@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F89C1A5FF2880050552A /* AppDelegate.swift */; };
-		D2C6F89F1A5FF2880050552A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F89E1A5FF2880050552A /* ViewController.swift */; };
-		D2C6F8A21A5FF2880050552A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8A01A5FF2880050552A /* Main.storyboard */; };
+		D2C6F89F1A5FF2880050552A /* HBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F89E1A5FF2880050552A /* HBViewController.swift */; };
 		D2C6F8A41A5FF2880050552A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8A31A5FF2880050552A /* Images.xcassets */; };
-		D2C6F8A71A5FF2880050552A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8A51A5FF2880050552A /* LaunchScreen.xib */; };
 		D2C6F8B31A5FF2880050552A /* HitBackAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8B21A5FF2880050552A /* HitBackAppTests.swift */; };
+		D2C6F8BD1A5FF39B0050552A /* HBTitleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8BC1A5FF39B0050552A /* HBTitleScene.swift */; };
+		D2C6F8C21A5FF3B10050552A /* HBGameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8BE1A5FF3B10050552A /* HBGameOverScene.swift */; };
+		D2C6F8C31A5FF3B10050552A /* HBPlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8BF1A5FF3B10050552A /* HBPlayScene.swift */; };
+		D2C6F8C41A5FF3B10050552A /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8C01A5FF3B10050552A /* spark.png */; };
+		D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8C11A5FF3B10050552A /* spark.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +32,16 @@
 		D2C6F8971A5FF2880050552A /* HitBackApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitBackApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C6F89B1A5FF2880050552A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C6F89C1A5FF2880050552A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D2C6F89E1A5FF2880050552A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D2C6F8A11A5FF2880050552A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D2C6F89E1A5FF2880050552A /* HBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBViewController.swift; sourceTree = "<group>"; };
 		D2C6F8A31A5FF2880050552A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D2C6F8A61A5FF2880050552A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D2C6F8AC1A5FF2880050552A /* HitBackAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitBackAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C6F8B11A5FF2880050552A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C6F8B21A5FF2880050552A /* HitBackAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBackAppTests.swift; sourceTree = "<group>"; };
+		D2C6F8BC1A5FF39B0050552A /* HBTitleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBTitleScene.swift; sourceTree = "<group>"; };
+		D2C6F8BE1A5FF3B10050552A /* HBGameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBGameOverScene.swift; sourceTree = "<group>"; };
+		D2C6F8BF1A5FF3B10050552A /* HBPlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBPlayScene.swift; sourceTree = "<group>"; };
+		D2C6F8C01A5FF3B10050552A /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		D2C6F8C11A5FF3B10050552A /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +84,13 @@
 			isa = PBXGroup;
 			children = (
 				D2C6F89C1A5FF2880050552A /* AppDelegate.swift */,
-				D2C6F89E1A5FF2880050552A /* ViewController.swift */,
-				D2C6F8A01A5FF2880050552A /* Main.storyboard */,
+				D2C6F89E1A5FF2880050552A /* HBViewController.swift */,
 				D2C6F8A31A5FF2880050552A /* Images.xcassets */,
-				D2C6F8A51A5FF2880050552A /* LaunchScreen.xib */,
+				D2C6F8BC1A5FF39B0050552A /* HBTitleScene.swift */,
+				D2C6F8BE1A5FF3B10050552A /* HBGameOverScene.swift */,
+				D2C6F8BF1A5FF3B10050552A /* HBPlayScene.swift */,
+				D2C6F8C01A5FF3B10050552A /* spark.png */,
+				D2C6F8C11A5FF3B10050552A /* spark.sks */,
 				D2C6F89A1A5FF2880050552A /* Supporting Files */,
 			);
 			path = HitBackApp;
@@ -192,9 +201,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C6F8A21A5FF2880050552A /* Main.storyboard in Resources */,
-				D2C6F8A71A5FF2880050552A /* LaunchScreen.xib in Resources */,
 				D2C6F8A41A5FF2880050552A /* Images.xcassets in Resources */,
+				D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */,
+				D2C6F8C41A5FF3B10050552A /* spark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C6F89F1A5FF2880050552A /* ViewController.swift in Sources */,
+				D2C6F8C21A5FF3B10050552A /* HBGameOverScene.swift in Sources */,
+				D2C6F8BD1A5FF39B0050552A /* HBTitleScene.swift in Sources */,
+				D2C6F8C31A5FF3B10050552A /* HBPlayScene.swift in Sources */,
+				D2C6F89F1A5FF2880050552A /* HBViewController.swift in Sources */,
 				D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,25 +246,6 @@
 			targetProxy = D2C6F8AD1A5FF2880050552A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		D2C6F8A01A5FF2880050552A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2C6F8A11A5FF2880050552A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D2C6F8A51A5FF2880050552A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2C6F8A61A5FF2880050552A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D2C6F8B41A5FF2880050552A /* Debug */ = {
