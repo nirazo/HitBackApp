@@ -23,7 +23,7 @@ class HBGameOverScene: SKScene {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        var scene : SKScene = HBPlayScene(size: self.size)
+        var scene : SKScene = HBVersusPlayScene(size: self.size)
         var transition : SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Up, duration: 1.0)
         self.view?.presentScene(scene, transition: transition)
     }

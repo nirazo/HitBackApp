@@ -1,93 +1,101 @@
 //
-//  BBPlayScene.swift
+//  HBSinglePlayScene.swift
 //  BlockBreaker
 //
-//  Created by Kenzo on 2015/01/06.
+//  Created by Kenzo on 2015/01/13.
 //  Copyright (c) 2015年 Kenzo. All rights reserved.
 //
 
 import SpriteKit
 
-class HBPlayScene: SKScene, SKPhysicsContactDelegate {
+class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     var life : Int = 0
     var stage : Int = 0
+    var ballSpeed : Double = 0
+    var lastUpdated : NSTimeInterval = 0
+    var touchedFlag : Bool = false
+    var score : Int = 0
+    var combo : Int = 0
+    
+    // コンボ計算用（ボールを打った後1度でもブロックに当たって帰ってきたらコンボ継続）
+    var blockBrokenInThisTurn : Bool = false
+    var comboContinue : Bool = true
     
     private  struct Block {
-        static var BLOCK_MARGIN = 16.0
-        static var BLOCK_WIDTH = 34.0
-        static var BLOCK_HEIGHT = 16.0
-        static var BLOCK_ROWS = 5
-        static var BLOCK_MAX_LIFE = 3
+        static let BLOCK_MARGIN = 16.0
+        static let BLOCK_WIDTH = 40.0
+        static let BLOCK_HEIGHT = 10.0
+        static let BLOCK_MAX_LIFE = 1
     }
     
     private struct Category {
-        static var blockCategory : UInt32 = 0x1 << 0
-        static var ballCategory : UInt32 = 0x1 << 1
-        static var paddleCategory : UInt32 = 0x1 << 2
-        static var worldCategory : UInt32 = 0x1 << 3
+        static let blockCategory : UInt32 = 0x1 << 0
+        static let ballCategory : UInt32 = 0x1 << 1
+        static let paddleCategory : UInt32 = 0x1 << 2
+        static let worldCategory : UInt32 = 0x1 << 3
     }
     
     private struct Paddle {
-        static var PADDLE_WIDTH = 70.0
-        static var PADDLE_HEIGHT = 14.0
-        static var PADDLE_Y = 40.0
-        static var PADDLE_SPEED = 0.005
+        static let PADDLE_WIDTH = 70.0
+        static let PADDLE_HEIGHT = 14.0
+        static let PADDLE_Y = 180.0
+        static let PADDLE_SPEED = 0.005
     }
     
     private struct Ball {
-        static var BALL_RADIUS = 6.0
-        static var BALL_VELOCITY_X = 80.0
-        static var BALL_VELOCITY_Y = 200.0
+        static let BALL_RADIUS = 6.0
+        static let BALL_BASESPEED = 350
+        static let BALL_VELOCITY_X = 100.0
+        static let BALL_VELOCITY_Y = 200.0
     }
     
     private struct Label {
-        static var LABEL_MARGIN : CGFloat = 5.0
-        static var LABEL_FONT_SIZE : CGFloat = 14.0
+        static let LABEL_MARGIN : CGFloat = 5.0
+        static let LABEL_FONT_SIZE : CGFloat = 14.0
     }
     
     private struct Config {
-        static var maxLife : Int = 5
+        static let maxLife : Int = 2
+        static let timeInterval : Double = 5.0 // 何秒おきにスピードアップするか
+        static let maxNumOfBlocks : Int = 1
+        static let scoreStep = 100
     }
     
     override convenience init(size: CGSize) {
-        self.init(size:size, life: 5, stage: 1)
+        self.init(size:size, life: Config.maxLife, stage: 1)
     }
     
     init(size : CGSize, life : Int, stage: Int) {
         super.init(size: size)
         self.life = life
         self.stage = stage
+        self.ballSpeed = Double(Ball.BALL_BASESPEED)
         
         self.addBlocks()
         self.addPaddle()
-        self.addStageLabel()
+        self.addScoreLabel()
+        self.addComboLabel()
         self.addLifeLabel()
         self.updateLifeLabel()
         
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        self.physicsWorld.contactDelegate = self    }
+        self.physicsBody?.categoryBitMask = Category.worldCategory
+        self.physicsWorld.contactDelegate = self
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // block related methods
+    //MARK: - block related methods
     func addBlocks() {
-        var blockMargin : Double = Block.BLOCK_MARGIN
+        let numOfBlocks : Int = Int(arc4random() % UInt32(Config.maxNumOfBlocks) + 1)
         var blockWidth : Double = Block.BLOCK_WIDTH
         var blockHeight : Double = Block.BLOCK_HEIGHT
-        var rows : Int = Block.BLOCK_ROWS as Int
-        var cols : Int = (Int(CGRectGetWidth(self.frame)) - Int(blockMargin)) / (Int(blockWidth) + Int(blockMargin))
-        var y : CGFloat = CGRectGetHeight(self.frame) - CGFloat(blockMargin) - CGFloat(blockHeight / 2)
         
-        for var i=0; i<rows; i++ {
-            var x : CGFloat = CGFloat(blockMargin) + CGFloat(blockWidth/2)
-            for var j=0; j<cols; j++ {
-                var block : SKNode = self.newBlock()
-                block.position = CGPointMake(x, y)
-                x += CGFloat(blockWidth) + CGFloat(blockMargin)
-            }
-            y -= CGFloat(blockHeight) + CGFloat(blockMargin)
+        for var i=0; i < numOfBlocks; i++ {
+            var block : SKNode = self.newBlock()
+            self.addChild(block)
         }
     }
     
@@ -97,6 +105,15 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         var maxLife : Int = Block.BLOCK_MAX_LIFE
         
         var block : SKSpriteNode = SKSpriteNode(color: SKColor.cyanColor(), size: CGSizeMake(blockWidth, blockHeight))
+        var xMin = Block.BLOCK_WIDTH/2
+        var xMax = (Int(self.frame.size.width) - Int(Block.BLOCK_WIDTH) / 2)
+        var x = CGFloat(self.getRandomNumber(Min: Float(xMin), Max: Float(xMax)))
+        
+        var yMin = Paddle.PADDLE_Y * 1.5
+        var yMax = self.frame.size.height - CGFloat(Block.BLOCK_HEIGHT/2)
+        var y = CGFloat(self.getRandomNumber(Min: Float(yMin), Max: Float(yMax)))
+        block.position = CGPointMake(x, y)
+        
         block.name = "block"
         block.userData = NSMutableDictionary()
         block.userData?.setObject(maxLife, forKey: "life")
@@ -104,7 +121,6 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         block.physicsBody?.dynamic = false
         block.physicsBody?.categoryBitMask = Category.blockCategory
         self.updateBlockAlpha(block)
-        self.addChild(block)
         return block
     }
     
@@ -112,16 +128,16 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         var life = block.userData?.objectForKey("life") as Int
         block.alpha = CGFloat(life) * 0.2
     }
-
+    
     func decreaseBlockLife(block : SKNode) {
         var life : Int = Int(block.userData?.objectForKey("life") as NSNumber) - 1
         block.userData?.setObject(life, forKey: "life")
         self.updateBlockAlpha(block)
         if (life < 1) {
-            self.removeNodeWithSpark(block)
+            self.blockBroken(block)
         }
         if (self.blockNodes().count < 1) {
-            self.nextLevel()
+            self.addBlocks()
         }
     }
     
@@ -133,27 +149,41 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         return nodes
     }
     
+    func blockBroken(block: SKNode) {
+        self.removeNodeWithSpark(block)
+        self.blockBrokenInThisTurn = true
+        self.comboContinue = true
+        if (self.comboContinue || self.combo == 0) {
+            self.combo++
+            self.updateComboLabel()
+        }
+        self.score += Config.scoreStep + self.comboBonus(Config.scoreStep, comboNum: self.combo)
+        self.updateScoreLabel()
+    }
     
-    // paddle related methods
+    
+    //MARK: - paddle related methods
     func addPaddle() {
         var paddleWidth : CGFloat = CGFloat(Paddle.PADDLE_WIDTH)
         var paddleHeight : CGFloat = CGFloat(Paddle.PADDLE_HEIGHT)
         var paddleY : CGFloat = CGFloat(Paddle.PADDLE_Y)
-
+        
         var paddle : SKSpriteNode = SKSpriteNode(color: SKColor.brownColor(), size: CGSizeMake(paddleWidth, paddleHeight))
         paddle.name = "paddle"
         paddle.position = CGPointMake(CGRectGetMidX(self.frame), paddleY)
         paddle.physicsBody = SKPhysicsBody(rectangleOfSize: paddle.size)
         paddle.physicsBody?.dynamic = false
+        paddle.physicsBody?.categoryBitMask = Category.paddleCategory
+        paddle.physicsBody?.contactTestBitMask = Category.ballCategory
         self.addChild(paddle)
     }
     
     func paddleNode() -> SKNode {
         return self.childNodeWithName("paddle")!
     }
-
     
-    // ball related methods
+    
+    //MARK: - ball related methods
     func addBall() {
         var radius : CGFloat = CGFloat(Ball.BALL_RADIUS)
         var velocityX : CGFloat = CGFloat(Ball.BALL_VELOCITY_X)
@@ -162,7 +192,7 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         ball.name = "ball"
         ball.position = CGPointMake(CGRectGetMidX(self.paddleNode().frame), CGRectGetMaxY(self.paddleNode().frame) + radius)
         var path : CGMutablePathRef = CGPathCreateMutable()
-        CGPathAddArc(path, nil, 0, 0, radius, 0, CGFloat(M_2_PI), true)
+        CGPathAddArc(path, nil, 0, 0, radius, 0, CGFloat(M_PI*2), true)
         ball.path = path
         ball.fillColor = SKColor.yellowColor()
         ball.strokeColor = SKColor.yellowColor()
@@ -184,21 +214,13 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         return self.childNodeWithName("ball")
     }
     
-    // touch related methods
+    //MARK: - touch related methods
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         if (self.ballNode() == nil) {
+            self.touchedFlag = true
             self.addBall()
             return
         }
-//        var touch : UITouch = touches.anyObject() as UITouch
-//        var location : CGPoint = touch.locationInNode(self)
-//        var speed :CGFloat = CGFloat(Paddle.PADDLE_SPEED)
-//        
-//        var x : CGFloat = location.x
-//        var diff : CGFloat = abs(x - self.paddleNode().position.x)
-//        var duration : CGFloat = speed*diff
-//        var move : SKAction = SKAction.moveToX(x, duration: NSTimeInterval(duration))
-//        self.paddleNode().runAction(move)
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
@@ -209,20 +231,37 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    // label related methods
-    func addStageLabel() {
+    //MARK: - label related methods
+    func addScoreLabel() {
         var margin : CGFloat = Label.LABEL_MARGIN
         var fontSize : CGFloat = Label.LABEL_FONT_SIZE
         
         var label : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
-        label.text = "stage" + String(self.stage)
+        label.text = "score: " + String(self.score)
         label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
         label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
         label.position = CGPointMake(CGRectGetMaxX(self.frame) - margin, CGRectGetMaxY(self.frame) - margin)
         label.fontSize = fontSize
         label.zPosition = 1.0
+        label.name = "scoreLabel"
         self.addChild(label)
     }
+    
+    func addComboLabel() {
+        var margin : CGFloat = Label.LABEL_MARGIN
+        var fontSize : CGFloat = Label.LABEL_FONT_SIZE
+        
+        var label : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
+        label.text = "combo: " + String(self.combo)
+        label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
+        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
+        label.position = CGPointMake(CGRectGetMaxX(self.frame) - margin, CGRectGetMaxY(self.frame) - margin*3)
+        label.fontSize = fontSize
+        label.zPosition = 1.0
+        label.name = "comboLabel"
+        self.addChild(label)
+    }
+    
     
     func addLifeLabel() {
         var margin : CGFloat = Label.LABEL_MARGIN
@@ -240,6 +279,14 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(label)
     }
     
+    func updateScoreLabel() {
+        self.scoreLabel().text = "score: " + String(self.score)
+    }
+    
+    func updateComboLabel() {
+        self.comboLabel().text = "combo: " + String(self.combo)
+    }
+    
     func updateLifeLabel() {
         var s : NSMutableString = ""
         for (var i = 0; i < self.life; i++) {
@@ -248,12 +295,20 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         self.lifeLabel().text = s
     }
     
+    func scoreLabel() -> SKLabelNode {
+        return self.childNodeWithName("scoreLabel")! as SKLabelNode
+    }
+    
+    func comboLabel() -> SKLabelNode {
+        return self.childNodeWithName("comboLabel")! as SKLabelNode
+    }
+    
     func lifeLabel() -> SKLabelNode {
         return self.childNodeWithName("lifeLabel")! as SKLabelNode
     }
-
     
-    // SKPhyscicsContactDelegate
+    
+    // MARK: - SKPhyscicsContactDelegate
     func didBeginContact(contact: SKPhysicsContact) {
         var firstBody : SKPhysicsBody = SKPhysicsBody()
         var secondBody : SKPhysicsBody = SKPhysicsBody()
@@ -268,11 +323,18 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         if (firstBody.categoryBitMask & Category.blockCategory != 0) {
             if (secondBody.categoryBitMask & Category.ballCategory != 0) {
                 self.decreaseBlockLife(firstBody.node!)
+                if (secondBody.velocity.dy == 0) {
+                    secondBody.velocity.dy == 1
+                }
+            }
+        } else if (firstBody.categoryBitMask & Category.ballCategory != 0) {
+            if (secondBody.categoryBitMask & Category.paddleCategory != 0) {
+                contactedBallAndPaddle()
             }
         }
     }
     
-    // Utilities
+    // MARK: - Utilities
     func removeNodeWithSpark(node : SKNode) {
         var sparkPath : String = NSBundle.mainBundle().pathForResource("spark", ofType: "sks")!
         var spark : SKEmitterNode = NSKeyedUnarchiver.unarchiveObjectWithFile(sparkPath) as SKEmitterNode
@@ -295,19 +357,64 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func nextLevel() {
-        var scene : HBPlayScene = HBPlayScene(size: self.size, life: self.life, stage: self.stage+1)
+        var scene : HBSinglePlayScene = HBSinglePlayScene(size: self.size, life: self.life, stage: self.stage+1)
         var transition : SKTransition = SKTransition.doorwayWithDuration(1.0)
         self.view?.presentScene(scene, transition: transition)
     }
     
+    /*
+    乱数を生成するメソッド.
+    */
+    func getRandomNumber(Min _Min : Float, Max _Max : Float)->Float {
+        
+        return ( Float(arc4random_uniform(UINT32_MAX)) / Float(UINT32_MAX) ) * (_Max - _Min) + _Min
+    }
     
-    // Callbacks
+    
+    // ボールとパドル衝突時のアクション
+    func contactedBallAndPaddle() {
+        // コンボ判定
+        if (!self.blockBrokenInThisTurn) {
+            self.comboContinue = false
+            self.combo = 0
+            self.updateComboLabel()
+        }
+        self.blockBrokenInThisTurn = false
+        
+        // 反射角計算
+        let ball_centerX : CGFloat = self.ballNode()!.position.x
+        let ball_centerY : CGFloat = self.ballNode()!.position.y + CGFloat(Paddle.PADDLE_Y/4)
+        let bar_centerX : CGFloat = self.paddleNode().position.x
+        let bar_centerY : CGFloat = self.paddleNode().position.y
+        let rad : CGFloat = atan2(ball_centerY - bar_centerY, ball_centerX - bar_centerX)
+        let ball_dx = CGFloat(cos(rad) * CGFloat(self.ballSpeed))
+        let ball_dy = CGFloat(sin(rad) * CGFloat(self.ballSpeed))
+        
+        self.ballNode()?.physicsBody?.velocity = CGVectorMake(ball_dx, ball_dy)
+    }
+    
+    // コンボボーナス計算
+    func comboBonus(base : Int, comboNum : Int) -> Int{
+        if (comboNum == 0 | 1) {
+            return 0
+        }
+        println("comboBonus: \(base/10 * (comboNum - 1))")
+        return base/10 * (comboNum - 1)
+    }
+    
+    
+    // MARK: - Callbacks
     override func update(currentTime: NSTimeInterval) {
-        if (Int(currentTime % 5) == 0) {
-            var velocity : CGVector? = self.ballNode()?.physicsBody?.velocity
-            velocity?.dx *= 1.001
-            velocity?.dy *= 1.001
-            self.ballNode()?.physicsBody?.velocity = velocity!
+        if (self.lastUpdated != 0) {
+            if ((self.lastUpdated + Config.timeInterval) <= currentTime) {
+                //println("speedUp")
+                self.ballSpeed *= 1.0001
+                self.lastUpdated = currentTime
+            }
+        }
+        if (self.touchedFlag) {
+            self.touchedFlag = false
+            self.lastUpdated = currentTime
         }
     }
     
@@ -326,6 +433,8 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
     override func didSimulatePhysics() {
         if (self.ballNode() != nil && self.ballNode()?.position.y < CGFloat(Ball.BALL_RADIUS*2)) {
             self.removeNodeWithSpark(self.ballNode()!)
+            self.lastUpdated = 0
+            self.ballSpeed = Double(Ball.BALL_BASESPEED)
             self.life--
             self.updateLifeLabel()
             if (self.life < 1) {

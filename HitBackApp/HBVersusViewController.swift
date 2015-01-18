@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class HBViewController: UIViewController {
+class HBVersusViewController: UIViewController {
     
     override func loadView() {
         var skView : SKView = SKView(frame: UIScreen.mainScreen().bounds)
@@ -23,7 +23,7 @@ class HBViewController: UIViewController {
         skView.showsNodeCount = true;
         skView.showsFPS = true;
         
-        var scene : SKScene = HBTitleScene(size: self.view.bounds.size)
+        var scene : SKScene = HBVersusPlayScene(size: self.view.bounds.size)
         skView.presentScene(scene)
     }
     
