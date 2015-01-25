@@ -34,7 +34,7 @@ class HBTitleViewController: UIViewController {
         singleStart.addTarget(self, action: "singleStartTapped:", forControlEvents:.TouchUpInside)
         versusStart.addTarget(self, action: "versusStartTapped:", forControlEvents:.TouchUpInside)
         self.view.addSubview(singleStart)
-        self.view.addSubview(versusStart)
+        //self.view.addSubview(versusStart)
     }
     
     func singleStartTapped(sender: AnyObject?) {
@@ -45,5 +45,9 @@ class HBTitleViewController: UIViewController {
     func versusStartTapped(sender: AnyObject?) {
         var vc : HBVersusViewController = HBVersusViewController()
         self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    func dismissGameViewControllers() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

@@ -26,6 +26,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         static let BLOCK_WIDTH = 40.0
         static let BLOCK_HEIGHT = 10.0
         static let BLOCK_MAX_LIFE = 1
+        static let BLOCK_FALL_STEP = 20
     }
     
     private struct Category {
@@ -56,8 +57,9 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     private struct Config {
         static let maxLife : Int = 2
-        static let timeInterval : Double = 5.0 // 何秒おきにスピードアップするか
-        static let maxNumOfBlocks : Int = 1
+        static let timeInterval : Double = 3.0 // 何秒おきにスピードアップするか
+        static let minNumOfBlocks : Int = 5
+        static let maxNumOfBlocks : Int = 10
         static let scoreStep = 100
     }
     
@@ -89,7 +91,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: - block related methods
     func addBlocks() {
-        let numOfBlocks : Int = Int(arc4random() % UInt32(Config.maxNumOfBlocks) + 1)
+        let numOfBlocks : Int = Int(getRandomNumber(Min: Float(Config.minNumOfBlocks), Max: Float(Config.maxNumOfBlocks)))
         var blockWidth : Double = Block.BLOCK_WIDTH
         var blockHeight : Double = Block.BLOCK_HEIGHT
         
@@ -126,7 +128,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     func updateBlockAlpha(block: SKNode) {
         var life = block.userData?.objectForKey("life") as Int
-        block.alpha = CGFloat(life) * 0.2
+        block.alpha = 1.0
     }
     
     func decreaseBlockLife(block : SKNode) {
@@ -136,12 +138,13 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         if (life < 1) {
             self.blockBroken(block)
         }
-        if (self.blockNodes().count < 1) {
+        if (self.blockNodes()!.count < 1) {
+            self.stage++
             self.addBlocks()
         }
     }
     
-    func blockNodes() -> NSArray {
+    func blockNodes() -> NSArray? {
         var nodes : NSMutableArray = [] as NSMutableArray
         self.enumerateChildNodesWithName("block", usingBlock: {node, stop in
             nodes.addObject(node)
@@ -159,6 +162,18 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         }
         self.score += Config.scoreStep + self.comboBonus(Config.scoreStep, comboNum: self.combo)
         self.updateScoreLabel()
+    }
+    
+    // ブロックを1段階分下に落とす
+    func fallBlocks() {
+        if (self.blockNodes()!.count != 0) {
+            for blockNode : SKNode in self.blockNodes()! as [SKNode] {
+                var dst : CGPoint = CGPointMake(blockNode.position.x, blockNode.position.y - CGFloat(Block.BLOCK_FALL_STEP))
+                var fall : SKAction = SKAction.moveTo(dst, duration: 1.0)
+                var sequence : SKAction = SKAction.sequence([fall])
+                blockNode.runAction(sequence)
+            }
+        }
     }
     
     
@@ -199,7 +214,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         
         ball.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         ball.physicsBody?.affectedByGravity = false
-        ball.physicsBody?.velocity = CGVectorMake(velocityX + CGFloat(self.stage), velocityY + CGFloat(self.stage))
+        ball.physicsBody?.velocity = CGVectorMake(velocityX + CGFloat(self.getRandomNumber(Min: 1, Max: 10)) + CGFloat(self.stage), velocityY +  CGFloat(self.getRandomNumber(Min: 1, Max: 10)))
         ball.physicsBody?.restitution = 1.0
         ball.physicsBody?.linearDamping = 0
         ball.physicsBody?.friction = 0
@@ -210,15 +225,19 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(ball)
     }
     
-    func ballNode() -> SKNode?{
-        return self.childNodeWithName("ball")
+    func ballNodes() -> NSArray?{
+        var nodes : NSMutableArray = [] as NSMutableArray
+        self.enumerateChildNodesWithName("ball", usingBlock: {node, stop in
+            nodes.addObject(node)
+        })
+        return nodes
     }
     
     //MARK: - touch related methods
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        if (self.ballNode() == nil) {
+        if (self.ballNodes()?.count == 0) {
             self.touchedFlag = true
-            self.addBall()
+                self.addBall()
             return
         }
     }
@@ -329,7 +348,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
             }
         } else if (firstBody.categoryBitMask & Category.ballCategory != 0) {
             if (secondBody.categoryBitMask & Category.paddleCategory != 0) {
-                contactedBallAndPaddle()
+                firstBody = contactedBallAndPaddle(firstBody.node!)
             }
         }
     }
@@ -372,7 +391,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     
     // ボールとパドル衝突時のアクション
-    func contactedBallAndPaddle() {
+    func contactedBallAndPaddle(ball : SKNode) -> SKPhysicsBody{
         // コンボ判定
         if (!self.blockBrokenInThisTurn) {
             self.comboContinue = false
@@ -382,15 +401,16 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.blockBrokenInThisTurn = false
         
         // 反射角計算
-        let ball_centerX : CGFloat = self.ballNode()!.position.x
-        let ball_centerY : CGFloat = self.ballNode()!.position.y + CGFloat(Paddle.PADDLE_Y/4)
+        let ball_centerX : CGFloat = ball.position.x
+        let ball_centerY : CGFloat = ball.position.y + CGFloat(Paddle.PADDLE_Y/4)
         let bar_centerX : CGFloat = self.paddleNode().position.x
         let bar_centerY : CGFloat = self.paddleNode().position.y
         let rad : CGFloat = atan2(ball_centerY - bar_centerY, ball_centerX - bar_centerX)
         let ball_dx = CGFloat(cos(rad) * CGFloat(self.ballSpeed))
         let ball_dy = CGFloat(sin(rad) * CGFloat(self.ballSpeed))
         
-        self.ballNode()?.physicsBody?.velocity = CGVectorMake(ball_dx, ball_dy)
+        ball.physicsBody?.velocity = CGVectorMake(ball_dx, ball_dy)
+        return ball.physicsBody!
     }
     
     // コンボボーナス計算
@@ -407,9 +427,10 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     override func update(currentTime: NSTimeInterval) {
         if (self.lastUpdated != 0) {
             if ((self.lastUpdated + Config.timeInterval) <= currentTime) {
-                //println("speedUp")
                 self.ballSpeed *= 1.0001
                 self.lastUpdated = currentTime
+                
+                self.fallBlocks()
             }
         }
         if (self.touchedFlag) {
@@ -431,16 +452,20 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didSimulatePhysics() {
-        if (self.ballNode() != nil && self.ballNode()?.position.y < CGFloat(Ball.BALL_RADIUS*2)) {
-            self.removeNodeWithSpark(self.ballNode()!)
-            self.lastUpdated = 0
-            self.ballSpeed = Double(Ball.BALL_BASESPEED)
-            self.life--
-            self.updateLifeLabel()
-            if (self.life < 1) {
-                self.gameOver()
+        if (self.ballNodes() != nil) {
+            for ballNode in self.ballNodes()! {
+                if (ballNode.position.y < CGFloat(Ball.BALL_RADIUS*2)) {
+                    self.removeNodeWithSpark(ballNode as SKNode)
+                    self.lastUpdated = 0
+                    self.ballSpeed = Double(Ball.BALL_BASESPEED)
+                    self.life--
+                    self.updateLifeLabel()
+                    if (self.life < 1) {
+                        self.gameOver()
+                    }
+                }
             }
+            
         }
     }
-    
 }

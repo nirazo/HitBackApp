@@ -36,6 +36,5 @@ class HBSingleViewController: UIViewController {
         return true
     }
     
-    
 }
 
