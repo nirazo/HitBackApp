@@ -25,11 +25,11 @@ class HBTitleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var singleStart : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 120, 40))
+        var singleStart : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 180, 40))
         singleStart.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame) - singleStart.frame.size.height)
-        var versusStart : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 120, 40))
+        var versusStart : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 180, 40))
         versusStart.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame))
-        singleStart.setTitle("一人用モード", forState: .Normal)
+        singleStart.setTitle("守れ！宇宙ねこ", forState: .Normal)
         versusStart.setTitle("対戦モード", forState: .Normal)
         singleStart.addTarget(self, action: "singleStartTapped:", forControlEvents:.TouchUpInside)
         versusStart.addTarget(self, action: "versusStartTapped:", forControlEvents:.TouchUpInside)

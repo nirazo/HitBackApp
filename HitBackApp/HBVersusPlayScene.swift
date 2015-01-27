@@ -331,7 +331,7 @@ class HBVersusPlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameOver() {
-        var scene : SKScene = HBGameOverScene(size: self.size)
+        var scene : SKScene = HBGameOverScene(size: self.size, score: 1)
         var transition : SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Down, duration: 1.0)
         self.view?.presentScene(scene, transition: transition)
     }

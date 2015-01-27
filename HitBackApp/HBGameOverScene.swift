@@ -9,13 +9,28 @@
 import SpriteKit
 
 class HBGameOverScene: SKScene {
-    override init(size: CGSize) {
+    init(size: CGSize, score: Int) {
+        let ud = NSUserDefaults.standardUserDefaults()
+        
         super.init(size: size)
         var titleLabel : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
         titleLabel.text = "Game Over..."
         titleLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
         titleLabel.fontSize = 40.0
         self.addChild(titleLabel)
+        
+        var scoreLabel : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
+        scoreLabel.text = "スコア： \(score)"
+        scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), titleLabel.position.y - titleLabel.frame.size.height)
+        scoreLabel.fontSize = 15.0
+        self.addChild(scoreLabel)
+        
+        var bestScoreLabel : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
+        let bestScore = ud.integerForKey("bestScore")
+        bestScoreLabel.text = "ハイスコア： \(bestScore)"
+        bestScoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), scoreLabel.position.y - titleLabel.frame.size.height)
+        bestScoreLabel.fontSize = 15.0
+        self.addChild(bestScoreLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
