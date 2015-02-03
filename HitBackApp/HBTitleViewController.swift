@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 import SpriteKit
+import GameKit
 
-class HBTitleViewController: UIViewController {
+class HBTitleViewController: UIViewController, GKGameCenterControllerDelegate {
     override init() {
         super.init()
     }
@@ -25,29 +26,78 @@ class HBTitleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var titleLabel : UILabel = UILabel(frame: CGRectMake(0, 0, self.view.frame.width, 60))
+        titleLabel.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame) - titleLabel.frame.size.height)
+        titleLabel.text = "守れ！！宇宙ねこ"
+        titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.textAlignment = .Center
+        self.view.addSubview(titleLabel)
+        
+        
         var singleStart : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 180, 40))
-        singleStart.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame) - singleStart.frame.size.height)
-        var versusStart : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 180, 40))
-        versusStart.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame))
-        singleStart.setTitle("守れ！宇宙ねこ", forState: .Normal)
-        versusStart.setTitle("対戦モード", forState: .Normal)
+        singleStart.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMinY(titleLabel.frame) + singleStart.frame.size.height*3)
+        singleStart.setTitle("はじめる", forState: .Normal)
+        singleStart.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 15)
         singleStart.addTarget(self, action: "singleStartTapped:", forControlEvents:.TouchUpInside)
-        versusStart.addTarget(self, action: "versusStartTapped:", forControlEvents:.TouchUpInside)
         self.view.addSubview(singleStart)
-        //self.view.addSubview(versusStart)
+        
+        
+        var scoreButton : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 180, 40))
+        scoreButton.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMinY(singleStart.frame) + scoreButton.frame.size.height*3)
+        scoreButton.setTitle("きろく", forState: .Normal)
+        scoreButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 15)
+        scoreButton.addTarget(self, action: "scoreButtonTapped:", forControlEvents:.TouchUpInside)
+        self.view.addSubview(scoreButton)
+
+        self.loginGameCenter()
     }
     
     func singleStartTapped(sender: AnyObject?) {
         var vc : HBSingleViewController = HBSingleViewController()
-        self.presentViewController(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)        
     }
     
-    func versusStartTapped(sender: AnyObject?) {
-        var vc : HBVersusViewController = HBVersusViewController()
-        self.presentViewController(vc, animated: true, completion: nil)
+    func scoreButtonTapped(sender: AnyObject?) {
+        var localPlayer = GKLocalPlayer()
+        
+        localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier : String!, error : NSError!) -> Void in
+            if error != nil {
+                println(error.localizedDescription)
+            } else {
+                let gameCenterController:GKGameCenterViewController = GKGameCenterViewController()
+                gameCenterController.gameCenterDelegate = self
+                gameCenterController.viewState = GKGameCenterViewControllerState.Leaderboards
+                gameCenterController.leaderboardIdentifier = "SpaceCat" //該当するLeaderboardのIDを指定します
+                self.presentViewController(gameCenterController, animated: true, completion: nil)
+            }
+        })
+    }
+    
+    func loginGameCenter() {
+        //GameCenterにログインします。
+        let localPlayer = GKLocalPlayer()
+        localPlayer.authenticateHandler = {(viewController, error) -> Void in
+            if ((viewController) != nil) {
+                println("ログイン確認処理：失敗-ログイン画面を表示")
+                self.presentViewController(viewController, animated: true, completion: nil)
+            }else{
+                println("ログイン確認処理：成功")
+                println(error)
+                if (error == nil){
+                    println("ログイン認証：成功")
+                }else{
+                    println("ログイン認証：失敗")
+                }
+            }
+        }
     }
     
     func dismissGameViewControllers() {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //MARK: - Delegate method for GKGameCenterDelegate
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!){
+        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil);
     }
 }

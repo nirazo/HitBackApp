@@ -9,22 +9,50 @@
 import UIKit
 import SpriteKit
 
-class HBSingleViewController: UIViewController {
+class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverViewControllerDelegate {
+    
+    var skView : SKView?
     
     override func loadView() {
         var skView : SKView = SKView(frame: UIScreen.mainScreen().bounds)
         self.view = skView
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        goGameScene()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.skView?.presentScene(nil)
+    }
+    
+    
+    func goGameScene() {
+        if (self.skView?.scene != nil) {
+            self.skView?.scene?.removeAllChildren()
+            self.skView?.presentScene(self.skView?.scene)
+        } else {
+            let gameScene = HBSinglePlayScene(size: self.view.bounds.size)
+            gameScene.escapeDelegate = self
+            gameScene.scaleMode = SKSceneScaleMode.AspectFill
+            self.skView!.presentScene(gameScene)
+        }
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        var skView : SKView = self.view as SKView
-        skView.showsDrawCount = true;
-        skView.showsNodeCount = true;
-        skView.showsFPS = true;
+        println("singleVC viewDidLoad")
         
-        var scene : SKScene = HBSinglePlayScene(size: self.view.bounds.size)
-        skView.presentScene(scene)
+        skView = self.view as? SKView
+        //self.skView = SKView(frame: UIScreen.mainScreen().bounds)
+        skView!.showsDrawCount = true;
+        skView!.showsNodeCount = true;
+        skView!.showsFPS = true;
+        skView!.ignoresSiblingOrder = true
+        //self.view = self.skView
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,5 +64,25 @@ class HBSingleViewController: UIViewController {
         return true
     }
     
+    
+    //MARK: - SceneEscapeProtocol method
+    func sceneEscape(scene: SKScene, score: Int) {
+        var gameOverVC = HBGameOverViewController(score: score)
+        self.navigationController?.pushViewController(gameOverVC, animated: true)
+    }
+    
+    //MARK: - HBGameOverViewControllerDelegate method
+    func toTitleTapped() {
+//        self.dismissViewControllerAnimated(true, completion: {() -> Void in
+//            self.navigationController?.popToRootViewControllerAnimated(true)
+//            return
+//        })
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    func toRetryTapped() {
+        //self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }
 

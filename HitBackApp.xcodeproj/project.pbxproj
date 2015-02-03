@@ -7,12 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D29011F31A7795BD00C23E30 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011E81A7795BD00C23E30 /* libGoogleAdMobAds.a */; };
+		D29011F41A7795BE00C23E30 /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011EA1A7795BD00C23E30 /* libAdapterIAd.a */; };
+		D29011F51A7795BE00C23E30 /* libAdapterNend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011EB1A7795BD00C23E30 /* libAdapterNend.a */; };
+		D29011F61A7795BE00C23E30 /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011ED1A7795BD00C23E30 /* libNendAd.a */; };
+		D29011F81A77964300C23E30 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011F71A77964300C23E30 /* AdSupport.framework */; };
+		D29011FA1A77965A00C23E30 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011F91A77965A00C23E30 /* AudioToolbox.framework */; };
+		D29011FC1A77966200C23E30 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011FB1A77966200C23E30 /* AVFoundation.framework */; };
+		D29011FE1A77966A00C23E30 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011FD1A77966A00C23E30 /* CoreGraphics.framework */; };
+		D29012001A77967200C23E30 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011FF1A77967200C23E30 /* MessageUI.framework */; };
+		D29012021A77967B00C23E30 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29012011A77967B00C23E30 /* StoreKit.framework */; };
+		D29012041A77968800C23E30 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29012031A77968800C23E30 /* SystemConfiguration.framework */; };
+		D29012061A77969D00C23E30 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29012051A77969D00C23E30 /* CoreTelephony.framework */; };
+		D29012081A7796C200C23E30 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29012071A7796C200C23E30 /* iAd.framework */; };
+		D290120A1A7796CA00C23E30 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29012091A7796CA00C23E30 /* Security.framework */; };
+		D290120C1A7796D000C23E30 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D290120B1A7796D000C23E30 /* ImageIO.framework */; };
+		D29012141A77B36B00C23E30 /* HBGameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29012131A77B36B00C23E30 /* HBGameOverViewController.swift */; };
+		D29D9EFA1A7CCE9E0055D55D /* spaceCat.png in Resources */ = {isa = PBXBuildFile; fileRef = D29D9EF91A7CCE9E0055D55D /* spaceCat.png */; };
+		D29D9EFD1A7CE1190055D55D /* ball_covered.png in Resources */ = {isa = PBXBuildFile; fileRef = D29D9EFB1A7CE1190055D55D /* ball_covered.png */; };
+		D29D9EFE1A7CE1190055D55D /* ball_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = D29D9EFC1A7CE1190055D55D /* ball_normal.png */; };
+		D2C35D9B1A77DE4900D829C3 /* SceneEscapeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C35D9A1A77DE4900D829C3 /* SceneEscapeProtocol.swift */; };
+		D2C538CB1A7F993F00CC8E3B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C538CA1A7F993F00CC8E3B /* GameKit.framework */; };
+		D2C5E9301A7E51AB00F7754A /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C5E92F1A7E51AB00F7754A /* enemy.png */; };
 		D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F89C1A5FF2880050552A /* AppDelegate.swift */; };
-		D2C6F89F1A5FF2880050552A /* HBVersusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F89E1A5FF2880050552A /* HBVersusViewController.swift */; };
 		D2C6F8A41A5FF2880050552A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8A31A5FF2880050552A /* Images.xcassets */; };
 		D2C6F8B31A5FF2880050552A /* HitBackAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8B21A5FF2880050552A /* HitBackAppTests.swift */; };
-		D2C6F8C21A5FF3B10050552A /* HBGameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8BE1A5FF3B10050552A /* HBGameOverScene.swift */; };
-		D2C6F8C31A5FF3B10050552A /* HBVersusPlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8BF1A5FF3B10050552A /* HBVersusPlayScene.swift */; };
 		D2C6F8C41A5FF3B10050552A /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8C01A5FF3B10050552A /* spark.png */; };
 		D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8C11A5FF3B10050552A /* spark.sks */; };
 		D2C983D11A63B97200EE60C6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */; };
@@ -32,16 +51,68 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D2C6F8971A5FF2880050552A /* HitBackApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HitBackApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D29011CB1A7795BD00C23E30 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
+		D29011CC1A7795BD00C23E30 /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
+		D29011CD1A7795BD00C23E30 /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
+		D29011CE1A7795BD00C23E30 /* DFPSwipeableBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPSwipeableBannerView.h; sourceTree = "<group>"; };
+		D29011CF1A7795BD00C23E30 /* GADAdSizeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSizeDelegate.h; sourceTree = "<group>"; };
+		D29011D01A7795BD00C23E30 /* GADAppEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAppEventDelegate.h; sourceTree = "<group>"; };
+		D29011D11A7795BD00C23E30 /* GADSwipeableBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSwipeableBannerViewDelegate.h; sourceTree = "<group>"; };
+		D29011D31A7795BD00C23E30 /* GADCustomEventBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventBanner.h; sourceTree = "<group>"; };
+		D29011D41A7795BD00C23E30 /* GADCustomEventBannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventBannerDelegate.h; sourceTree = "<group>"; };
+		D29011D51A7795BD00C23E30 /* GADCustomEventExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventExtras.h; sourceTree = "<group>"; };
+		D29011D61A7795BD00C23E30 /* GADCustomEventInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventInterstitial.h; sourceTree = "<group>"; };
+		D29011D71A7795BD00C23E30 /* GADCustomEventInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventInterstitialDelegate.h; sourceTree = "<group>"; };
+		D29011D81A7795BD00C23E30 /* GADCustomEventRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventRequest.h; sourceTree = "<group>"; };
+		D29011DA1A7795BD00C23E30 /* GADSearchBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSearchBannerView.h; sourceTree = "<group>"; };
+		D29011DB1A7795BD00C23E30 /* GADSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSearchRequest.h; sourceTree = "<group>"; };
+		D29011DC1A7795BD00C23E30 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		D29011DD1A7795BD00C23E30 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		D29011DE1A7795BD00C23E30 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		D29011DF1A7795BD00C23E30 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		D29011E01A7795BD00C23E30 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		D29011E11A7795BD00C23E30 /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
+		D29011E21A7795BD00C23E30 /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
+		D29011E31A7795BD00C23E30 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		D29011E41A7795BD00C23E30 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		D29011E51A7795BD00C23E30 /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
+		D29011E61A7795BD00C23E30 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		D29011E71A7795BD00C23E30 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		D29011E81A7795BD00C23E30 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		D29011EA1A7795BD00C23E30 /* libAdapterIAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterIAd.a; sourceTree = "<group>"; };
+		D29011EB1A7795BD00C23E30 /* libAdapterNend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterNend.a; sourceTree = "<group>"; };
+		D29011ED1A7795BD00C23E30 /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
+		D29011EE1A7795BD00C23E30 /* NADIconArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconArrayView.h; sourceTree = "<group>"; };
+		D29011EF1A7795BD00C23E30 /* NADIconLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconLoader.h; sourceTree = "<group>"; };
+		D29011F01A7795BD00C23E30 /* NADIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADIconView.h; sourceTree = "<group>"; };
+		D29011F11A7795BD00C23E30 /* NADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADInterstitial.h; sourceTree = "<group>"; };
+		D29011F21A7795BD00C23E30 /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
+		D29011F71A77964300C23E30 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		D29011F91A77965A00C23E30 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D29011FB1A77966200C23E30 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D29011FD1A77966A00C23E30 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D29011FF1A77967200C23E30 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		D29012011A77967B00C23E30 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		D29012031A77968800C23E30 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D29012051A77969D00C23E30 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D29012071A7796C200C23E30 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		D29012091A7796CA00C23E30 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D290120B1A7796D000C23E30 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		D29012111A779C8300C23E30 /* HitBackApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HitBackApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		D29012131A77B36B00C23E30 /* HBGameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBGameOverViewController.swift; sourceTree = "<group>"; };
+		D29D9EF91A7CCE9E0055D55D /* spaceCat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceCat.png; sourceTree = "<group>"; };
+		D29D9EFB1A7CE1190055D55D /* ball_covered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_covered.png; sourceTree = "<group>"; };
+		D29D9EFC1A7CE1190055D55D /* ball_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_normal.png; sourceTree = "<group>"; };
+		D2C35D9A1A77DE4900D829C3 /* SceneEscapeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneEscapeProtocol.swift; sourceTree = "<group>"; };
+		D2C538CA1A7F993F00CC8E3B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		D2C5E92F1A7E51AB00F7754A /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
+		D2C6F8971A5FF2880050552A /* SpaceCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C6F89B1A5FF2880050552A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C6F89C1A5FF2880050552A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D2C6F89E1A5FF2880050552A /* HBVersusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HBVersusViewController.swift; sourceTree = "<group>"; };
 		D2C6F8A31A5FF2880050552A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D2C6F8AC1A5FF2880050552A /* HitBackAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitBackAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C6F8B11A5FF2880050552A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C6F8B21A5FF2880050552A /* HitBackAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBackAppTests.swift; sourceTree = "<group>"; };
-		D2C6F8BE1A5FF3B10050552A /* HBGameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBGameOverScene.swift; sourceTree = "<group>"; };
-		D2C6F8BF1A5FF3B10050552A /* HBVersusPlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBVersusPlayScene.swift; sourceTree = "<group>"; };
 		D2C6F8C01A5FF3B10050552A /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		D2C6F8C11A5FF3B10050552A /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
 		D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -55,6 +126,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D290120C1A7796D000C23E30 /* ImageIO.framework in Frameworks */,
+				D290120A1A7796CA00C23E30 /* Security.framework in Frameworks */,
+				D29012081A7796C200C23E30 /* iAd.framework in Frameworks */,
+				D29012061A77969D00C23E30 /* CoreTelephony.framework in Frameworks */,
+				D29012041A77968800C23E30 /* SystemConfiguration.framework in Frameworks */,
+				D29012021A77967B00C23E30 /* StoreKit.framework in Frameworks */,
+				D29012001A77967200C23E30 /* MessageUI.framework in Frameworks */,
+				D29011FE1A77966A00C23E30 /* CoreGraphics.framework in Frameworks */,
+				D29011FC1A77966200C23E30 /* AVFoundation.framework in Frameworks */,
+				D29011FA1A77965A00C23E30 /* AudioToolbox.framework in Frameworks */,
+				D29011F81A77964300C23E30 /* AdSupport.framework in Frameworks */,
+				D29011F41A7795BE00C23E30 /* libAdapterIAd.a in Frameworks */,
+				D29011F31A7795BD00C23E30 /* libGoogleAdMobAds.a in Frameworks */,
+				D29011F51A7795BE00C23E30 /* libAdapterNend.a in Frameworks */,
+				D29011F61A7795BE00C23E30 /* libNendAd.a in Frameworks */,
+				D2C538CB1A7F993F00CC8E3B /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,20 +155,152 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D29011C61A7795BD00C23E30 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				D290120B1A7796D000C23E30 /* ImageIO.framework */,
+				D29012091A7796CA00C23E30 /* Security.framework */,
+				D29012071A7796C200C23E30 /* iAd.framework */,
+				D29012051A77969D00C23E30 /* CoreTelephony.framework */,
+				D29012031A77968800C23E30 /* SystemConfiguration.framework */,
+				D29012011A77967B00C23E30 /* StoreKit.framework */,
+				D29011FF1A77967200C23E30 /* MessageUI.framework */,
+				D29011FD1A77966A00C23E30 /* CoreGraphics.framework */,
+				D29011FB1A77966200C23E30 /* AVFoundation.framework */,
+				D29011F91A77965A00C23E30 /* AudioToolbox.framework */,
+				D29011F71A77964300C23E30 /* AdSupport.framework */,
+				D29011C71A7795BD00C23E30 /* Ad */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		D29011C71A7795BD00C23E30 /* Ad */ = {
+			isa = PBXGroup;
+			children = (
+				D29011C81A7795BD00C23E30 /* AdMob */,
+				D29011E91A7795BD00C23E30 /* Admob_Adapter */,
+				D29011EC1A7795BD00C23E30 /* Nend */,
+			);
+			path = Ad;
+			sourceTree = "<group>";
+		};
+		D29011C81A7795BD00C23E30 /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				D29011C91A7795BD00C23E30 /* Add-ons */,
+				D29011DC1A7795BD00C23E30 /* GADAdMobExtras.h */,
+				D29011DD1A7795BD00C23E30 /* GADAdNetworkExtras.h */,
+				D29011DE1A7795BD00C23E30 /* GADAdSize.h */,
+				D29011DF1A7795BD00C23E30 /* GADBannerView.h */,
+				D29011E01A7795BD00C23E30 /* GADBannerViewDelegate.h */,
+				D29011E11A7795BD00C23E30 /* GADInAppPurchase.h */,
+				D29011E21A7795BD00C23E30 /* GADInAppPurchaseDelegate.h */,
+				D29011E31A7795BD00C23E30 /* GADInterstitial.h */,
+				D29011E41A7795BD00C23E30 /* GADInterstitialDelegate.h */,
+				D29011E51A7795BD00C23E30 /* GADModules.h */,
+				D29011E61A7795BD00C23E30 /* GADRequest.h */,
+				D29011E71A7795BD00C23E30 /* GADRequestError.h */,
+				D29011E81A7795BD00C23E30 /* libGoogleAdMobAds.a */,
+			);
+			path = AdMob;
+			sourceTree = "<group>";
+		};
+		D29011C91A7795BD00C23E30 /* Add-ons */ = {
+			isa = PBXGroup;
+			children = (
+				D29011CA1A7795BD00C23E30 /* DoubleClick */,
+				D29011D21A7795BD00C23E30 /* Mediation */,
+				D29011D91A7795BD00C23E30 /* Search */,
+			);
+			path = "Add-ons";
+			sourceTree = "<group>";
+		};
+		D29011CA1A7795BD00C23E30 /* DoubleClick */ = {
+			isa = PBXGroup;
+			children = (
+				D29011CB1A7795BD00C23E30 /* DFPBannerView.h */,
+				D29011CC1A7795BD00C23E30 /* DFPExtras.h */,
+				D29011CD1A7795BD00C23E30 /* DFPInterstitial.h */,
+				D29011CE1A7795BD00C23E30 /* DFPSwipeableBannerView.h */,
+				D29011CF1A7795BD00C23E30 /* GADAdSizeDelegate.h */,
+				D29011D01A7795BD00C23E30 /* GADAppEventDelegate.h */,
+				D29011D11A7795BD00C23E30 /* GADSwipeableBannerViewDelegate.h */,
+			);
+			path = DoubleClick;
+			sourceTree = "<group>";
+		};
+		D29011D21A7795BD00C23E30 /* Mediation */ = {
+			isa = PBXGroup;
+			children = (
+				D29011D31A7795BD00C23E30 /* GADCustomEventBanner.h */,
+				D29011D41A7795BD00C23E30 /* GADCustomEventBannerDelegate.h */,
+				D29011D51A7795BD00C23E30 /* GADCustomEventExtras.h */,
+				D29011D61A7795BD00C23E30 /* GADCustomEventInterstitial.h */,
+				D29011D71A7795BD00C23E30 /* GADCustomEventInterstitialDelegate.h */,
+				D29011D81A7795BD00C23E30 /* GADCustomEventRequest.h */,
+			);
+			path = Mediation;
+			sourceTree = "<group>";
+		};
+		D29011D91A7795BD00C23E30 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				D29011DA1A7795BD00C23E30 /* GADSearchBannerView.h */,
+				D29011DB1A7795BD00C23E30 /* GADSearchRequest.h */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		D29011E91A7795BD00C23E30 /* Admob_Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				D29011EA1A7795BD00C23E30 /* libAdapterIAd.a */,
+				D29011EB1A7795BD00C23E30 /* libAdapterNend.a */,
+			);
+			path = Admob_Adapter;
+			sourceTree = "<group>";
+		};
+		D29011EC1A7795BD00C23E30 /* Nend */ = {
+			isa = PBXGroup;
+			children = (
+				D29011ED1A7795BD00C23E30 /* libNendAd.a */,
+				D29011EE1A7795BD00C23E30 /* NADIconArrayView.h */,
+				D29011EF1A7795BD00C23E30 /* NADIconLoader.h */,
+				D29011F01A7795BD00C23E30 /* NADIconView.h */,
+				D29011F11A7795BD00C23E30 /* NADInterstitial.h */,
+				D29011F21A7795BD00C23E30 /* NADView.h */,
+			);
+			path = Nend;
+			sourceTree = "<group>";
+		};
+		D29D9EF61A7CC7260055D55D /* img */ = {
+			isa = PBXGroup;
+			children = (
+				D2C5E92F1A7E51AB00F7754A /* enemy.png */,
+				D29D9EFB1A7CE1190055D55D /* ball_covered.png */,
+				D29D9EFC1A7CE1190055D55D /* ball_normal.png */,
+				D29D9EF91A7CCE9E0055D55D /* spaceCat.png */,
+			);
+			name = img;
+			sourceTree = "<group>";
+		};
 		D2C6F88E1A5FF2880050552A = {
 			isa = PBXGroup;
 			children = (
+				D2C538CA1A7F993F00CC8E3B /* GameKit.framework */,
 				D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */,
 				D2C6F8991A5FF2880050552A /* HitBackApp */,
+				D29011C61A7795BD00C23E30 /* lib */,
 				D2C6F8AF1A5FF2880050552A /* HitBackAppTests */,
 				D2C6F8981A5FF2880050552A /* Products */,
+				D29012111A779C8300C23E30 /* HitBackApp-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
 		D2C6F8981A5FF2880050552A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2C6F8971A5FF2880050552A /* HitBackApp.app */,
+				D2C6F8971A5FF2880050552A /* SpaceCat.app */,
 				D2C6F8AC1A5FF2880050552A /* HitBackAppTests.xctest */,
 			);
 			name = Products;
@@ -90,17 +309,17 @@
 		D2C6F8991A5FF2880050552A /* HitBackApp */ = {
 			isa = PBXGroup;
 			children = (
+				D29D9EF61A7CC7260055D55D /* img */,
 				D2C6F89C1A5FF2880050552A /* AppDelegate.swift */,
 				D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */,
+				D29012131A77B36B00C23E30 /* HBGameOverViewController.swift */,
 				D2C983D71A655DBB00EE60C6 /* HBSingleViewController.swift */,
-				D2C6F89E1A5FF2880050552A /* HBVersusViewController.swift */,
 				D2C6F8A31A5FF2880050552A /* Images.xcassets */,
-				D2C6F8BE1A5FF3B10050552A /* HBGameOverScene.swift */,
 				D2C983D91A655E5A00EE60C6 /* HBSinglePlayScene.swift */,
-				D2C6F8BF1A5FF3B10050552A /* HBVersusPlayScene.swift */,
 				D2C6F8C01A5FF3B10050552A /* spark.png */,
 				D2C6F8C11A5FF3B10050552A /* spark.sks */,
 				D2C6F89A1A5FF2880050552A /* Supporting Files */,
+				D2C35D9A1A77DE4900D829C3 /* SceneEscapeProtocol.swift */,
 			);
 			path = HitBackApp;
 			sourceTree = "<group>";
@@ -133,9 +352,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D2C6F8961A5FF2880050552A /* HitBackApp */ = {
+		D2C6F8961A5FF2880050552A /* SpaceCat */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2C6F8B61A5FF2880050552A /* Build configuration list for PBXNativeTarget "HitBackApp" */;
+			buildConfigurationList = D2C6F8B61A5FF2880050552A /* Build configuration list for PBXNativeTarget "SpaceCat" */;
 			buildPhases = (
 				D2C6F8931A5FF2880050552A /* Sources */,
 				D2C6F8941A5FF2880050552A /* Frameworks */,
@@ -145,9 +364,9 @@
 			);
 			dependencies = (
 			);
-			name = HitBackApp;
+			name = SpaceCat;
 			productName = HitBackApp;
-			productReference = D2C6F8971A5FF2880050552A /* HitBackApp.app */;
+			productReference = D2C6F8971A5FF2880050552A /* SpaceCat.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D2C6F8AB1A5FF2880050552A /* HitBackAppTests */ = {
@@ -179,6 +398,12 @@
 				TargetAttributes = {
 					D2C6F8961A5FF2880050552A = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 9E44EWSQF3;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					D2C6F8AB1A5FF2880050552A = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -199,7 +424,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2C6F8961A5FF2880050552A /* HitBackApp */,
+				D2C6F8961A5FF2880050552A /* SpaceCat */,
 				D2C6F8AB1A5FF2880050552A /* HitBackAppTests */,
 			);
 		};
@@ -211,7 +436,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2C6F8A41A5FF2880050552A /* Images.xcassets in Resources */,
+				D29D9EFE1A7CE1190055D55D /* ball_normal.png in Resources */,
+				D2C5E9301A7E51AB00F7754A /* enemy.png in Resources */,
+				D29D9EFA1A7CCE9E0055D55D /* spaceCat.png in Resources */,
 				D2C983D11A63B97200EE60C6 /* Default-568h@2x.png in Resources */,
+				D29D9EFD1A7CE1190055D55D /* ball_covered.png in Resources */,
 				D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */,
 				D2C6F8C41A5FF3B10050552A /* spark.png in Resources */,
 			);
@@ -231,12 +460,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C6F8C21A5FF3B10050552A /* HBGameOverScene.swift in Sources */,
+				D29012141A77B36B00C23E30 /* HBGameOverViewController.swift in Sources */,
 				D2C983D61A63CDAD00EE60C6 /* HBTitleViewController.swift in Sources */,
 				D2C983D81A655DBB00EE60C6 /* HBSingleViewController.swift in Sources */,
-				D2C6F8C31A5FF3B10050552A /* HBVersusPlayScene.swift in Sources */,
-				D2C6F89F1A5FF2880050552A /* HBVersusViewController.swift in Sources */,
 				D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */,
+				D2C35D9B1A77DE4900D829C3 /* SceneEscapeProtocol.swift in Sources */,
 				D2C983DA1A655E5A00EE60C6 /* HBSinglePlayScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,7 +482,7 @@
 /* Begin PBXTargetDependency section */
 		D2C6F8AE1A5FF2880050552A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D2C6F8961A5FF2880050552A /* HitBackApp */;
+			target = D2C6F8961A5FF2880050552A /* SpaceCat */;
 			targetProxy = D2C6F8AD1A5FF2880050552A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -297,7 +525,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LIBTOOLFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "HitBackApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -332,7 +563,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LIBTOOLFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "HitBackApp-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -341,10 +575,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = HitBackApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/Ad/AdMob",
+					"$(PROJECT_DIR)/lib/Ad/Admob_Adapter",
+					"$(PROJECT_DIR)/lib/Ad/Nend",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HitBackApp-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -352,10 +596,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = HitBackApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/Ad/AdMob",
+					"$(PROJECT_DIR)/lib/Ad/Admob_Adapter",
+					"$(PROJECT_DIR)/lib/Ad/Nend",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HitBackApp-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -405,7 +659,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2C6F8B61A5FF2880050552A /* Build configuration list for PBXNativeTarget "HitBackApp" */ = {
+		D2C6F8B61A5FF2880050552A /* Build configuration list for PBXNativeTarget "SpaceCat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2C6F8B71A5FF2880050552A /* Debug */,
