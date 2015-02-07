@@ -30,6 +30,7 @@ class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverV
     
     
     func goGameScene() {
+        self.skView?.paused = false
         if (self.skView?.scene != nil) {
             self.skView?.scene?.removeAllChildren()
             self.skView?.presentScene(self.skView?.scene)
@@ -44,15 +45,11 @@ class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("singleVC viewDidLoad")
-        
         skView = self.view as? SKView
-        //self.skView = SKView(frame: UIScreen.mainScreen().bounds)
         skView!.showsDrawCount = true;
         skView!.showsNodeCount = true;
         skView!.showsFPS = true;
         skView!.ignoresSiblingOrder = true
-        //self.view = self.skView
     }
     
     override func didReceiveMemoryWarning() {

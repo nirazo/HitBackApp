@@ -12,35 +12,38 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     var life : Int = 0
     var stage : Int = 0
     var ballSpeed : Double = 0
-    var lastUpdated : NSTimeInterval = 0
+    var lastSpeedUpTime : NSTimeInterval = 0
+    var lastEnemyAddedTime : NSTimeInterval = 0
     var isFirstTouched : Bool = false // 経過時間測定用フラグ
     var isBallReady : Bool = false // ボールがセットされ、発射する直前の状態になっているか否か
     var isDisplayManipulatable : Bool = true
     var score : Int = 0
     var combo : Int = 0
     var highScore : Int = 0
+    
     // ハイスコア保存用NSUserDefaults
     let ud = NSUserDefaults.standardUserDefaults()
     var escapeDelegate : SceneEscapeProtocol?
     var touchesStartY : CGFloat? = 0.0 // touchesBeganが始まった際のy座標
     
     // コンボ計算用（ボールを打った後1度でもブロックに当たって帰ってきたらコンボ継続）
-    var blockBrokenInThisTurn : Bool = false
+    var enemyBrokenInThisTurn : Bool = false
     var comboContinue : Bool = true
     
     // ボールのサイズ
     var ballSize : CGFloat = 0
     
-    private  struct Block {
-        static let BLOCK_MARGIN = 16.0
-        static let BLOCK_WIDTH = 50.0
-        static let BLOCK_HEIGHT = 18.0
-        static let BLOCK_MAX_LIFE = 1
-        static let BLOCK_FALL_STEP = 25 // ブロックが落ちてくる幅。画面サイズをこの値で割った値ぶん落ちてくる
+    var normalTexture : SKTexture? = nil
+    var smileTexture : SKTexture? = nil
+    var bounceTexture : SKTexture? = nil
+    var downTexture : SKTexture? = nil
+    
+    private  struct Enemy {
+        static let ENEMY_MARGIN = 16.0
     }
     
     private struct Category {
-        static let blockCategory : UInt32 = 0x1 << 0
+        static let enemyCategory : UInt32 = 0x1 << 0
         static let ballCategory : UInt32 = 0x1 << 1
         static let paddleCategory : UInt32 = 0x1 << 2
         static let worldCategory : UInt32 = 0x1 << 3
@@ -63,17 +66,26 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private struct Label {
-        static let LABEL_MARGIN : CGFloat = 5.0
+        static let LABEL_MARGIN : CGFloat = 10.0
         static let LABEL_FONT_SIZE : CGFloat = 14.0
     }
     
     private struct Config {
         static let maxLife : Int = 2
         static let timeInterval : Double = 3.0 // 何秒おきにスピードアップするか
-        // static let minNumOfBlocks : Int = 5
-        static let maxNumOfBlocks : Int = 8
+        static let minNumOfEnemies : Int = 3
+        static let maxNumOfEnemies : Int = 5
         static let scoreStep = 100
         static let speedUp_rate = 1.03
+        static let emenyFrequency : Double = 4.0
+        static let emenyFrequency_MAX : Double = 2.5
+    }
+    
+    enum ENEMY_TYPE : Int {
+        case NORMAL = 0
+        case QUICK = 1
+        case HEAVY = 2
+        case QUICK_HEAVY = 3
     }
     
     override convenience init(size: CGSize) {
@@ -82,6 +94,18 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     init(size : CGSize, life : Int, stage: Int) {
         super.init(size: size)
+        var normalImage : UIImage = UIImage(named: "spaceCat.png")!
+        var smilelImage : UIImage = UIImage(named: "spaceCat_smile.png")!
+        var bounceImage : UIImage = UIImage(named: "spaceCat_bounce.png")!
+        var downImage : UIImage = UIImage(named: "spaceCat_down.png")!
+//        normalImage = normalImage.resizedImage(CGFloat(Paddle.PADDLE_WIDTH), height: CGFloat(Paddle.PADDLE_HEIGHT))!
+//        smilelImage = smilelImage.resizedImage(CGFloat(Paddle.PADDLE_WIDTH), height: CGFloat(ßPaddle.PADDLE_HEIGHT))!
+//        bounceImage = bounceImage.resizedImage(CGFloat(Paddle.PADDLE_WIDTH), height: CGFloat(Paddle.PADDLE_HEIGHT))!
+//        downImage = downImage.resizedImage(CGFloat(Paddle.PADDLE_WIDTH), height: CGFloat(Paddle.PADDLE_HEIGHT))!
+        self.normalTexture = SKTexture(image: normalImage)
+        self.smileTexture = SKTexture(image: smilelImage)
+        self.bounceTexture = SKTexture(image: bounceImage)
+        self.downTexture = SKTexture(image: downImage)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -97,7 +121,6 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.comboContinue = true
         self.ballSpeed = Double(Ball.BALL_BASESPEED)
         
-        self.addBlocks()
         self.addPaddle()
         self.addScoreLabel()
         self.addComboLabel()
@@ -109,7 +132,8 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         self.isFirstTouched = false
-        self.lastUpdated = 0
+        self.lastSpeedUpTime = 0
+        self.lastEnemyAddedTime = 0
         
         if (self.stage == 1) {
             self.displayStageStartLabel()
@@ -117,103 +141,54 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.ballSize = self.life == 2 ? CGFloat(Ball.BALL_RADIUS_BIG) : CGFloat(Ball.BALL_RADIUS_SMALL)
     }
     
-    //MARK: - block related methods
-    func addBlocks() {
-        let numOfBlocks : Int = Int(getRandomNumber(Min: Float(Config.maxNumOfBlocks), Max: Float(Config.maxNumOfBlocks)))
-        var blockWidth : Double = Block.BLOCK_WIDTH
-        var blockHeight : Double = Block.BLOCK_HEIGHT
-        
-        for var i=0; i < numOfBlocks; i++ {
-            var block : SKNode = self.newBlock()
-            self.addChild(block)
+    //MARK: - Enemy related methods
+    func addEnemy() {
+        let numOfEnemies : Int = Int(HBUtils.getRandomNumber(Float(Config.minNumOfEnemies), Max: Float(Config.maxNumOfEnemies + (self.level() / 5) * 2)))
+        println("level: \(self.level())")
+        println("numOfEnemy: \(numOfEnemies)")
+        for var i=0; i < numOfEnemies; i++ {
+            var enemyType : ENEMY_TYPE
+            if (self.level() > 1) {
+                enemyType = i%2 == 0 ? ENEMY_TYPE.NORMAL : ENEMY_TYPE.QUICK
+            } else {
+                enemyType = ENEMY_TYPE.NORMAL
+            }
+            var enemy : SKSpriteNode = self.newEnemy(enemyType)
+            self.addChild(enemy)
         }
     }
     
-    func newBlock() -> SKNode {
-        var blockWidth : CGFloat = CGFloat(Block.BLOCK_WIDTH)
-        var blockHeight : CGFloat = CGFloat(Block.BLOCK_HEIGHT)
-        var maxLife : Int = Block.BLOCK_MAX_LIFE
-        
-        var block : SKSpriteNode = SKSpriteNode(texture: SKTexture(image: UIImage(named: "enemy.png")!))
-        block.size = CGSize(width: Block.BLOCK_WIDTH, height: Block.BLOCK_HEIGHT)
-        var xMin = Block.BLOCK_WIDTH/2
-        var xMax = (Int(self.frame.size.width) - Int(Block.BLOCK_WIDTH) / 2)
-        var x = CGFloat(self.getRandomNumber(Min: Float(xMin), Max: Float(xMax)))
-        
-        // y座標のmin, maxの変更
-        var yMin = CGFloat(Paddle.PADDLE_BASE_Y * 2) - CGFloat(10 * self.stage)
-        var yMax = self.frame.size.height - CGFloat(Block.BLOCK_HEIGHT/2) - CGFloat(10 * self.stage)
-        var y = CGFloat(self.getRandomNumber(Min: Float(yMin), Max: Float(yMax)))
-        
-        block.position = CGPointMake(x, y)
-        
-        block.name = "block"
-        block.userData = NSMutableDictionary()
-        block.userData?.setObject(maxLife, forKey: "life")
-        block.physicsBody = SKPhysicsBody(rectangleOfSize: block.size)
-        block.physicsBody?.dynamic = false
-        block.physicsBody?.categoryBitMask = Category.blockCategory
-        self.updateBlockAlpha(block)
-        return block
-    }
-    
-    func updateBlockAlpha(block: SKNode) {
-        var life = block.userData?.objectForKey("life") as Int
-        block.alpha = 1.0
-    }
-    
-    func decreaseBlockLife(block : SKNode) {
-        var life : Int = Int(block.userData?.objectForKey("life") as NSNumber) - 1
-        block.userData?.setObject(life, forKey: "life")
-        self.updateBlockAlpha(block)
-        if (life < 1) {
-            self.blockBroken(block)
+    func newEnemy(type : ENEMY_TYPE) -> SKSpriteNode {
+        var enemy : EnemyBase? = nil
+        switch type {
+        case ENEMY_TYPE.NORMAL:
+            enemy = NormalEnemy(level: self.level(), category: Category.enemyCategory)
+        case ENEMY_TYPE.QUICK:
+            enemy = QuickEnemy(level: self.level(), category: Category.enemyCategory)
+        default:
+            break
         }
-        if (self.blockNodes()!.count < 1) {
-            self.nextLevel()
-        }
+        var xMin = enemy!.size.width/2
+        var xMax = (Int(self.frame.size.width) - Int(enemy!.size.width) / 2)
+        var x = CGFloat(HBUtils.getRandomNumber(Float(xMin), Max: Float(xMax)))
+        var y = self.frame.size.height
+        enemy!.position = CGPointMake(x, y)
+        return enemy!
     }
     
-    func blockNodes() -> NSArray? {
+    func enemyNodes() -> NSArray? {
         var nodes : NSMutableArray = [] as NSMutableArray
-        self.enumerateChildNodesWithName("block", usingBlock: {node, stop in
+        self.enumerateChildNodesWithName("enemy", usingBlock: {node, stop in
             nodes.addObject(node)
         })
         return nodes
     }
     
-    func blockBroken(block: SKNode) {
-        self.removeNodeWithSpark(block)
-        self.blockBrokenInThisTurn = true
-        self.comboContinue = true
-        if (self.comboContinue || self.combo == 0) {
-            self.combo++
-            self.updateComboLabel()
+    func judgeEnemyHeightIsGameOver(enemy : EnemyBase) -> Bool{
+        if (enemy.position.y - CGFloat(enemy.size.height) / 2 < CGFloat(Paddle.PADDLE_BASE_Y)) {
+            return true
         }
-        self.score += Config.scoreStep + self.comboBonus(Config.scoreStep, comboNum: self.combo)
-        self.updateScoreLabel()
-    }
-    
-    // ブロックを1段階分下に落とす
-    func fallBlocks() {
-        if (self.blockNodes()!.count != 0) {
-            for blockNode : SKNode in self.blockNodes()! as [SKNode] {
-                var dst : CGPoint = CGPointMake(blockNode.position.x, blockNode.position.y
-                    - CGFloat(self.frame.size.height/CGFloat(Block.BLOCK_FALL_STEP)))
-                
-                var fall : SKAction = SKAction.moveTo(dst, duration: 1.0)
-                var sequence : SKAction = SKAction.sequence([fall])
-                blockNode.runAction(sequence, completion: {() -> Void in
-                    self.judgeBlockHeightIsGameOver(blockNode)
-                })
-            }
-        }
-    }
-    
-    func judgeBlockHeightIsGameOver(block : SKNode) {
-        if (block.position.y - CGFloat(Block.BLOCK_HEIGHT) / 2 < self.paddleNode().position.y + CGFloat(Paddle.PADDLE_RADIUS)) {
-            self.gameOver()
-        }
+        return false
     }
     
     
@@ -264,7 +239,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.friction = 0
         ball.physicsBody?.usesPreciseCollisionDetection = true
         ball.physicsBody?.categoryBitMask = Category.ballCategory
-        ball.physicsBody?.contactTestBitMask = Category.blockCategory
+        ball.physicsBody?.contactTestBitMask = Category.enemyCategory
         
         self.addChild(ball)
     }
@@ -287,6 +262,9 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.changeBallSize()
         self.updateLifeLabel()
         self.combo = 0
+        // 表情変える
+        var anim = SKAction.animateWithTextures([self.normalTexture!, self.downTexture!], timePerFrame: 0.5)
+        self.paddleNode().runAction(anim)
     }
     
     // ballのノードの配列を返す
@@ -326,12 +304,21 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
             var newRad : CGFloat = newAngle * CGFloat(M_PI*2) / 360
             let newDx = (cos(newRad) * CGFloat(self.ballSpeed))
             let newDy = (sin(newRad) * CGFloat(self.ballSpeed))
-            var oldSpeed = (ballPhysicsBody.velocity.dx * ballPhysicsBody.velocity.dx) + (ballPhysicsBody.velocity.dy * ballPhysicsBody.velocity.dy)
             ballPhysicsBody.velocity = CGVectorMake(newDx, newDy)
-            var newSpeed = (ballPhysicsBody.velocity.dx * ballPhysicsBody.velocity.dx) + (ballPhysicsBody.velocity.dy * ballPhysicsBody.velocity.dy)
             let newAngle = newRad / CGFloat(M_PI*2) * 360.0
         }
     }
+    
+    // ボールの速度を補正する
+    func compensateBallSpeed(ballPhysicsBody : SKPhysicsBody) {
+        let velX :CGFloat = ballPhysicsBody.velocity.dx
+        let velY : CGFloat = ballPhysicsBody.velocity.dy
+        var rad : CGFloat = atan2(velY, velX)
+        let newDx = (cos(rad) * CGFloat(self.ballSpeed))
+        let newDy = (sin(rad) * CGFloat(self.ballSpeed))
+        ballPhysicsBody.velocity = CGVectorMake(newDx, newDy)
+    }
+    
     
     func changeBallSize() {
         self.ballSize = self.life == Config.maxLife ? CGFloat(Ball.BALL_RADIUS_BIG) : CGFloat(Ball.BALL_RADIUS_SMALL)
@@ -349,8 +336,10 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         if(self.ballNode()? == nil) {
             self.isBallReady = true
             self.isFirstTouched = true
-            println(addBall)
             self.addBall()
+            // 表情変える
+            var anim = SKAction.animateWithTextures([self.normalTexture!, self.normalTexture!], timePerFrame: 0.5)
+            self.paddleNode().runAction(anim)
         }
         if (self.stageStartLabel() != nil) {
             self.stageStartLabel()!.removeFromParent()
@@ -367,6 +356,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
             if (ball.physicsBody?.velocity == CGVectorMake(0, 0) && self.isBallReady) {
                 self.shootBall()
                 self.isBallReady = false
+                self.addEnemy()
             }
             return
         }
@@ -398,7 +388,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         var fontSize : CGFloat = Label.LABEL_FONT_SIZE
         
         var label : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
-        label.text = "score: " + String(self.score)
+        label.text = "とくてん: " + String(self.score)
         label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
         label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
         label.position = CGPointMake(CGRectGetMaxX(self.frame) - margin, CGRectGetMaxY(self.frame) - margin)
@@ -413,7 +403,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         var fontSize : CGFloat = Label.LABEL_FONT_SIZE
         
         var label : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
-        label.text = "combo: " + String(self.combo)
+        label.text = "コンボ: " + String(self.combo)
         label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
         label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
         label.position = CGPointMake(CGRectGetMaxX(self.frame) - margin, CGRectGetMaxY(self.frame) - margin*3)
@@ -441,11 +431,11 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateScoreLabel() {
-        self.scoreLabel().text = "score: " + String(self.score)
+        self.scoreLabel().text = "とくてん: " + String(self.score)
     }
     
     func updateComboLabel() {
-        self.comboLabel().text = "combo: " + String(self.combo)
+        self.comboLabel().text = "コンボ: " + String(self.combo)
     }
     
     func updateLifeLabel() {
@@ -481,10 +471,29 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
         }
-        if (firstBody.categoryBitMask & Category.blockCategory != 0) {
+        if (firstBody.categoryBitMask & Category.enemyCategory != 0) {
             if (secondBody.categoryBitMask & Category.ballCategory != 0) {
-                secondBody = self.contactedBallAndBlock(secondBody.node! as SKSpriteNode)
-                self.decreaseBlockLife(firstBody.node!)
+                secondBody = self.contactedBallAndEnemy(secondBody.node! as SKSpriteNode)
+                var contactedNode = firstBody.node! as EnemyBase
+                contactedNode.contactedWithBall()
+                if (Int(contactedNode.userData?.objectForKey("life") as NSNumber) < 1) {
+                    
+                    // 表情変える
+                    var anim = SKAction.animateWithTextures([self.smileTexture!, self.normalTexture!], timePerFrame: 0.5)
+                    self.paddleNode().runAction(anim)
+                    
+                    
+                    self.removeNodeWithSpark(contactedNode)
+                    contactedNode.removeFromParent()
+                    self.enemyBrokenInThisTurn = true
+                    self.comboContinue = true
+                    if (self.comboContinue || self.combo == 0) {
+                        self.combo++
+                        self.updateComboLabel()
+                    }
+                    self.score += Config.scoreStep + self.comboBonus(Config.scoreStep, comboNum: self.combo)
+                    self.updateScoreLabel()
+                }
             }
         } else if (firstBody.categoryBitMask & Category.ballCategory != 0) {
             if (secondBody.categoryBitMask & Category.paddleCategory != 0) {
@@ -494,6 +503,10 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // MARK: - Utilities
+    func level() -> Int {
+        return Int(self.score / 1000)
+    }
+    
     func removeNodeWithSpark(node : SKNode) {
         var sparkPath : String = NSBundle.mainBundle().pathForResource("spark", ofType: "sks")!
         var spark : SKEmitterNode = NSKeyedUnarchiver.unarchiveObjectWithFile(sparkPath) as SKEmitterNode
@@ -511,55 +524,42 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     func gameOver() {
         println("gameover!!")
+        self.view?.paused = true
         self.escapeDelegate?.sceneEscape!(self, score: self.score)
     }
     
-    
-    func nextLevel() {
-        self.userInteractionEnabled = false
-        self.stage++
-        self.ballNode()?.removeFromParent()
-        self.lastUpdated = 0
-        self.displayNextStageLabel { () -> Void in
-            self.addBlocks()
-            self.userInteractionEnabled = true
-        }
-    }
-    
-    /*
-    乱数を生成するメソッド.
-    */
-    func getRandomNumber(Min _Min : Float, Max _Max : Float)->Float {
-        
-        return ( Float(arc4random_uniform(UINT32_MAX)) / Float(UINT32_MAX) ) * (_Max - _Min) + _Min
-    }
-    
-    
     // ボールとパドル衝突時のアクション
     func contactedBallAndPaddle(ball : SKSpriteNode) -> SKPhysicsBody{
+        // 回転
         var up : SKAction = SKAction.rotateByAngle(10 * CGFloat(M_PI*2) / 360, duration: 0.03)
         var down : SKAction = SKAction.rotateByAngle(-10 * CGFloat(M_PI*2) / 360, duration: 0.03)
         var sequence : SKAction = SKAction.sequence([up, down, down, up])
-        var repeatSequence : SKAction = SKAction.repeatAction(sequence, count: 5)
-        self.paddleNode().runAction(sequence)
+        var repeatSequence : SKAction = SKAction.repeatAction(sequence, count: 2)
+        self.paddleNode().runAction(repeatSequence)
+        
+        // 表情変える
+        var anim = SKAction.animateWithTextures([self.bounceTexture!, self.normalTexture!], timePerFrame: 0.5)
+        self.paddleNode().runAction(anim)
         
         // コンボ判定
-        if (!self.blockBrokenInThisTurn) {
+        if (!self.enemyBrokenInThisTurn) {
             self.comboContinue = false
             self.combo = 0
             self.updateComboLabel()
         }
-        self.blockBrokenInThisTurn = false
+        self.enemyBrokenInThisTurn = false
                 
         let velX = ball.physicsBody?.velocity.dx
         let velY = ball.physicsBody?.velocity.dy
         let rad : CGFloat = atan2(velY!, velX!)
+        self.compensateBallSpeed(ball.physicsBody!)
         self.compensateBallAngle(ball.physicsBody!)
         return ball.physicsBody!
     }
     
     // ボールとブロック衝突時のアクション
-    func contactedBallAndBlock(ball : SKSpriteNode) -> SKPhysicsBody{
+    func contactedBallAndEnemy(ball : SKSpriteNode) -> SKPhysicsBody{
+        self.compensateBallSpeed(ball.physicsBody!)
         self.compensateBallAngle(ball.physicsBody!)
         return ball.physicsBody!
     }
@@ -590,37 +590,24 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         return self.childNodeWithName("stageStartLabel")? as? SKLabelNode
     }
     
-    // 次のステージへ進んだ時のテキスト表示
-    func displayNextStageLabel(completion block: (() -> Void)!) {
-        var nextStageLabel = SKLabelNode(fontNamed: "HiraKakuProN-W3")
-        nextStageLabel.text = "くりあー！"
-        nextStageLabel.fontColor = UIColor.whiteColor()
-        nextStageLabel.fontSize = 20
-        nextStageLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
-        var scaleUp = SKAction.scaleTo(2.0, duration: 0.2)
-        var scaleDown = SKAction.scaleTo(1.5, duration: 0.2)
-        var scaleStay = SKAction.scaleTo(1.5, duration: 0.2)
-        var textFadeout = SKAction.fadeOutWithDuration(0.3)
-        let textRemove = SKAction.removeFromParent()
-        let textSequence = SKAction.sequence([scaleUp, scaleDown, scaleStay, textFadeout, textRemove])
-        self.addChild(nextStageLabel)
-        nextStageLabel.runAction(textSequence, completion: block)
-    }
-    
-    
     // MARK: - Callbacks
     override func update(currentTime: NSTimeInterval) {
-        if (self.lastUpdated != 0) {
-            if ((self.lastUpdated + Config.timeInterval) <= currentTime) {
+        if (self.lastSpeedUpTime != 0) {
+            if ((self.lastSpeedUpTime + Config.timeInterval) <= currentTime) {
                 self.changeBallSpeed()
-                self.lastUpdated = currentTime
-                
-                self.fallBlocks()
+                self.lastSpeedUpTime = currentTime
+            }
+            var enemyJudge : NSTimeInterval = self.lastEnemyAddedTime + Config.emenyFrequency - NSTimeInterval(0.3 * NSTimeInterval(self.level() / 3))
+            enemyJudge = enemyJudge > Config.emenyFrequency_MAX ? enemyJudge : Config.emenyFrequency_MAX
+            if (enemyJudge <= currentTime) {
+                self.addEnemy()
+                self.lastEnemyAddedTime = currentTime
             }
         }
         if (self.isFirstTouched) {
             self.isFirstTouched = false
-            self.lastUpdated = currentTime
+            self.lastSpeedUpTime = currentTime
+            self.lastEnemyAddedTime = currentTime
         }
     }
     
@@ -662,6 +649,14 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
                         }
                         self.gameOver()
                     }
+                }
+            }
+        }
+        if (self.enemyNodes()?.count != 0) {
+            for enemyNode in self.enemyNodes()! {
+                if (self.judgeEnemyHeightIsGameOver(enemyNode as EnemyBase)) {
+                    self.gameOver()
+                    break
                 }
             }
         }

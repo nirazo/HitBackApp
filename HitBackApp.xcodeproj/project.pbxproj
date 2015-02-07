@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2671A531A85EB31007FFDBE /* EnemyBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A521A85EB31007FFDBE /* EnemyBase.swift */; };
+		D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A551A85F33B007FFDBE /* NormalEnemy.swift */; };
+		D2671A581A85FFC8007FFDBE /* QuickEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */; };
+		D2671A5A1A8612CE007FFDBE /* HBUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A591A8612CE007FFDBE /* HBUtils.swift */; };
+		D2671A5E1A866BC8007FFDBE /* spaceCat_bounce.png in Resources */ = {isa = PBXBuildFile; fileRef = D2671A5B1A866BC8007FFDBE /* spaceCat_bounce.png */; };
+		D2671A5F1A866BC8007FFDBE /* spaceCat_down.png in Resources */ = {isa = PBXBuildFile; fileRef = D2671A5C1A866BC8007FFDBE /* spaceCat_down.png */; };
+		D2671A601A866BC8007FFDBE /* spaceCat_smile.png in Resources */ = {isa = PBXBuildFile; fileRef = D2671A5D1A866BC8007FFDBE /* spaceCat_smile.png */; };
+		D2671A621A867125007FFDBE /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A611A867125007FFDBE /* UIImage+Utils.swift */; };
 		D29011F31A7795BD00C23E30 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011E81A7795BD00C23E30 /* libGoogleAdMobAds.a */; };
 		D29011F41A7795BE00C23E30 /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011EA1A7795BD00C23E30 /* libAdapterIAd.a */; };
 		D29011F51A7795BE00C23E30 /* libAdapterNend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D29011EB1A7795BD00C23E30 /* libAdapterNend.a */; };
@@ -51,6 +59,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D2671A521A85EB31007FFDBE /* EnemyBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyBase.swift; sourceTree = "<group>"; };
+		D2671A551A85F33B007FFDBE /* NormalEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalEnemy.swift; sourceTree = "<group>"; };
+		D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickEnemy.swift; sourceTree = "<group>"; };
+		D2671A591A8612CE007FFDBE /* HBUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBUtils.swift; sourceTree = "<group>"; };
+		D2671A5B1A866BC8007FFDBE /* spaceCat_bounce.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceCat_bounce.png; sourceTree = "<group>"; };
+		D2671A5C1A866BC8007FFDBE /* spaceCat_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceCat_down.png; sourceTree = "<group>"; };
+		D2671A5D1A866BC8007FFDBE /* spaceCat_smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceCat_smile.png; sourceTree = "<group>"; };
+		D2671A611A867125007FFDBE /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		D29011CB1A7795BD00C23E30 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
 		D29011CC1A7795BD00C23E30 /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
 		D29011CD1A7795BD00C23E30 /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
@@ -155,9 +171,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D2671A541A85F324007FFDBE /* Enemy */ = {
+			isa = PBXGroup;
+			children = (
+				D2671A521A85EB31007FFDBE /* EnemyBase.swift */,
+				D2671A551A85F33B007FFDBE /* NormalEnemy.swift */,
+				D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */,
+			);
+			name = Enemy;
+			sourceTree = "<group>";
+		};
+		D2671A651A867A79007FFDBE /* Title */ = {
+			isa = PBXGroup;
+			children = (
+				D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */,
+			);
+			name = Title;
+			sourceTree = "<group>";
+		};
+		D2671A661A867A8A007FFDBE /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				D2C983D71A655DBB00EE60C6 /* HBSingleViewController.swift */,
+				D2C983D91A655E5A00EE60C6 /* HBSinglePlayScene.swift */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		D2671A671A867AA1007FFDBE /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				D29012131A77B36B00C23E30 /* HBGameOverViewController.swift */,
+			);
+			name = Result;
+			sourceTree = "<group>";
+		};
 		D29011C61A7795BD00C23E30 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D2C538CA1A7F993F00CC8E3B /* GameKit.framework */,
 				D290120B1A7796D000C23E30 /* ImageIO.framework */,
 				D29012091A7796CA00C23E30 /* Security.framework */,
 				D29012071A7796C200C23E30 /* iAd.framework */,
@@ -280,6 +332,9 @@
 				D29D9EFB1A7CE1190055D55D /* ball_covered.png */,
 				D29D9EFC1A7CE1190055D55D /* ball_normal.png */,
 				D29D9EF91A7CCE9E0055D55D /* spaceCat.png */,
+				D2671A5B1A866BC8007FFDBE /* spaceCat_bounce.png */,
+				D2671A5C1A866BC8007FFDBE /* spaceCat_down.png */,
+				D2671A5D1A866BC8007FFDBE /* spaceCat_smile.png */,
 			);
 			name = img;
 			sourceTree = "<group>";
@@ -287,7 +342,6 @@
 		D2C6F88E1A5FF2880050552A = {
 			isa = PBXGroup;
 			children = (
-				D2C538CA1A7F993F00CC8E3B /* GameKit.framework */,
 				D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */,
 				D2C6F8991A5FF2880050552A /* HitBackApp */,
 				D29011C61A7795BD00C23E30 /* lib */,
@@ -309,17 +363,19 @@
 		D2C6F8991A5FF2880050552A /* HitBackApp */ = {
 			isa = PBXGroup;
 			children = (
-				D29D9EF61A7CC7260055D55D /* img */,
 				D2C6F89C1A5FF2880050552A /* AppDelegate.swift */,
-				D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */,
-				D29012131A77B36B00C23E30 /* HBGameOverViewController.swift */,
-				D2C983D71A655DBB00EE60C6 /* HBSingleViewController.swift */,
+				D2671A651A867A79007FFDBE /* Title */,
+				D2671A661A867A8A007FFDBE /* Game */,
+				D2671A671A867AA1007FFDBE /* Result */,
+				D2671A541A85F324007FFDBE /* Enemy */,
+				D29D9EF61A7CC7260055D55D /* img */,
 				D2C6F8A31A5FF2880050552A /* Images.xcassets */,
-				D2C983D91A655E5A00EE60C6 /* HBSinglePlayScene.swift */,
 				D2C6F8C01A5FF3B10050552A /* spark.png */,
 				D2C6F8C11A5FF3B10050552A /* spark.sks */,
 				D2C6F89A1A5FF2880050552A /* Supporting Files */,
 				D2C35D9A1A77DE4900D829C3 /* SceneEscapeProtocol.swift */,
+				D2671A591A8612CE007FFDBE /* HBUtils.swift */,
+				D2671A611A867125007FFDBE /* UIImage+Utils.swift */,
 			);
 			path = HitBackApp;
 			sourceTree = "<group>";
@@ -441,6 +497,9 @@
 				D29D9EFA1A7CCE9E0055D55D /* spaceCat.png in Resources */,
 				D2C983D11A63B97200EE60C6 /* Default-568h@2x.png in Resources */,
 				D29D9EFD1A7CE1190055D55D /* ball_covered.png in Resources */,
+				D2671A601A866BC8007FFDBE /* spaceCat_smile.png in Resources */,
+				D2671A5E1A866BC8007FFDBE /* spaceCat_bounce.png in Resources */,
+				D2671A5F1A866BC8007FFDBE /* spaceCat_down.png in Resources */,
 				D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */,
 				D2C6F8C41A5FF3B10050552A /* spark.png in Resources */,
 			);
@@ -460,11 +519,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2671A621A867125007FFDBE /* UIImage+Utils.swift in Sources */,
 				D29012141A77B36B00C23E30 /* HBGameOverViewController.swift in Sources */,
 				D2C983D61A63CDAD00EE60C6 /* HBTitleViewController.swift in Sources */,
 				D2C983D81A655DBB00EE60C6 /* HBSingleViewController.swift in Sources */,
+				D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */,
 				D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */,
+				D2671A5A1A8612CE007FFDBE /* HBUtils.swift in Sources */,
+				D2671A581A85FFC8007FFDBE /* QuickEnemy.swift in Sources */,
 				D2C35D9B1A77DE4900D829C3 /* SceneEscapeProtocol.swift in Sources */,
+				D2671A531A85EB31007FFDBE /* EnemyBase.swift in Sources */,
 				D2C983DA1A655E5A00EE60C6 /* HBSinglePlayScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
