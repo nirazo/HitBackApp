@@ -54,7 +54,6 @@ class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverV
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -70,15 +69,11 @@ class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverV
     
     //MARK: - HBGameOverViewControllerDelegate method
     func toTitleTapped() {
-//        self.dismissViewControllerAnimated(true, completion: {() -> Void in
-//            self.navigationController?.popToRootViewControllerAnimated(true)
-//            return
-//        })
+
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     func toRetryTapped() {
-        //self.dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
 }

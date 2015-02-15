@@ -24,7 +24,7 @@ class QuickEnemy : EnemyBase {
             life     : Config.MAX_LIFE,
             level    : level,
             fallTime : 15.0,
-            image    : UIImage(named: "enemy.png")!,
+            image    : UIImage(named: "quickEnemy.png")!,
             category : category)
     }
     
