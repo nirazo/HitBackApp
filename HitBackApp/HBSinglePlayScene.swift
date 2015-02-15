@@ -46,6 +46,9 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     var scoreStringImage : SKSpriteNode?
     var comboStringImage : SKSpriteNode?
     
+    // パドルのベースの高さ
+    var paddleBaseY : CGFloat?
+    
     enum GAME_STATE : Int {
         case BEFORE_START = 0
         case NORMAL = 1
@@ -67,7 +70,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         static let PADDLE_WIDTH = 70.0
         static let PADDLE_HEIGHT = 14.0
         static let PADDLE_RADIUS = 35.0
-        static let PADDLE_BASE_Y = 180.0
+        static let PADDLE_BASE_Y_DEVIDE = 4 // 画面を何分割したところにパドルを置くか
         static let PADDLE_SPEED = 0.005
     }
     
@@ -134,11 +137,18 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.comboContinue = true
         self.ballSpeed = Double(Ball.BALL_BASESPEED)
         
+        self.paddleBaseY = self.frame.height / CGFloat(Paddle.PADDLE_BASE_Y_DEVIDE)
+        
+        var movableAreaNode : SKSpriteNode = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: self.frame.width, height: CGFloat(Paddle.PADDLE_RADIUS * 3)))
+        
+        movableAreaNode.position = CGPoint(x: self.frame.width / 2, y: self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS / 2))
+        movableAreaNode.alpha = 0.13
+        self.addChild(movableAreaNode)
+        
+        
         self.addPaddle()
         self.addScoreLabel()
         self.addComboLabel()
-        //self.addLifeLabel()
-        //self.updateLifeLabel()
         
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         self.physicsBody?.categoryBitMask = Category.worldCategory
@@ -215,7 +225,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func judgeEnemyHeightIsGameOver(enemy : EnemyBase) -> Bool{
-        if (enemy.position.y - CGFloat(enemy.size.height) / 2 < CGFloat(Paddle.PADDLE_BASE_Y)) {
+        if (enemy.position.y - CGFloat(enemy.size.height) / 2 < self.paddleBaseY!) {
             return true
         }
         return false
@@ -228,7 +238,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         var paddle : SKSpriteNode = SKSpriteNode(texture: SKTexture(image: UIImage(named: "spaceCat.png")!))
         paddle.size = CGSize(width: Paddle.PADDLE_RADIUS*2*1.05, height: Paddle.PADDLE_RADIUS*2)
         
-        var paddleY : CGFloat = CGFloat(Paddle.PADDLE_BASE_Y)
+        var paddleY : CGFloat = self.paddleBaseY!
         paddle.name = "paddle"
         paddle.position = CGPointMake(CGRectGetMidX(self.frame), paddleY)
         var path : CGMutablePathRef = CGPathCreateMutable()
@@ -692,10 +702,10 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         }
         
         // Paddleのyの可動範囲限定
-        if (paddlePosition.y < CGFloat(Paddle.PADDLE_BASE_Y)) {
-            paddlePosition.y = CGFloat(Paddle.PADDLE_BASE_Y)
-        } else if (CGFloat(paddlePosition.y) > CGFloat(Paddle.PADDLE_BASE_Y + Paddle.PADDLE_RADIUS)) {
-            paddlePosition.y = CGFloat(Paddle.PADDLE_BASE_Y + Paddle.PADDLE_RADIUS)
+        if (paddlePosition.y < self.paddleBaseY!) {
+            paddlePosition.y = self.paddleBaseY!
+        } else if (CGFloat(paddlePosition.y) > self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS)) {
+            paddlePosition.y = self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS)
         }
         
         if (self.isBallReady) {

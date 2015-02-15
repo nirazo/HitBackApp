@@ -58,6 +58,13 @@
 		D2C983A91A8F9828009013B8 /* scoreLabel_gameScene.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983A71A8F9828009013B8 /* scoreLabel_gameScene.png */; };
 		D2C983AB1A8F9842009013B8 /* bestScoreLabel.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983AA1A8F9842009013B8 /* bestScoreLabel.png */; };
 		D2C983AD1A8F9EA0009013B8 /* scoreLabel_gameOver.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983AC1A8F9EA0009013B8 /* scoreLabel_gameOver.png */; };
+		D2C983B51A90B188009013B8 /* tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983B11A90B188009013B8 /* tutorial1.png */; };
+		D2C983BB1A90B1F2009013B8 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983B91A90B1F2009013B8 /* backButton.png */; };
+		D2C983C21A90B247009013B8 /* HBTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C983C11A90B247009013B8 /* HBTutorialViewController.swift */; };
+		D2C983C41A90B69E009013B8 /* tutorialButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983C31A90B69E009013B8 /* tutorialButton.png */; };
+		D2C983C81A90D712009013B8 /* tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983C71A90D712009013B8 /* tutorial3.png */; };
+		D2C983CA1A90EF81009013B8 /* tutorial4.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983C91A90EF81009013B8 /* tutorial4.png */; };
+		D2C983CC1A90EFED009013B8 /* tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983CB1A90EFED009013B8 /* tutorial2.png */; };
 		D2C983D11A63B97200EE60C6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */; };
 		D2C983D61A63CDAD00EE60C6 /* HBTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */; };
 		D2C983D81A655DBB00EE60C6 /* HBSingleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C983D71A655DBB00EE60C6 /* HBSingleViewController.swift */; };
@@ -163,6 +170,13 @@
 		D2C983A71A8F9828009013B8 /* scoreLabel_gameScene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreLabel_gameScene.png; sourceTree = "<group>"; };
 		D2C983AA1A8F9842009013B8 /* bestScoreLabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bestScoreLabel.png; sourceTree = "<group>"; };
 		D2C983AC1A8F9EA0009013B8 /* scoreLabel_gameOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreLabel_gameOver.png; sourceTree = "<group>"; };
+		D2C983B11A90B188009013B8 /* tutorial1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial1.png; sourceTree = "<group>"; };
+		D2C983B91A90B1F2009013B8 /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
+		D2C983C11A90B247009013B8 /* HBTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBTutorialViewController.swift; sourceTree = "<group>"; };
+		D2C983C31A90B69E009013B8 /* tutorialButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialButton.png; sourceTree = "<group>"; };
+		D2C983C71A90D712009013B8 /* tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial3.png; sourceTree = "<group>"; };
+		D2C983C91A90EF81009013B8 /* tutorial4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial4.png; sourceTree = "<group>"; };
+		D2C983CB1A90EFED009013B8 /* tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial2.png; sourceTree = "<group>"; };
 		D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBTitleViewController.swift; sourceTree = "<group>"; };
 		D2C983D71A655DBB00EE60C6 /* HBSingleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBSingleViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +255,8 @@
 		D26A84751A8EFD3D00904761 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D2C983C31A90B69E009013B8 /* tutorialButton.png */,
+				D2C983B91A90B1F2009013B8 /* backButton.png */,
 				D26A847D1A8F00F700904761 /* retryButton.png */,
 				D26A847E1A8F00F700904761 /* toTitleButton.png */,
 				D26A84761A8F000200904761 /* rankingButton.png */,
@@ -394,6 +410,7 @@
 		D29D9EF61A7CC7260055D55D /* img */ = {
 			isa = PBXGroup;
 			children = (
+				D2C983B01A90B149009013B8 /* Tutorial */,
 				D2C983AE1A8F9FC3009013B8 /* SpaceCat */,
 				D26A84811A8F0D7800904761 /* labels */,
 				D26A847C1A8F000D00904761 /* enemy */,
@@ -434,6 +451,7 @@
 			children = (
 				D2C6F89C1A5FF2880050552A /* AppDelegate.swift */,
 				D2671A651A867A79007FFDBE /* Title */,
+				D2C983BD1A90B203009013B8 /* Tutorial */,
 				D2671A661A867A8A007FFDBE /* Game */,
 				D2671A671A867AA1007FFDBE /* Result */,
 				D2671A541A85F324007FFDBE /* Enemy */,
@@ -483,6 +501,25 @@
 				D27063DC1A87886400D21E9D /* spaceCat_smile.png */,
 			);
 			name = SpaceCat;
+			sourceTree = "<group>";
+		};
+		D2C983B01A90B149009013B8 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				D2C983B11A90B188009013B8 /* tutorial1.png */,
+				D2C983CB1A90EFED009013B8 /* tutorial2.png */,
+				D2C983C71A90D712009013B8 /* tutorial3.png */,
+				D2C983C91A90EF81009013B8 /* tutorial4.png */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
+		D2C983BD1A90B203009013B8 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				D2C983C11A90B247009013B8 /* HBTutorialViewController.swift */,
+			);
+			name = Tutorial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -571,17 +608,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2C983CC1A90EFED009013B8 /* tutorial2.png in Resources */,
 				D26A84661A8BA92900904761 /* quickEnemy.png in Resources */,
 				D26A847A1A8F000200904761 /* startButton.png in Resources */,
 				D2AB0ED61A8B9DCE00BA1A27 /* icon.png in Resources */,
 				D26A84891A8F0D9A00904761 /* scoreLabel.png in Resources */,
 				D26A84621A8BA81D00904761 /* background.png in Resources */,
+				D2C983B51A90B188009013B8 /* tutorial1.png in Resources */,
 				D26A84651A8BA92900904761 /* enemy.png in Resources */,
 				D2C6F8A41A5FF2880050552A /* Images.xcassets in Resources */,
 				D2C983A91A8F9828009013B8 /* scoreLabel_gameScene.png in Resources */,
 				D2AB0EDF1A8B9DDE00BA1A27 /* retry.png in Resources */,
 				D29D9EFE1A7CE1190055D55D /* ball_normal.png in Resources */,
 				D2C983D11A63B97200EE60C6 /* Default-568h@2x.png in Resources */,
+				D2C983BB1A90B1F2009013B8 /* backButton.png in Resources */,
 				D26A84801A8F00F700904761 /* toTitleButton.png in Resources */,
 				D2C983AD1A8F9EA0009013B8 /* scoreLabel_gameOver.png in Resources */,
 				D26A84881A8F0D9A00904761 /* gameOverLabel.png in Resources */,
@@ -589,10 +629,13 @@
 				D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */,
 				D26A84871A8F0D9A00904761 /* comboLabel.png in Resources */,
 				D2C983AB1A8F9842009013B8 /* bestScoreLabel.png in Resources */,
+				D2C983CA1A90EF81009013B8 /* tutorial4.png in Resources */,
 				D27063DF1A87886400D21E9D /* spaceCat_smile.png in Resources */,
 				D27063DD1A87886400D21E9D /* spaceCat_bounce.png in Resources */,
 				D26A847B1A8F000200904761 /* titleImage.png in Resources */,
 				D27063DE1A87886400D21E9D /* spaceCat_down.png in Resources */,
+				D2C983C41A90B69E009013B8 /* tutorialButton.png in Resources */,
+				D2C983C81A90D712009013B8 /* tutorial3.png in Resources */,
 				D28B19151A8BA60500758A87 /* earth.png in Resources */,
 				D26A847F1A8F00F700904761 /* retryButton.png in Resources */,
 				D2C6F8C41A5FF3B10050552A /* spark.png in Resources */,
@@ -621,6 +664,7 @@
 				D2C983D81A655DBB00EE60C6 /* HBSingleViewController.swift in Sources */,
 				D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */,
 				D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */,
+				D2C983C21A90B247009013B8 /* HBTutorialViewController.swift in Sources */,
 				D2671A5A1A8612CE007FFDBE /* HBUtils.swift in Sources */,
 				D2671A581A85FFC8007FFDBE /* QuickEnemy.swift in Sources */,
 				D2C35D9B1A77DE4900D829C3 /* SceneEscapeProtocol.swift in Sources */,

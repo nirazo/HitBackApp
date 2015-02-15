@@ -11,13 +11,16 @@ import UIKit
 import SpriteKit
 import GameKit
 
-class HBTitleViewController: UIViewController, GKGameCenterControllerDelegate {
+class HBTitleViewController: UIViewController, GKGameCenterControllerDelegate, HBTutorialViewControllerDelegate {
     var catView : UIImageView = UIImageView(image: UIImage(named: "spaceCat.png")?)
 
     var bannerView: GADBannerView?
     var titleView : UIImageView = UIImageView(image: UIImage(named: "titleImage.png")?)
     var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png")?)
     var earthView : UIImageView = UIImageView(image: UIImage(named: "earth.png")?)
+    
+    // NSUserDefaults
+    let ud = NSUserDefaults.standardUserDefaults()
     
     override init() {
         super.init()
@@ -72,18 +75,23 @@ class HBTitleViewController: UIViewController, GKGameCenterControllerDelegate {
         self.view.addSubview(self.titleView)
         
         // スタートボタン
-        var singleStart : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 150, 50))
+        var singleStart : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 120, 40))
         singleStart.setBackgroundImage(UIImage(named: "startButton.png"), forState: .Normal)
         singleStart.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(self.catView.frame) + singleStart.frame.size.height)
-        singleStart.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 15)
         singleStart.addTarget(self, action: "singleStartTapped:", forControlEvents:.TouchUpInside)
         self.view.addSubview(singleStart)
         
+        // チュートリアル表示ボタン
+        var tutorialButton : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 120, 40))
+        tutorialButton.setBackgroundImage(UIImage(named: "tutorialButton.png"), forState: .Normal)
+        tutorialButton.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(singleStart.frame) + tutorialButton.frame.size.height)
+        tutorialButton.addTarget(self, action: "tutorialButtonTapped:", forControlEvents:.TouchUpInside)
+        self.view.addSubview(tutorialButton)
+        
         // ランキング表示ボタン
-        var scoreButton : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 150, 50))
+        var scoreButton : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 120, 40))
         scoreButton.setBackgroundImage(UIImage(named: "rankingButton.png"), forState: .Normal)
-        scoreButton.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(singleStart.frame) + scoreButton.frame.size.height)
-        scoreButton.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 15)
+        scoreButton.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(tutorialButton.frame) + scoreButton.frame.size.height)
         scoreButton.addTarget(self, action: "scoreButtonTapped:", forControlEvents:.TouchUpInside)
         self.view.addSubview(scoreButton)
 
@@ -111,8 +119,19 @@ class HBTitleViewController: UIViewController, GKGameCenterControllerDelegate {
     }
     
     func singleStartTapped(sender: AnyObject?) {
+        if (!ud.boolForKey("tutorialDisplayed")) {
+            var vc : HBTutorialViewController = HBTutorialViewController()
+            vc.delegate = self
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
         var vc : HBSingleViewController = HBSingleViewController()
         self.navigationController?.pushViewController(vc, animated: true)        
+    }
+    
+    func tutorialButtonTapped(sender: AnyObject?) {
+        var vc : HBTutorialViewController = HBTutorialViewController()
+        vc.delegate = self
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func scoreButtonTapped(sender: AnyObject?) {
@@ -157,5 +176,12 @@ class HBTitleViewController: UIViewController, GKGameCenterControllerDelegate {
     //MARK: - Delegate method for GKGameCenterDelegate
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!){
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    
+    //MARK: - Delegate method for HBTutorialViewControllerDelegate
+    func backButtonTapped() {
+        self.ud.setBool(true, forKey: "tutorialDisplayed")
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

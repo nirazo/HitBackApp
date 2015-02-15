@@ -60,6 +60,9 @@ class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverV
         return true
     }
     
+    func toRetryTapped() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
     //MARK: - SceneEscapeProtocol method
     func sceneEscape(scene: SKScene, score: Int) {
@@ -71,10 +74,6 @@ class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverV
     func toTitleTapped() {
 
         self.navigationController?.popToRootViewControllerAnimated(true)
-    }
-    
-    func toRetryTapped() {
-        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 
