@@ -164,7 +164,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.addBall()
         
         // 背景
-        var background = SKSpriteNode(imageNamed: "background.png")
+        var background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         background.size = self.frame.size
         background.alpha = 0.60
@@ -554,7 +554,6 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
                     var anim = SKAction.animateWithTextures([self.smileTexture!, self.normalTexture!], timePerFrame: 0.5)
                     self.paddleNode().runAction(anim)
                     
-                    
                     self.removeNodeWithSpark(contactedNode)
                     contactedNode.removeFromParent()
                     self.enemyBrokenInThisTurn = true
@@ -631,6 +630,10 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     // ボールとブロック衝突時のアクション
     func contactedBallAndEnemy(ball : SKSpriteNode) -> SKPhysicsBody{
+        if (self.isBallReady) {
+            self.shootBall()
+            self.isBallReady = false
+        }
         self.compensateBallSpeed(ball.physicsBody!)
         self.compensateBallAngle(ball.physicsBody!)
         return ball.physicsBody!
@@ -721,18 +724,16 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (self.ballNodes()?.count != 0) {
-            for ballNode in self.ballNodes()! {
-                if (ballNode.position.y < self.ballSize*2) {
-                    // 表情変える
-                    var anim = SKAction.animateWithTextures([self.normalTexture!, self.downTexture!], timePerFrame: 0.01)
-                    self.paddleNode().runAction(anim)
-                    self.ballIsDead(ballNode as SKNode)
-                    if (self.life < 1) {
-                        if (self.score > ud.integerForKey("bestScore")) {
-                            ud.setInteger(self.score, forKey: "bestScore")
-                        }
-                        self.gameOver()
+            if (self.ballNode()!.position.y < self.ballSize*2) {
+                // 表情変える
+                var anim = SKAction.animateWithTextures([self.normalTexture!, self.downTexture!], timePerFrame: 0.01)
+                self.paddleNode().runAction(anim)
+                self.ballIsDead(self.ballNode()! as SKNode)
+                if (self.life < 1) {
+                    if (self.score > ud.integerForKey("bestScore")) {
+                        ud.setInteger(self.score, forKey: "bestScore")
                     }
+                    self.gameOver()
                 }
             }
         }

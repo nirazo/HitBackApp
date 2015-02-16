@@ -57,13 +57,6 @@ class EnemyBase : SKSpriteNode {
         var life : Int = Int(self.userData?.objectForKey("life") as NSNumber) - 1
         self.userData?.setObject(life, forKey: "life")
         self.updateAlpha()
-        if (life < 1) {
-            self.broken()
-        }
-    }
-    
-    func broken() {
-        self.removeNodeWithSpark()
     }
     
     func updateAlpha() {
@@ -71,18 +64,4 @@ class EnemyBase : SKSpriteNode {
         self.alpha = 1.0
     }
     
-    func removeNodeWithSpark() {
-        var sparkPath : String = NSBundle.mainBundle().pathForResource("spark", ofType: "sks")!
-        var spark : SKEmitterNode = NSKeyedUnarchiver.unarchiveObjectWithFile(sparkPath) as SKEmitterNode
-        spark.position = self.position
-        spark.xScale = 0.3
-        spark.yScale = 0.3
-        self.addChild(spark)
-        
-        var fadeOut : SKAction = SKAction.fadeOutWithDuration(0.3)
-        var remove : SKAction = SKAction.removeFromParent()
-        var sequence : SKAction = SKAction.sequence([fadeOut, remove])
-        spark.runAction(sequence)
-    }
-
 }
