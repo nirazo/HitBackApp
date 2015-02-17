@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */; };
+		D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */; };
+		D22D481D1A937CAE00ACDC43 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481C1A937CAE00ACDC43 /* Config.swift */; };
 		D2671A531A85EB31007FFDBE /* EnemyBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A521A85EB31007FFDBE /* EnemyBase.swift */; };
 		D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A551A85F33B007FFDBE /* NormalEnemy.swift */; };
 		D2671A581A85FFC8007FFDBE /* QuickEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */; };
@@ -82,6 +85,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractBannerAdViewController.swift; sourceTree = "<group>"; };
+		D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractInterstitialAdViewController.swift; sourceTree = "<group>"; };
+		D22D481C1A937CAE00ACDC43 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D2671A521A85EB31007FFDBE /* EnemyBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyBase.swift; sourceTree = "<group>"; };
 		D2671A551A85F33B007FFDBE /* NormalEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalEnemy.swift; sourceTree = "<group>"; };
 		D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickEnemy.swift; sourceTree = "<group>"; };
@@ -217,6 +223,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D22D48151A9367BB00ACDC43 /* Advertisement */ = {
+			isa = PBXGroup;
+			children = (
+				D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */,
+				D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */,
+			);
+			name = Advertisement;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		D2671A541A85F324007FFDBE /* Enemy */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				D2C6F89C1A5FF2880050552A /* AppDelegate.swift */,
+				D22D48151A9367BB00ACDC43 /* Advertisement */,
 				D2671A651A867A79007FFDBE /* Title */,
 				D2C983BD1A90B203009013B8 /* Tutorial */,
 				D2671A661A867A8A007FFDBE /* Game */,
@@ -463,6 +480,7 @@
 				D2C35D9A1A77DE4900D829C3 /* SceneEscapeProtocol.swift */,
 				D2671A591A8612CE007FFDBE /* HBUtils.swift */,
 				D2671A611A867125007FFDBE /* UIImage+Utils.swift */,
+				D22D481C1A937CAE00ACDC43 /* Config.swift */,
 			);
 			path = HitBackApp;
 			sourceTree = "<group>";
@@ -660,7 +678,10 @@
 			files = (
 				D2671A621A867125007FFDBE /* UIImage+Utils.swift in Sources */,
 				D29012141A77B36B00C23E30 /* HBGameOverViewController.swift in Sources */,
+				D22D481D1A937CAE00ACDC43 /* Config.swift in Sources */,
 				D2C983D61A63CDAD00EE60C6 /* HBTitleViewController.swift in Sources */,
+				D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */,
+				D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */,
 				D2C983D81A655DBB00EE60C6 /* HBSingleViewController.swift in Sources */,
 				D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */,
 				D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */,

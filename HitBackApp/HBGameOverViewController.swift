@@ -18,7 +18,7 @@ protocol HBGameOverViewControllerDelegate {
     
 }
 
-class HBGameOverViewController: UIViewController {
+class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     var score : Int!
     var bannerView: GADBannerView?
     var delegate : HBGameOverViewControllerDelegate?
@@ -50,13 +50,17 @@ class HBGameOverViewController: UIViewController {
         self.score = score
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required override init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func loadView() {
         self.view = UIView(frame: UIScreen.mainScreen().bounds)
         self.view.backgroundColor = UIColor.blackColor()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.showInterstitial()
     }
     
     override func viewDidLoad() {
@@ -139,21 +143,8 @@ class HBGameOverViewController: UIViewController {
         buttonToRetry!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.view.addSubview(buttonToRetry!)
 
-        
         // 広告表示
-        self.bannerView = GADBannerView(adSize: GADAdSizeFullWidthPortraitWithHeight(kGADAdSizeBanner.size.height), origin: CGPointMake(0, CGFloat(self.view.frame.height - kGADAdSizeBanner.size.height)))
-        self.bannerView?.backgroundColor = UIColor.clearColor()
-        self.bannerView?.adUnitID = "ca-app-pub-8756306138420194/2858977665" // 広告ユニットID
-        //self.bannerView?.rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
-        self.bannerView?.rootViewController = self
-        self.view?.addSubview(self.bannerView!)
-        let request = GADRequest() // リクエストのプロパティにいろいろ設定するターゲティングとかいろいろできるよ
-        request.testDevices = [GAD_SIMULATOR_ID] // 実機でテストする場合は、デバイスごとのIDをArrayに追加する(デバッグ時にコンソールにIDが表示されるよ)
-        self.bannerView?.loadRequest(request)
-        
-        self.reportScoreToGameCenter(self.score)
-        println("gameOver viewDidLoad")
-        
+        super.showAds(isWithStatusBar: true)
     }
     
     

@@ -11,7 +11,7 @@ import UIKit
 import SpriteKit
 import GameKit
 
-class HBTitleViewController: UIViewController, GKGameCenterControllerDelegate, HBTutorialViewControllerDelegate {
+class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterControllerDelegate, HBTutorialViewControllerDelegate {
     var catView : UIImageView = UIImageView(image: UIImage(named: "spaceCat.png")?)
 
     var bannerView: GADBannerView?
@@ -30,7 +30,7 @@ class HBTitleViewController: UIViewController, GKGameCenterControllerDelegate, H
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required override init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -95,22 +95,8 @@ class HBTitleViewController: UIViewController, GKGameCenterControllerDelegate, H
         scoreButton.addTarget(self, action: "scoreButtonTapped:", forControlEvents:.TouchUpInside)
         self.view.addSubview(scoreButton)
 
-        
         // 広告表示
-        var offsetX = (self.view.frame.size.width - kGADAdSizeBanner.size.width) / 2
-        self.bannerView = GADBannerView(adSize: kGADAdSizeBanner, origin: CGPointMake(offsetX, self.view.frame.size.height - kGADAdSizeBanner.size.height))
-        //self.bannerView = GADBannerView(adSize: GADAdSizeFullWidthPortraitWithHeight(kGADAdSizeBanner.size.height), origin: CGPointMake(0, CGFloat(self.view.frame.height - kGADAdSizeBanner.size.height)))
-        //self.bannerView?.backgroundColor = UIColor.clearColor()
-        self.bannerView?.adUnitID = "ca-app-pub-8756306138420194/2858977665" // 広告ユニットID
-        //self.bannerView?.rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController
-        self.bannerView?.rootViewController = self
-        self.view?.addSubview(self.bannerView!)
-        let request = GADRequest() // リクエストのプロパティにいろいろ設定するターゲティングとかいろいろできるよ
-        request.testDevices = [GAD_SIMULATOR_ID] // 実機でテストする場合は、デバイスごとのIDをArrayに追加する(デバッグ時にコンソールにIDが表示されるよ)
-        self.bannerView?.loadRequest(request)
-        
-        println("title viewDidLoad")
-        
+        super.showAds(isWithStatusBar: true)
         self.loginGameCenter()
     }
     
