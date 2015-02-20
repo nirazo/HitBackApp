@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D227FBA61A97922A00CBDFE2 /* tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA41A97922A00CBDFE2 /* tutorial3.png */; };
+		D227FBA71A97922A00CBDFE2 /* tutorial4.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA51A97922A00CBDFE2 /* tutorial4.png */; };
+		D227FBAA1A97934700CBDFE2 /* startText1.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA81A97934700CBDFE2 /* startText1.png */; };
+		D227FBAB1A97934700CBDFE2 /* startText2.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA91A97934700CBDFE2 /* startText2.png */; };
 		D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */; };
 		D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */; };
 		D22D481D1A937CAE00ACDC43 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481C1A937CAE00ACDC43 /* Config.swift */; };
+		D24033BA1A9644EE003F0ACB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24033B91A9644EE003F0ACB /* Constants.swift */; };
 		D2671A531A85EB31007FFDBE /* EnemyBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A521A85EB31007FFDBE /* EnemyBase.swift */; };
 		D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A551A85F33B007FFDBE /* NormalEnemy.swift */; };
 		D2671A581A85FFC8007FFDBE /* QuickEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */; };
@@ -65,8 +70,6 @@
 		D2C983BB1A90B1F2009013B8 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983B91A90B1F2009013B8 /* backButton.png */; };
 		D2C983C21A90B247009013B8 /* HBTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C983C11A90B247009013B8 /* HBTutorialViewController.swift */; };
 		D2C983C41A90B69E009013B8 /* tutorialButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983C31A90B69E009013B8 /* tutorialButton.png */; };
-		D2C983C81A90D712009013B8 /* tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983C71A90D712009013B8 /* tutorial3.png */; };
-		D2C983CA1A90EF81009013B8 /* tutorial4.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983C91A90EF81009013B8 /* tutorial4.png */; };
 		D2C983CC1A90EFED009013B8 /* tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983CB1A90EFED009013B8 /* tutorial2.png */; };
 		D2C983D11A63B97200EE60C6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */; };
 		D2C983D61A63CDAD00EE60C6 /* HBTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */; };
@@ -85,9 +88,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D227FBA41A97922A00CBDFE2 /* tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial3.png; sourceTree = "<group>"; };
+		D227FBA51A97922A00CBDFE2 /* tutorial4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial4.png; sourceTree = "<group>"; };
+		D227FBA81A97934700CBDFE2 /* startText1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startText1.png; sourceTree = "<group>"; };
+		D227FBA91A97934700CBDFE2 /* startText2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startText2.png; sourceTree = "<group>"; };
 		D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractBannerAdViewController.swift; sourceTree = "<group>"; };
 		D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractInterstitialAdViewController.swift; sourceTree = "<group>"; };
 		D22D481C1A937CAE00ACDC43 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		D24033B91A9644EE003F0ACB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D2671A521A85EB31007FFDBE /* EnemyBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyBase.swift; sourceTree = "<group>"; };
 		D2671A551A85F33B007FFDBE /* NormalEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalEnemy.swift; sourceTree = "<group>"; };
 		D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickEnemy.swift; sourceTree = "<group>"; };
@@ -180,8 +188,6 @@
 		D2C983B91A90B1F2009013B8 /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
 		D2C983C11A90B247009013B8 /* HBTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBTutorialViewController.swift; sourceTree = "<group>"; };
 		D2C983C31A90B69E009013B8 /* tutorialButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialButton.png; sourceTree = "<group>"; };
-		D2C983C71A90D712009013B8 /* tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial3.png; sourceTree = "<group>"; };
-		D2C983C91A90EF81009013B8 /* tutorial4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial4.png; sourceTree = "<group>"; };
 		D2C983CB1A90EFED009013B8 /* tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial2.png; sourceTree = "<group>"; };
 		D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBTitleViewController.swift; sourceTree = "<group>"; };
@@ -437,6 +443,8 @@
 				D2AB0ED51A8B9DCE00BA1A27 /* icon.png */,
 				D29D9EFB1A7CE1190055D55D /* ball_covered.png */,
 				D29D9EFC1A7CE1190055D55D /* ball_normal.png */,
+				D227FBA81A97934700CBDFE2 /* startText1.png */,
+				D227FBA91A97934700CBDFE2 /* startText2.png */,
 			);
 			name = img;
 			sourceTree = "<group>";
@@ -481,6 +489,7 @@
 				D2671A591A8612CE007FFDBE /* HBUtils.swift */,
 				D2671A611A867125007FFDBE /* UIImage+Utils.swift */,
 				D22D481C1A937CAE00ACDC43 /* Config.swift */,
+				D24033B91A9644EE003F0ACB /* Constants.swift */,
 			);
 			path = HitBackApp;
 			sourceTree = "<group>";
@@ -526,8 +535,8 @@
 			children = (
 				D2C983B11A90B188009013B8 /* tutorial1.png */,
 				D2C983CB1A90EFED009013B8 /* tutorial2.png */,
-				D2C983C71A90D712009013B8 /* tutorial3.png */,
-				D2C983C91A90EF81009013B8 /* tutorial4.png */,
+				D227FBA41A97922A00CBDFE2 /* tutorial3.png */,
+				D227FBA51A97922A00CBDFE2 /* tutorial4.png */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -633,27 +642,29 @@
 				D26A84891A8F0D9A00904761 /* scoreLabel.png in Resources */,
 				D26A84621A8BA81D00904761 /* background.png in Resources */,
 				D2C983B51A90B188009013B8 /* tutorial1.png in Resources */,
+				D227FBA61A97922A00CBDFE2 /* tutorial3.png in Resources */,
 				D26A84651A8BA92900904761 /* enemy.png in Resources */,
 				D2C6F8A41A5FF2880050552A /* Images.xcassets in Resources */,
 				D2C983A91A8F9828009013B8 /* scoreLabel_gameScene.png in Resources */,
 				D2AB0EDF1A8B9DDE00BA1A27 /* retry.png in Resources */,
 				D29D9EFE1A7CE1190055D55D /* ball_normal.png in Resources */,
+				D227FBAA1A97934700CBDFE2 /* startText1.png in Resources */,
 				D2C983D11A63B97200EE60C6 /* Default-568h@2x.png in Resources */,
 				D2C983BB1A90B1F2009013B8 /* backButton.png in Resources */,
 				D26A84801A8F00F700904761 /* toTitleButton.png in Resources */,
 				D2C983AD1A8F9EA0009013B8 /* scoreLabel_gameOver.png in Resources */,
 				D26A84881A8F0D9A00904761 /* gameOverLabel.png in Resources */,
+				D227FBAB1A97934700CBDFE2 /* startText2.png in Resources */,
 				D29D9EFD1A7CE1190055D55D /* ball_covered.png in Resources */,
 				D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */,
 				D26A84871A8F0D9A00904761 /* comboLabel.png in Resources */,
+				D227FBA71A97922A00CBDFE2 /* tutorial4.png in Resources */,
 				D2C983AB1A8F9842009013B8 /* bestScoreLabel.png in Resources */,
-				D2C983CA1A90EF81009013B8 /* tutorial4.png in Resources */,
 				D27063DF1A87886400D21E9D /* spaceCat_smile.png in Resources */,
 				D27063DD1A87886400D21E9D /* spaceCat_bounce.png in Resources */,
 				D26A847B1A8F000200904761 /* titleImage.png in Resources */,
 				D27063DE1A87886400D21E9D /* spaceCat_down.png in Resources */,
 				D2C983C41A90B69E009013B8 /* tutorialButton.png in Resources */,
-				D2C983C81A90D712009013B8 /* tutorial3.png in Resources */,
 				D28B19151A8BA60500758A87 /* earth.png in Resources */,
 				D26A847F1A8F00F700904761 /* retryButton.png in Resources */,
 				D2C6F8C41A5FF3B10050552A /* spark.png in Resources */,
@@ -683,6 +694,7 @@
 				D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */,
 				D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */,
 				D2C983D81A655DBB00EE60C6 /* HBSingleViewController.swift in Sources */,
+				D24033BA1A9644EE003F0ACB /* Constants.swift in Sources */,
 				D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */,
 				D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */,
 				D2C983C21A90B247009013B8 /* HBTutorialViewController.swift in Sources */,

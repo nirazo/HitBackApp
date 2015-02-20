@@ -33,15 +33,18 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     // ボールのサイズ
     var ballSize : CGFloat = 0
     
-    var normalTexture : SKTexture? = nil
-    var smileTexture : SKTexture? = nil
-    var bounceTexture : SKTexture? = nil
-    var downTexture : SKTexture? = nil
+    var normalTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat.png")!)
+    var smileTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_smile.png")!)
+    var bounceTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_bounce.png")!)
+    var downTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_down.png")!)
     
     let backgroundTexture : SKTexture = SKTexture(image: UIImage(named: "background")!)
     let earthTexture : SKTexture = SKTexture(image: UIImage(named: "earth")!)
     let scoreTexture : SKTexture = SKTexture(image: UIImage(named: "scoreLabel_gameScene")!)
     let comboTexture : SKTexture = SKTexture(image: UIImage(named: "comboLabel")!)
+    
+    let readyTextTexture : SKTexture = SKTexture(image: UIImage(named: "startText1")!)
+    let goTextTexture : SKTexture = SKTexture(image: UIImage(named: "startText2")!)
     
     var scoreStringImage : SKSpriteNode?
     var comboStringImage : SKSpriteNode?
@@ -52,6 +55,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     enum GAME_STATE : Int {
         case BEFORE_START = 0
         case NORMAL = 1
+        case BEFORE_GAMEOVER = 2
     }
     var gameState : GAME_STATE = GAME_STATE.BEFORE_START
     
@@ -114,14 +118,6 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     init(size : CGSize, life : Int, stage: Int) {
         super.init(size: size)
-        var normalImage : UIImage = UIImage(named: "spaceCat.png")!
-        var smilelImage : UIImage = UIImage(named: "spaceCat_smile.png")!
-        var bounceImage : UIImage = UIImage(named: "spaceCat_bounce.png")!
-        var downImage : UIImage = UIImage(named: "spaceCat_down.png")!
-        self.normalTexture = SKTexture(image: normalImage)
-        self.smileTexture = SKTexture(image: smilelImage)
-        self.bounceTexture = SKTexture(image: bounceImage)
-        self.downTexture = SKTexture(image: downImage)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -183,6 +179,9 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: - Enemy related methods
     func addEnemy() {
+        if (self.gameState != GAME_STATE.NORMAL) {
+            return
+        }
         let numOfEnemies : Int = Int(HBUtils.getRandomNumber(Float(Config.minNumOfEnemies), Max: Float(Config.minNumOfEnemies + (self.level() / 5) * 2)))
         println("level: \(self.level())")
         println("numOfEnemy: \(numOfEnemies)")
@@ -214,6 +213,16 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         var y = self.frame.size.height
         enemy!.position = CGPointMake(x, y)
         return enemy!
+    }
+    
+    
+    // enemyの動きを止める
+    func stopEnemies() {
+        if (self.enemyNodes()?.count != 0) {
+            for enemy in self.enemyNodes()! as [SKSpriteNode!] {
+                enemy.removeActionForKey("fallEnemy")
+            }
+        }
     }
     
     func enemyNodes() -> NSArray? {
@@ -300,10 +309,20 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.removeNodeWithSpark(node)
         self.life--
         self.changeBallSize()
-        //self.updateLifeLabel()
         self.lastSpeedUpTime = 0
         self.combo = 0
-        self.addBall()
+        if (self.life > 0) {
+            self.addBall()
+        }
+    }
+    
+    // ボールの動きを止める
+    func stopBalls() {
+        if (self.ballNodes()?.count != 0) {
+            for ball in self.ballNodes()! as [SKSpriteNode!] {
+                ball!.physicsBody!.velocity = CGVector(dx: 0.0, dy: 0.0)
+            }
+        }
     }
     
     // ballのノードの配列を返す
@@ -382,7 +401,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: - touch related methods
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        if (self.gameState == GAME_STATE.BEFORE_START) {
+        if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
         
@@ -391,7 +410,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
             self.isFirstTouched = true
             //self.addBall()
             // 表情変える
-            var anim = SKAction.animateWithTextures([self.normalTexture!, self.normalTexture!], timePerFrame: 0.5)
+            var anim = SKAction.animateWithTextures([self.normalTexture, self.normalTexture], timePerFrame: 0.5)
             self.paddleNode().runAction(anim)
         }
         if (self.stageStartLabel() != nil) {
@@ -404,6 +423,9 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        if (self.gameState != GAME_STATE.NORMAL) {
+            return
+        }
         if (self.ballNodes()?.count != 0 && !self.isBallMoving()) {
             var ball = self.ballNodes()![0] as SKSpriteNode
             if (ball.physicsBody?.velocity == CGVectorMake(0, 0) && self.isBallReady) {
@@ -415,7 +437,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        if (self.gameState == GAME_STATE.BEFORE_START) {
+        if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
         
@@ -533,6 +555,9 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: - SKPhyscicsContactDelegate
     func didEndContact(contact: SKPhysicsContact) {
+        if (self.gameState == GAME_STATE.BEFORE_GAMEOVER) {
+            return
+        }
         var firstBody : SKPhysicsBody = SKPhysicsBody()
         var secondBody : SKPhysicsBody = SKPhysicsBody()
         
@@ -551,7 +576,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
                 if (Int(contactedNode.userData?.objectForKey("life") as NSNumber) < 1) {
                     
                     // 表情変える
-                    var anim = SKAction.animateWithTextures([self.smileTexture!, self.normalTexture!], timePerFrame: 0.5)
+                    var anim = SKAction.animateWithTextures([self.smileTexture, self.normalTexture], timePerFrame: 0.5)
                     self.paddleNode().runAction(anim)
                     
                     self.removeNodeWithSpark(contactedNode)
@@ -594,9 +619,42 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameOver() {
-        println("gameover!!")
-        self.view?.paused = true
-        self.escapeDelegate?.sceneEscape!(self, score: self.score)
+        if (self.score > ud.integerForKey("bestScore")) {
+            ud.setInteger(self.score, forKey: "bestScore")
+        }
+        self.gameState = GAME_STATE.BEFORE_GAMEOVER
+        // アニメーション消す
+        self.paddleNode().removeAllActions()
+        
+        // 表情変える
+        var anim = SKAction.setTexture(self.downTexture)
+        self.paddleNode().runAction(anim)
+        
+        self.stopBalls()
+        self.stopEnemies()
+        
+        // 横揺れアニメーション
+        var right : SKAction = SKAction.moveByX(-10.0, y: 0.0, duration: 0.05)
+        var left : SKAction = SKAction.moveByX(10, y: 0.0, duration: 0.05)
+        var sequence : SKAction = SKAction.sequence([right, left, left, right])
+        var repeatSequence : SKAction = SKAction.repeatAction(sequence, count: 6)
+        self.paddleNode().runAction(repeatSequence, completion: {() -> Void in
+            // 横揺れが終わったら、一旦止まってふらふらしながら落ちていくアニメーション
+            var wait : SKAction = SKAction.waitForDuration(0.6)
+            self.paddleNode().runAction(wait, completion: {() -> Void in
+                var right : SKAction = SKAction.moveByX(-15.0, y: 0.0, duration: 0.1)
+                var left : SKAction = SKAction.moveByX(15, y: 0.0, duration: 0.1)
+                var swingSequence : SKAction = SKAction.sequence([right, left, left, right])
+                var repeatSequence : SKAction = SKAction.repeatActionForever(swingSequence)
+                self.paddleNode().runAction(repeatSequence)
+
+                var fall : SKAction = SKAction.moveToY(CGFloat(-Paddle.PADDLE_RADIUS), duration: 1.20)
+                self.paddleNode().runAction(fall, completion: {() -> Void in
+                    self.view?.paused = true
+                    self.escapeDelegate?.sceneEscape!(self, score: self.score)
+                })
+            })
+        })
     }
     
     // ボールとパドル衝突時のアクション
@@ -609,7 +667,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         self.paddleNode().runAction(repeatSequence)
         
         // 表情変える
-        var anim = SKAction.animateWithTextures([self.bounceTexture!, self.normalTexture!], timePerFrame: 0.5)
+        var anim = SKAction.animateWithTextures([self.bounceTexture, self.normalTexture], timePerFrame: 0.5)
         self.paddleNode().runAction(anim)
         
         // コンボ判定
@@ -664,7 +722,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: - Callbacks
     override func update(currentTime: NSTimeInterval) {
-        if (self.gameState == GAME_STATE.BEFORE_START) {
+        if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
         
@@ -698,41 +756,40 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         var ballPosition : CGPoint? = self.ballNode()?.position
         
         // Paddleのxが画面端に来た場合
-        if (paddlePosition.x < paddleRadius) {
-            paddlePosition.x = paddleRadius
-        } else if (paddlePosition.x > CGRectGetWidth(self.frame) - paddleRadius) {
-            paddlePosition.x = CGRectGetWidth(self.frame) - paddleRadius
+        if (self.gameState != GAME_STATE.BEFORE_GAMEOVER) {
+            if (paddlePosition.x < paddleRadius) {
+                paddlePosition.x = paddleRadius
+            } else if (paddlePosition.x > CGRectGetWidth(self.frame) - paddleRadius) {
+                paddlePosition.x = CGRectGetWidth(self.frame) - paddleRadius
+            }
+            
+            // Paddleのyの可動範囲限定
+            if (paddlePosition.y < self.paddleBaseY!) {
+                paddlePosition.y = self.paddleBaseY!
+            } else if (CGFloat(paddlePosition.y) > self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS)) {
+                paddlePosition.y = self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS)
+            }
+            
+            if (self.isBallReady) {
+                ballPosition?.x = paddlePosition.x
+                self.ballNode()?.position = ballPosition!
+            }
+            self.paddleNode().position = paddlePosition
         }
-        
-        // Paddleのyの可動範囲限定
-        if (paddlePosition.y < self.paddleBaseY!) {
-            paddlePosition.y = self.paddleBaseY!
-        } else if (CGFloat(paddlePosition.y) > self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS)) {
-            paddlePosition.y = self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS)
-        }
-        
-        if (self.isBallReady) {
-            ballPosition?.x = paddlePosition.x
-            self.ballNode()?.position = ballPosition!
-        }
-        self.paddleNode().position = paddlePosition
     }
     
     override func didSimulatePhysics() {
-        if (self.gameState == GAME_STATE.BEFORE_START) {
+        if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
         
         if (self.ballNodes()?.count != 0) {
             if (self.ballNode()!.position.y < self.ballSize*2) {
                 // 表情変える
-                var anim = SKAction.animateWithTextures([self.normalTexture!, self.downTexture!], timePerFrame: 0.01)
+                var anim = SKAction.animateWithTextures([self.normalTexture, self.downTexture], timePerFrame: 0.01)
                 self.paddleNode().runAction(anim)
                 self.ballIsDead(self.ballNode()! as SKNode)
                 if (self.life < 1) {
-                    if (self.score > ud.integerForKey("bestScore")) {
-                        ud.setInteger(self.score, forKey: "bestScore")
-                    }
                     self.gameOver()
                 }
             }
@@ -754,21 +811,15 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        var readyText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
-        var goText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        var readyTextNode = SKSpriteNode(texture: self.readyTextTexture)
+        var goTextNode = SKSpriteNode(texture: self.goTextTexture)
         
-        readyText.text = "ちきゅうを"
-        goText.text = "まもれーー！！"
+        readyTextNode.size = CGSize(width: self.size.width * 2 / 3, height: self.size.width * 2 / 3 / 3.912)
+        readyTextNode.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - 200)
+        goTextNode.size = CGSize(width: self.size.width * 2 / 3, height: self.size.width * 2 / 3 / 5.318)
+        goTextNode.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - 200)
         
-        readyText.fontColor = UIColor.whiteColor()
-        readyText.fontSize = 25
-        readyText.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - 200)
-        
-        goText.fontColor = UIColor.whiteColor()
-        goText.fontSize = 25
-        goText.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - 200)
-        
-        let scaleUp = SKAction.scaleTo(2.0, duration: 0.1)
+        let scaleUp = SKAction.scaleTo(1.8, duration: 0.1)
         let scaleDown = SKAction.scaleTo(1.5, duration: 0.1)
         let scaleStay = SKAction.scaleBy(1.0, duration: 1.0)
         let fadeout = SKAction.fadeOutWithDuration(0.1)
@@ -776,10 +827,10 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         let readyTextSequence = SKAction.sequence([scaleStay, fadeout, remove])
         let goTextSequence    = SKAction.sequence([scaleUp, scaleDown, scaleStay, fadeout, remove])
         
-        self.addChild(readyText)
-        readyText.runAction(readyTextSequence, completion: {
-            self.addChild(goText)
-            goText.runAction(goTextSequence, completion: {
+        self.addChild(readyTextNode)
+        readyTextNode.runAction(readyTextSequence, completion: {
+            self.addChild(goTextNode)
+            goTextNode.runAction(goTextSequence, completion: {
                 self.gameState = GAME_STATE.NORMAL
             })
         })

@@ -39,13 +39,12 @@ class EnemyBase : SKSpriteNode {
     func fallDown(level: Int) {
         var fall : SKAction = SKAction.moveToY(0.0, duration: NSTimeInterval(self.fallTime))
         var sequence : SKAction = SKAction.sequence([fall])
-        self.runAction(sequence, completion: {() -> Void in
-        })
+        self.runAction(sequence, withKey: "fallEnemy")
         var action1 : SKAction = SKAction.rotateByAngle(5 * CGFloat(M_PI*2) / 360, duration: 0.1)
         var action2 : SKAction = SKAction.rotateByAngle(-5 * CGFloat(M_PI*2) / 360, duration: 0.1)
         var infinite : SKAction = SKAction.sequence([action1,action2,action2,action1])
         var repeat : SKAction = SKAction.repeatActionForever(infinite)
-        self.runAction(repeat)
+        self.runAction(repeat, withKey: "swingEnemy")
     }
     
     // ボールとの衝突時のアクション

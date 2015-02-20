@@ -16,6 +16,7 @@ class QuickEnemy : EnemyBase {
         static let WIDTH = 50.0
         static let HEIGHT = 18.0
         static let MAX_LIFE = 1
+        static let FALL_SEC = 15.0
     }
     
     init(level: Int, category: UInt32) {
@@ -23,7 +24,7 @@ class QuickEnemy : EnemyBase {
             height   : Config.HEIGHT),
             life     : Config.MAX_LIFE,
             level    : level,
-            fallTime : 15.0,
+            fallTime : Float(Config.FALL_SEC),
             image    : UIImage(named: "quickEnemy.png")!,
             category : category)
     }

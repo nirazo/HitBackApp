@@ -31,6 +31,9 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     var buttonToRetry : UIButton?
     var buttonToTitle : UIButton?
     
+    let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 50.0
+    let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 30.0
+    
     private struct Label {
         static let LABEL_MARGIN : CGFloat = 18.0
         static let LABEL_FONT_SIZE : CGFloat = 20.0
@@ -65,8 +68,6 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("\(self.score)")
-        
         let ud = NSUserDefaults.standardUserDefaults()
         
         // 背景
@@ -80,10 +81,11 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         self.view.addSubview(self.earthView)
 
         // ゲームオーバーの文字
+        var titleMarginY : CGFloat = IS_IPHONE_4_OR_LESS ? TITLE_MARGIN_Y_IPHONE4ORLESS : TITLE_MARGIN_Y_IPHONE5ORMORE
         var gameOverWidth = self.view.frame.size.width - 15
         var gameOverHeight = gameOverWidth / 7
         self.gameOverLabelImageView.frame.size = CGSize(width: gameOverWidth, height: gameOverHeight)
-        self.gameOverLabelImageView.center = CGPointMake(CGRectGetMidX(self.view.frame), self.gameOverLabelImageView.frame.size.height / 2 + 50)
+        self.gameOverLabelImageView.center = CGPointMake(CGRectGetMidX(self.view.frame), self.gameOverLabelImageView.frame.size.height / 2 + titleMarginY)
         self.view.addSubview(self.gameOverLabelImageView)
         
         

@@ -19,6 +19,11 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
     var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png")?)
     var earthView : UIImageView = UIImageView(image: UIImage(named: "earth.png")?)
     
+    let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 70.0
+    let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 35.0
+    let PARTS_MARGIN_Y_IPHONE5ORMORE : CGFloat = 20.0
+    let PARTS_MARGIN_Y_IPHONE4ORLESS : CGFloat = 10.0
+    
     // NSUserDefaults
     let ud = NSUserDefaults.standardUserDefaults()
     
@@ -37,9 +42,29 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var titleMarginY : CGFloat = IS_IPHONE_4_OR_LESS ? TITLE_MARGIN_Y_IPHONE4ORLESS : TITLE_MARGIN_Y_IPHONE5ORMORE
+        var partsMarginY : CGFloat = IS_IPHONE_4_OR_LESS ? PARTS_MARGIN_Y_IPHONE4ORLESS : PARTS_MARGIN_Y_IPHONE5ORMORE
+        
+        // 背景
+        self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
+        self.view.addSubview(self.backgroundView)
+        self.view.sendSubviewToBack(self.backgroundView)
+        
+        // 地球
+        self.earthView.frame.size = CGSize(width: self.view.frame.size.width * 1.2, height: self.view.frame.size.width)
+        self.earthView.center = CGPoint(x: CGRectGetMidX(self.view.frame), y: self.view.frame.size.height)
+        self.view.addSubview(self.earthView)
+        
+        // タイトル
+        var titleWidth = self.view.frame.size.width - 30
+        var titleHeight = titleWidth / 2.6
+        self.titleView.frame.size = CGSize(width: titleWidth, height: titleHeight)
+        self.titleView.center = CGPointMake(CGRectGetMidX(self.view.frame), titleView.frame.size.height / 2 + titleMarginY)
+        self.view.addSubview(self.titleView)
+        
         // ねこ
         self.catView.frame.size = CGSize(width: 120, height: 102.8)
-        self.catView.center = CGPoint(x:CGRectGetMidX(self.view.frame) , y: CGRectGetMidY(self.view.frame))
+        self.catView.center = CGPoint(x:CGRectGetMidX(self.view.frame) , y: CGRectGetMaxY(self.titleView.frame) + self.catView.frame.size.height/2 + partsMarginY)
         self.catView.animationRepeatCount = 0
         self.view.addSubview(self.catView)
         
@@ -56,42 +81,25 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
         self.catView.animationImages = [rotateImage1!, rotateImage2!, rotateImage1!, rotateImage3!, rotateImage1!]
         self.catView.animationRepeatCount = 0
         self.catView.animationDuration = 1.0
-
-        // 背景
-        self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
-        self.view.addSubview(self.backgroundView)
-        self.view.sendSubviewToBack(self.backgroundView)
-        
-        // 地球
-        self.earthView.frame.size = CGSize(width: self.view.frame.size.width * 1.2, height: self.view.frame.size.width)
-        self.earthView.center = CGPoint(x: CGRectGetMidX(self.view.frame), y: self.view.frame.size.height)
-        self.view.addSubview(self.earthView)
-        
-        // タイトル
-        var titleWidth = self.view.frame.size.width - 30
-        var titleHeight = titleWidth / 2.6
-        self.titleView.frame.size = CGSize(width: titleWidth, height: titleHeight)
-        self.titleView.center = CGPointMake(CGRectGetMidX(self.view.frame), titleView.frame.size.height / 2 + 70)
-        self.view.addSubview(self.titleView)
         
         // スタートボタン
         var singleStart : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 120, 40))
         singleStart.setBackgroundImage(UIImage(named: "startButton.png"), forState: .Normal)
-        singleStart.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(self.catView.frame) + singleStart.frame.size.height)
+        singleStart.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(self.catView.frame) + singleStart.frame.size.height/2 + partsMarginY)
         singleStart.addTarget(self, action: "singleStartTapped:", forControlEvents:.TouchUpInside)
         self.view.addSubview(singleStart)
         
         // チュートリアル表示ボタン
         var tutorialButton : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 120, 40))
         tutorialButton.setBackgroundImage(UIImage(named: "tutorialButton.png"), forState: .Normal)
-        tutorialButton.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(singleStart.frame) + tutorialButton.frame.size.height)
+        tutorialButton.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(singleStart.frame) + tutorialButton.frame.size.height/2 + partsMarginY)
         tutorialButton.addTarget(self, action: "tutorialButtonTapped:", forControlEvents:.TouchUpInside)
         self.view.addSubview(tutorialButton)
         
         // ランキング表示ボタン
         var scoreButton : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 120, 40))
         scoreButton.setBackgroundImage(UIImage(named: "rankingButton.png"), forState: .Normal)
-        scoreButton.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(tutorialButton.frame) + scoreButton.frame.size.height)
+        scoreButton.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(tutorialButton.frame) + scoreButton.frame.size.height/2 + partsMarginY)
         scoreButton.addTarget(self, action: "scoreButtonTapped:", forControlEvents:.TouchUpInside)
         self.view.addSubview(scoreButton)
 
