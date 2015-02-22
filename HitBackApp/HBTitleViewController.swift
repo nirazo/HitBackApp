@@ -27,6 +27,8 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
     // NSUserDefaults
     let ud = NSUserDefaults.standardUserDefaults()
     
+    var isLogedIn = false
+    
     override init() {
         super.init()
     }
@@ -131,6 +133,15 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
     func scoreButtonTapped(sender: AnyObject?) {
         var localPlayer = GKLocalPlayer()
         
+        if self.isLogedIn != true {
+            let alert = Alert()
+            alert.showAlert(self, title: "きろく",
+                buttonTitle: "OK",
+                message: "ランキングが表示できません。ネットワークにつながっているか確認してください。", tag: 0)
+            loginGameCenter()
+            return
+        }
+        
         localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier : String!, error : NSError!) -> Void in
             if error != nil {
                 println(error.localizedDescription)
@@ -156,6 +167,7 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
                 println(error)
                 if (error == nil){
                     println("ログイン認証：成功")
+                    self.isLogedIn = true
                 }else{
                     println("ログイン認証：失敗")
                 }

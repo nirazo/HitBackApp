@@ -31,7 +31,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     var buttonToRetry : UIButton?
     var buttonToTitle : UIButton?
     
-    let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 50.0
+    let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 75.0
     let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 30.0
     
     private struct Label {
@@ -69,6 +69,9 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let ud = NSUserDefaults.standardUserDefaults()
+        
+        // 広告表示
+        super.showAds(isWithStatusBar: true)
         
         // 背景
         self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
@@ -131,7 +134,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         buttonToTitle = UIButton()
         buttonToTitle?.setBackgroundImage(UIImage(named: "toTitleBUtton.png"), forState: .Normal)
         buttonToTitle!.bounds.size = CGSize(width: 120, height: 40)
-        buttonToTitle!.center = CGPointMake(self.view.frame.width / 4, CGRectGetMaxY(self.catView.frame) + Label.LABEL_MARGIN + buttonToTitle!.frame.size.height / 2)
+        buttonToTitle!.center = CGPointMake(self.view.frame.width / 4, self.view.frame.size.height - kGADAdSizeBanner.size.height - 10 - buttonToTitle!.frame.size.height / 2)
         buttonToTitle!.setBackgroundImage(UIImage(named: "toTitleButton.png"), forState: .Normal)
         buttonToTitle!.addTarget(self, action: "toTitleTapped:", forControlEvents: .TouchUpInside)
         self.view.addSubview(buttonToTitle!)
@@ -145,8 +148,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         buttonToRetry!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.view.addSubview(buttonToRetry!)
 
-        // 広告表示
-        super.showAds(isWithStatusBar: true)
+        self.view.bringSubviewToFront(self.bannerViewFooter!)
     }
     
     

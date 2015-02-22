@@ -49,6 +49,15 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     var scoreStringImage : SKSpriteNode?
     var comboStringImage : SKSpriteNode?
     
+    var movableAreaNode : SKSpriteNode?
+    
+    // ノードの名前
+    let touchAreaName : String = "touchArea"
+    let touchTextName : String = "touchText"
+    
+    // userdefaultsのキーの名前
+    let touchDisplayedKey : String = "touchAreaDisplayed"
+    
     // パドルのベースの高さ
     var paddleBaseY : CGFloat?
     
@@ -135,11 +144,11 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         
         self.paddleBaseY = self.frame.height / CGFloat(Paddle.PADDLE_BASE_Y_DEVIDE)
         
-        var movableAreaNode : SKSpriteNode = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: self.frame.width, height: CGFloat(Paddle.PADDLE_RADIUS * 3)))
+        self.movableAreaNode = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: self.frame.width, height: CGFloat(Paddle.PADDLE_RADIUS * 3)))
         
-        movableAreaNode.position = CGPoint(x: self.frame.width / 2, y: self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS / 2))
-        movableAreaNode.alpha = 0.13
-        self.addChild(movableAreaNode)
+        self.movableAreaNode!.position = CGPoint(x: self.frame.width / 2, y: self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS / 2))
+        self.movableAreaNode!.alpha = 0.17
+        self.addChild(self.movableAreaNode!)
         
         
         self.addPaddle()
@@ -163,7 +172,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         var background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         background.size = self.frame.size
-        background.alpha = 0.60
+        background.alpha = 0.90
         background.zPosition = -10
         self.addChild(background)
         
@@ -183,8 +192,8 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         let numOfEnemies : Int = Int(HBUtils.getRandomNumber(Float(Config.minNumOfEnemies), Max: Float(Config.minNumOfEnemies + (self.level() / 5) * 2)))
-        println("level: \(self.level())")
-        println("numOfEnemy: \(numOfEnemies)")
+//        println("level: \(self.level())")
+//        println("numOfEnemy: \(numOfEnemies)")
         for var i=0; i < numOfEnemies; i++ {
             var enemyType : ENEMY_TYPE
             if (self.level() > 1) {
@@ -426,6 +435,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
+        self.removeTouchAreaAndText()
         if (self.ballNodes()?.count != 0 && !self.isBallMoving()) {
             var ball = self.ballNodes()![0] as SKSpriteNode
             if (ball.physicsBody?.velocity == CGVectorMake(0, 0) && self.isBallReady) {
@@ -619,6 +629,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameOver() {
+        self.removeTouchAreaAndText()
         if (self.score > ud.integerForKey("bestScore")) {
             ud.setInteger(self.score, forKey: "bestScore")
         }
@@ -714,6 +725,17 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
         stageStartLabel.fontSize = 20
         stageStartLabel.name = "stageStartLabel"
         stageStartLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+    }
+    
+    // イントロダクション用のタッチエリアとテキストを削除
+    func removeTouchAreaAndText() {
+        var touchArea = self.childNodeWithName(self.touchAreaName)
+        var touchText = self.childNodeWithName(self.touchTextName)
+        if (touchArea != nil && touchText != nil) {
+            touchArea?.removeFromParent()
+            touchText?.removeFromParent()
+            self.ud.setBool(true, forKey: self.touchDisplayedKey)
+        }
     }
     
     func stageStartLabel() -> SKLabelNode? {
@@ -832,6 +854,21 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
             self.addChild(goTextNode)
             goTextNode.runAction(goTextSequence, completion: {
                 self.gameState = GAME_STATE.NORMAL
+                if (!self.ud.boolForKey(self.touchDisplayedKey)) {
+                    var touchAreaNode : SKSpriteNode = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: self.size.width, height: CGRectGetMinY(self.movableAreaNode!.frame)))
+                    touchAreaNode.position = CGPoint(x: self.frame.width / 2, y: CGRectGetMinY(self.movableAreaNode!.frame) / 2)
+                    touchAreaNode.alpha = 0.40
+                    touchAreaNode.name = self.touchAreaName
+                    
+                    let touchTextTexture : SKTexture = SKTexture(image: UIImage(named: "touchText")!)
+                    var touchTextNode = SKSpriteNode(texture: touchTextTexture)
+                    touchTextNode.size = CGSize(width: touchAreaNode.size.width, height: touchAreaNode.size.width * touchTextTexture.size().height / touchTextTexture.size().width)
+                    touchTextNode.position = touchAreaNode.position
+                    touchTextNode.name = self.touchTextName
+                    
+                    self.addChild(touchAreaNode)
+                    self.addChild(touchTextNode)
+                }
             })
         })
     }

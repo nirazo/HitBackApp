@@ -11,6 +11,7 @@
 		D227FBA71A97922A00CBDFE2 /* tutorial4.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA51A97922A00CBDFE2 /* tutorial4.png */; };
 		D227FBAA1A97934700CBDFE2 /* startText1.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA81A97934700CBDFE2 /* startText1.png */; };
 		D227FBAB1A97934700CBDFE2 /* startText2.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA91A97934700CBDFE2 /* startText2.png */; };
+		D227FBAD1A988BCB00CBDFE2 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D227FBAC1A988BCB00CBDFE2 /* Alert.swift */; };
 		D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */; };
 		D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */; };
 		D22D481D1A937CAE00ACDC43 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481C1A937CAE00ACDC43 /* Config.swift */; };
@@ -52,6 +53,9 @@
 		D290120A1A7796CA00C23E30 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D29012091A7796CA00C23E30 /* Security.framework */; };
 		D290120C1A7796D000C23E30 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D290120B1A7796D000C23E30 /* ImageIO.framework */; };
 		D29012141A77B36B00C23E30 /* HBGameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29012131A77B36B00C23E30 /* HBGameOverViewController.swift */; };
+		D294B3E11A9987C60053439F /* touchText.png in Resources */ = {isa = PBXBuildFile; fileRef = D294B3E01A9987C60053439F /* touchText.png */; };
+		D294B3E31A9995BA0053439F /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D294B3E21A9995BA0053439F /* Launch Screen.xib */; };
+		D294B3E51A9996080053439F /* team_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D294B3E41A9996080053439F /* team_logo.png */; };
 		D29D9EFD1A7CE1190055D55D /* ball_covered.png in Resources */ = {isa = PBXBuildFile; fileRef = D29D9EFB1A7CE1190055D55D /* ball_covered.png */; };
 		D29D9EFE1A7CE1190055D55D /* ball_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = D29D9EFC1A7CE1190055D55D /* ball_normal.png */; };
 		D2AB0ED61A8B9DCE00BA1A27 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AB0ED51A8B9DCE00BA1A27 /* icon.png */; };
@@ -92,6 +96,7 @@
 		D227FBA51A97922A00CBDFE2 /* tutorial4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial4.png; sourceTree = "<group>"; };
 		D227FBA81A97934700CBDFE2 /* startText1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startText1.png; sourceTree = "<group>"; };
 		D227FBA91A97934700CBDFE2 /* startText2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startText2.png; sourceTree = "<group>"; };
+		D227FBAC1A988BCB00CBDFE2 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractBannerAdViewController.swift; sourceTree = "<group>"; };
 		D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractInterstitialAdViewController.swift; sourceTree = "<group>"; };
 		D22D481C1A937CAE00ACDC43 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -166,6 +171,9 @@
 		D290120B1A7796D000C23E30 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		D29012111A779C8300C23E30 /* HitBackApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HitBackApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		D29012131A77B36B00C23E30 /* HBGameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBGameOverViewController.swift; sourceTree = "<group>"; };
+		D294B3E01A9987C60053439F /* touchText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touchText.png; sourceTree = "<group>"; };
+		D294B3E21A9995BA0053439F /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		D294B3E41A9996080053439F /* team_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = team_logo.png; sourceTree = "<group>"; };
 		D29D9EFB1A7CE1190055D55D /* ball_covered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_covered.png; sourceTree = "<group>"; };
 		D29D9EFC1A7CE1190055D55D /* ball_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_normal.png; sourceTree = "<group>"; };
 		D2AB0ED51A8B9DCE00BA1A27 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -277,6 +285,8 @@
 		D26A84751A8EFD3D00904761 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D294B3E41A9996080053439F /* team_logo.png */,
+				D294B3E01A9987C60053439F /* touchText.png */,
 				D2C983C31A90B69E009013B8 /* tutorialButton.png */,
 				D2C983B91A90B1F2009013B8 /* backButton.png */,
 				D26A847D1A8F00F700904761 /* retryButton.png */,
@@ -445,6 +455,7 @@
 				D29D9EFC1A7CE1190055D55D /* ball_normal.png */,
 				D227FBA81A97934700CBDFE2 /* startText1.png */,
 				D227FBA91A97934700CBDFE2 /* startText2.png */,
+				D294B3E21A9995BA0053439F /* Launch Screen.xib */,
 			);
 			name = img;
 			sourceTree = "<group>";
@@ -490,6 +501,7 @@
 				D2671A611A867125007FFDBE /* UIImage+Utils.swift */,
 				D22D481C1A937CAE00ACDC43 /* Config.swift */,
 				D24033B91A9644EE003F0ACB /* Constants.swift */,
+				D227FBAC1A988BCB00CBDFE2 /* Alert.swift */,
 			);
 			path = HitBackApp;
 			sourceTree = "<group>";
@@ -641,6 +653,7 @@
 				D2AB0ED61A8B9DCE00BA1A27 /* icon.png in Resources */,
 				D26A84891A8F0D9A00904761 /* scoreLabel.png in Resources */,
 				D26A84621A8BA81D00904761 /* background.png in Resources */,
+				D294B3E11A9987C60053439F /* touchText.png in Resources */,
 				D2C983B51A90B188009013B8 /* tutorial1.png in Resources */,
 				D227FBA61A97922A00CBDFE2 /* tutorial3.png in Resources */,
 				D26A84651A8BA92900904761 /* enemy.png in Resources */,
@@ -656,6 +669,7 @@
 				D26A84881A8F0D9A00904761 /* gameOverLabel.png in Resources */,
 				D227FBAB1A97934700CBDFE2 /* startText2.png in Resources */,
 				D29D9EFD1A7CE1190055D55D /* ball_covered.png in Resources */,
+				D294B3E31A9995BA0053439F /* Launch Screen.xib in Resources */,
 				D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */,
 				D26A84871A8F0D9A00904761 /* comboLabel.png in Resources */,
 				D227FBA71A97922A00CBDFE2 /* tutorial4.png in Resources */,
@@ -668,6 +682,7 @@
 				D28B19151A8BA60500758A87 /* earth.png in Resources */,
 				D26A847F1A8F00F700904761 /* retryButton.png in Resources */,
 				D2C6F8C41A5FF3B10050552A /* spark.png in Resources */,
+				D294B3E51A9996080053439F /* team_logo.png in Resources */,
 				D26A84791A8F000200904761 /* rankingButton.png in Resources */,
 				D27063E11A8789D400D21E9D /* spaceCat.png in Resources */,
 			);
@@ -690,6 +705,7 @@
 				D2671A621A867125007FFDBE /* UIImage+Utils.swift in Sources */,
 				D29012141A77B36B00C23E30 /* HBGameOverViewController.swift in Sources */,
 				D22D481D1A937CAE00ACDC43 /* Config.swift in Sources */,
+				D227FBAD1A988BCB00CBDFE2 /* Alert.swift in Sources */,
 				D2C983D61A63CDAD00EE60C6 /* HBTitleViewController.swift in Sources */,
 				D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */,
 				D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */,
@@ -813,6 +829,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = HitBackApp/Info.plist;
@@ -834,6 +851,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = HitBackApp/Info.plist;

@@ -9,17 +9,16 @@
 import UIKit
 import SpriteKit
 
-class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverViewControllerDelegate {
+class HBSingleViewController: HBAbstractBannerAdViewController, SceneEscapeProtocol, HBGameOverViewControllerDelegate {
     
     var skView : SKView?
     
-    override func loadView() {
-        var skView : SKView = SKView(frame: UIScreen.mainScreen().bounds)
-        self.view = skView
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+//        skView!.showsDrawCount = true;
+//        skView!.showsNodeCount = true;
+//        skView!.showsFPS = true;
+//        skView!.ignoresSiblingOrder = true
         goGameScene()
     }
     
@@ -35,7 +34,7 @@ class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverV
             self.skView?.scene?.removeAllChildren()
             self.skView?.presentScene(self.skView?.scene)
         } else {
-            let gameScene = HBSinglePlayScene(size: self.view.bounds.size)
+            let gameScene = HBSinglePlayScene(size: self.skView!.bounds.size)
             gameScene.escapeDelegate = self
             gameScene.scaleMode = SKSceneScaleMode.AspectFill
             self.skView!.presentScene(gameScene)
@@ -45,11 +44,12 @@ class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        skView = self.view as? SKView
-        skView!.showsDrawCount = true;
-        skView!.showsNodeCount = true;
-        skView!.showsFPS = true;
-        skView!.ignoresSiblingOrder = true
+        // ゲーム画面に広告出すようにしたらコメント外す
+        //super.showAds(isWithStatusBar: true)
+        //var height = self.view.frame.size.height - self.bannerViewFooter!.frame.size.height
+        //self.skView = SKView(frame: CGRectMake(0, 0, self.view.frame.size.width, height))
+        self.skView = SKView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        self.view.addSubview(self.skView!)
     }
     
     override func didReceiveMemoryWarning() {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class HBAbstractBannerAdViewController: UIViewController, GADInterstitialDelegate {
+class HBAbstractBannerAdViewController: UIViewController {
     let FOOTER_AD_UNITID = "ca-app-pub-8756306138420194/2265804461"
     
     var bannerViewFooter: GADBannerView?
@@ -22,7 +22,7 @@ class HBAbstractBannerAdViewController: UIViewController, GADInterstitialDelegat
         // 広告
         //request = GADRequest() // リクエストのプロパティにいろいろ設定するターゲティングとかいろいろできるよ
         // simulatorと自機をテストデバイスとして登録
-        request.testDevices = [GAD_SIMULATOR_ID, "3a9ba648dc59b79657b6e0643f300787"] // TODO: リリース前に変えろ
+        // request.testDevices = [GAD_SIMULATOR_ID, "3a9ba648dc59b79657b6e0643f300787"] // TODO: リリース前に変えろ
         let leftMargin = (self.view.frame.size.width - kGADAdSizeBanner.size.width) / 2.0
         
         bannerViewFooter = GADBannerView(adSize: kGADAdSizeBanner, origin: CGPointMake(leftMargin, self.view.frame.size.height - kGADAdSizeBanner.size.height))
