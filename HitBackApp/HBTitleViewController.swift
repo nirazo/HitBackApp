@@ -24,6 +24,8 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
     let PARTS_MARGIN_Y_IPHONE5ORMORE : CGFloat = 20.0
     let PARTS_MARGIN_Y_IPHONE4ORLESS : CGFloat = 10.0
     
+    let gameCenterPlayer = GKLocalPlayer()
+    
     // NSUserDefaults
     let ud = NSUserDefaults.standardUserDefaults()
     
@@ -131,25 +133,22 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
     }
     
     func scoreButtonTapped(sender: AnyObject?) {
-        var localPlayer = GKLocalPlayer()
-        
         if self.isLogedIn != true {
             let alert = Alert()
             alert.showAlert(self, title: "きろく",
                 buttonTitle: "OK",
-                message: "ランキングが表示できません。ネットワークにつながっているか確認してください。", tag: 0)
+                message: "ランキングが表示できません。\nネットワークにつながっているか、GameCenterにログインしているか確認してください。", tag: 0)
             loginGameCenter()
             return
         }
-        
-        localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier : String!, error : NSError!) -> Void in
+        self.gameCenterPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderboardIdentifier : String!, error : NSError!) -> Void in
             if error != nil {
                 println(error.localizedDescription)
             } else {
                 let gameCenterController:GKGameCenterViewController = GKGameCenterViewController()
                 gameCenterController.gameCenterDelegate = self
                 gameCenterController.viewState = GKGameCenterViewControllerState.Leaderboards
-                gameCenterController.leaderboardIdentifier = "SpaceCat" //該当するLeaderboardのIDを指定します
+                gameCenterController.leaderboardIdentifier = "spaceCat" //該当するLeaderboardのIDを指定します
                 self.presentViewController(gameCenterController, animated: true, completion: nil)
             }
         })
@@ -157,8 +156,7 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
     
     func loginGameCenter() {
         //GameCenterにログインします。
-        let localPlayer = GKLocalPlayer()
-        localPlayer.authenticateHandler = {(viewController, error) -> Void in
+        self.gameCenterPlayer.authenticateHandler = {(viewController, error) -> Void in
             if ((viewController) != nil) {
                 println("ログイン確認処理：失敗-ログイン画面を表示")
                 self.presentViewController(viewController, animated: true, completion: nil)
@@ -168,6 +166,7 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
                 if (error == nil){
                     println("ログイン認証：成功")
                     self.isLogedIn = true
+                    BestScoreManager().syncBestScore()
                 }else{
                     println("ログイン認証：失敗")
                 }

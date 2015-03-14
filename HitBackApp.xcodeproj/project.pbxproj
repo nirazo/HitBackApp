@@ -14,8 +14,9 @@
 		D227FBAD1A988BCB00CBDFE2 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D227FBAC1A988BCB00CBDFE2 /* Alert.swift */; };
 		D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */; };
 		D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */; };
-		D22D481D1A937CAE00ACDC43 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481C1A937CAE00ACDC43 /* Config.swift */; };
 		D24033BA1A9644EE003F0ACB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24033B91A9644EE003F0ACB /* Constants.swift */; };
+		D24CB2EC1AB2DF10007FFADD /* BestScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24CB2EB1AB2DF10007FFADD /* BestScoreManager.swift */; };
+		D24CB2EE1AB3F2BD007FFADD /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24CB2ED1AB3F2BD007FFADD /* Config.swift */; };
 		D2671A531A85EB31007FFDBE /* EnemyBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A521A85EB31007FFDBE /* EnemyBase.swift */; };
 		D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A551A85F33B007FFDBE /* NormalEnemy.swift */; };
 		D2671A581A85FFC8007FFDBE /* QuickEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */; };
@@ -99,8 +100,9 @@
 		D227FBAC1A988BCB00CBDFE2 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractBannerAdViewController.swift; sourceTree = "<group>"; };
 		D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractInterstitialAdViewController.swift; sourceTree = "<group>"; };
-		D22D481C1A937CAE00ACDC43 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D24033B91A9644EE003F0ACB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D24CB2EB1AB2DF10007FFADD /* BestScoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestScoreManager.swift; sourceTree = "<group>"; };
+		D24CB2ED1AB3F2BD007FFADD /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D2671A521A85EB31007FFDBE /* EnemyBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyBase.swift; sourceTree = "<group>"; };
 		D2671A551A85F33B007FFDBE /* NormalEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalEnemy.swift; sourceTree = "<group>"; };
 		D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickEnemy.swift; sourceTree = "<group>"; };
@@ -499,9 +501,10 @@
 				D2C35D9A1A77DE4900D829C3 /* SceneEscapeProtocol.swift */,
 				D2671A591A8612CE007FFDBE /* HBUtils.swift */,
 				D2671A611A867125007FFDBE /* UIImage+Utils.swift */,
-				D22D481C1A937CAE00ACDC43 /* Config.swift */,
 				D24033B91A9644EE003F0ACB /* Constants.swift */,
 				D227FBAC1A988BCB00CBDFE2 /* Alert.swift */,
+				D24CB2EB1AB2DF10007FFADD /* BestScoreManager.swift */,
+				D24CB2ED1AB3F2BD007FFADD /* Config.swift */,
 			);
 			path = HitBackApp;
 			sourceTree = "<group>";
@@ -704,7 +707,6 @@
 			files = (
 				D2671A621A867125007FFDBE /* UIImage+Utils.swift in Sources */,
 				D29012141A77B36B00C23E30 /* HBGameOverViewController.swift in Sources */,
-				D22D481D1A937CAE00ACDC43 /* Config.swift in Sources */,
 				D227FBAD1A988BCB00CBDFE2 /* Alert.swift in Sources */,
 				D2C983D61A63CDAD00EE60C6 /* HBTitleViewController.swift in Sources */,
 				D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */,
@@ -714,6 +716,8 @@
 				D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */,
 				D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */,
 				D2C983C21A90B247009013B8 /* HBTutorialViewController.swift in Sources */,
+				D24CB2EE1AB3F2BD007FFADD /* Config.swift in Sources */,
+				D24CB2EC1AB2DF10007FFADD /* BestScoreManager.swift in Sources */,
 				D2671A5A1A8612CE007FFDBE /* HBUtils.swift in Sources */,
 				D2671A581A85FFC8007FFDBE /* QuickEnemy.swift in Sources */,
 				D2C35D9B1A77DE4900D829C3 /* SceneEscapeProtocol.swift in Sources */,
@@ -784,6 +788,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "HitBackApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -817,11 +822,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_LIBTOOLFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "HitBackApp-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};

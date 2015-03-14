@@ -25,8 +25,8 @@ class HBAbstractInterstitialAdViewController: HBAbstractBannerAdViewController, 
         println("start showing interstitial")
         // AD_SHOW_COUNT_INTERVAL 回に一度しか表示しない
         interstitialCounter++
+        println("interstitialCount : \(interstitialCounter)")
         if interstitialCounter < AD_SHOW_COUNT_INTERVAL {
-            // println("counter: \(interstitialCounter)")
             return
         }
         interstitialCounter = 0

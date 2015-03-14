@@ -20,6 +20,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     var score : Int = 0
     var combo : Int = 0
     var highScore : Int = 0
+    var bestScoreManager : BestScoreManager!
     
     // ハイスコア保存用NSUserDefaults
     let ud = NSUserDefaults.standardUserDefaults()
@@ -135,6 +136,7 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
+        self.bestScoreManager = BestScoreManager()
         self.life = Config.maxLife
         self.stage = 1
         self.score = 0
@@ -630,9 +632,8 @@ class HBSinglePlayScene: SKScene, SKPhysicsContactDelegate {
     
     func gameOver() {
         self.removeTouchAreaAndText()
-        if (self.score > ud.integerForKey("bestScore")) {
-            ud.setInteger(self.score, forKey: "bestScore")
-        }
+        self.bestScoreManager.updateBestScore(self.score)
+        
         self.gameState = GAME_STATE.BEFORE_GAMEOVER
         // アニメーション消す
         self.paddleNode().removeAllActions()

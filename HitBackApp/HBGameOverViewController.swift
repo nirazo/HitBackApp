@@ -30,6 +30,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     var bestScoreLabel : UILabel?
     var buttonToRetry : UIButton?
     var buttonToTitle : UIButton?
+    let ud = NSUserDefaults.standardUserDefaults()
     
     let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 75.0
     let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 30.0
@@ -60,19 +61,16 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     override func loadView() {
         self.view = UIView(frame: UIScreen.mainScreen().bounds)
         self.view.backgroundColor = UIColor.blackColor()
+        // 広告表示
+        super.showAds(isWithStatusBar: true)
+        super.showInterstitial()
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.showInterstitial()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ud = NSUserDefaults.standardUserDefaults()
-        
-        // 広告表示
-        super.showAds(isWithStatusBar: true)
-        
         // 背景
         self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.view.addSubview(self.backgroundView)
@@ -116,7 +114,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         
         // ベストスコア表示
         bestScoreLabel = UILabel(frame: CGRectMake(0, 0, self.view.frame.size.width, 30))
-        let bestScore = ud.integerForKey("bestScore")
+        let bestScore = ud.integerForKey(BESTSCORE_KEY)
         bestScoreLabel!.text = String(bestScore)
         bestScoreLabel!.font = UIFont(name: "Helvetica", size: Label.LABEL_FONT_SIZE)
         bestScoreLabel!.textColor = UIColor.whiteColor()
@@ -151,21 +149,16 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         self.view.bringSubviewToFront(self.bannerViewFooter!)
     }
     
+    //MARK: - Score lerated methods
     
-    private func reportScoreToGameCenter(value:Int){
-        var score:GKScore = GKScore()
-        score.value = Int64(value)
-        score.leaderboardIdentifier = "SpaceCat"
-        var scoreArr:[GKScore] = [score]
-        GKScore.reportScores(scoreArr, withCompletionHandler:{(error:NSError!) -> Void in
-            if( (error != nil)){
-                println("reportScore NG \n\(score)")
-            }else{
-                println("reportScore OK \n\(score)")
-            }
-        })
+    func getHighScore() -> Int {
+        var highScore = ud.objectForKey(BESTSCORE_KEY) as Int?
+        if highScore == nil {
+            ud.setObject(0, forKey:BESTSCORE_KEY)
+            highScore = 0
+        }
+        return highScore!
     }
-
     
     override func viewDidDisappear(animated: Bool) {
         if self.bannerView != nil {
