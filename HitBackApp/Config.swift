@@ -9,3 +9,5 @@
 import Foundation
 
 var interstitialCounter : Int = 0
+var interstitial : GADInterstitial? = nil
+var isInterstitialDisplayed : Bool = true

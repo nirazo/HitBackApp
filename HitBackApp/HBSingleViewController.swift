@@ -72,7 +72,6 @@ class HBSingleViewController: HBAbstractBannerAdViewController, SceneEscapeProto
     
     //MARK: - HBGameOverViewControllerDelegate method
     func toTitleTapped() {
-
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }

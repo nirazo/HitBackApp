@@ -61,9 +61,6 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     override func loadView() {
         self.view = UIView(frame: UIScreen.mainScreen().bounds)
         self.view.backgroundColor = UIColor.blackColor()
-        // 広告表示
-        super.showAds(isWithStatusBar: true)
-        super.showInterstitial()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,6 +68,8 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 広告表示
+        super.showAds(isWithStatusBar: true)
         // 背景
         self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.view.addSubview(self.backgroundView)
@@ -147,17 +146,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         self.view.addSubview(buttonToRetry!)
 
         self.view.bringSubviewToFront(self.bannerViewFooter!)
-    }
-    
-    //MARK: - Score lerated methods
-    
-    func getHighScore() -> Int {
-        var highScore = ud.objectForKey(BESTSCORE_KEY) as Int?
-        if highScore == nil {
-            ud.setObject(0, forKey:BESTSCORE_KEY)
-            highScore = 0
-        }
-        return highScore!
+        super.showInterstitial()
     }
     
     override func viewDidDisappear(animated: Bool) {

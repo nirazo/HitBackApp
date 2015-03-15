@@ -26,8 +26,7 @@ class BestScoreManager {
         let oldBestScore = getBestScore()
         if oldBestScore < score {
             userDefault.setObject(score, forKey:BESTSCORE_KEY)
-            println("highScore updated")
-            
+            println("bestScore updated")
             reportScoreToGameCenter(score)
         }
     }
