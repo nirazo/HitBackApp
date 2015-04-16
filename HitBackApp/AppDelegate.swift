@@ -17,7 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        var viewController : HBTitleViewController = HBTitleViewController()
+        //var viewController : HBTitleViewController = HBTitleViewController()
+        var viewController : HBStageSelectViewController = HBStageSelectViewController()
         self.navVC = UINavigationController(rootViewController: viewController)
         self.navVC?.setNavigationBarHidden(true, animated: false)
         self.window!.rootViewController = navVC

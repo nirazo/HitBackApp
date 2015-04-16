@@ -34,7 +34,7 @@ class HBSingleViewController: HBAbstractBannerAdViewController, SceneEscapeProto
             self.skView?.scene?.removeAllChildren()
             self.skView?.presentScene(self.skView?.scene)
         } else {
-            let gameScene = HBSinglePlayScene(size: self.skView!.bounds.size)
+            let gameScene = HBPlaySceneFactory().create(self.skView!.bounds.size, stage: GAME_STAGE.NORMAL)
             gameScene.escapeDelegate = self
             gameScene.scaleMode = SKSceneScaleMode.AspectFill
             self.skView!.presentScene(gameScene)

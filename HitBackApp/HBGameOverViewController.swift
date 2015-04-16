@@ -25,7 +25,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png"))
     var earthView : UIImageView = UIImageView(image: UIImage(named: "earth.png"))
     var gameOverLabelImageView : UIImageView = UIImageView(image: UIImage(named: "gameOverLabel.png"))
-    var catView : UIImageView = UIImageView(image: UIImage(named: "spaceCat_down.png")?)
+    var catView : UIImageView = UIImageView(image: UIImage(named: "spaceCat_down.png"))
     var scoreLabel : UILabel?
     var bestScoreLabel : UILabel?
     var buttonToRetry : UIButton?
@@ -40,21 +40,21 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         static let LABEL_FONT_SIZE : CGFloat = 20.0
     }
     
-    override init() {
-        super.init()
-    }
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     init(score : Int) {
-        super.init()
+        super.init(nibName: nil, bundle: nil)
         println("gameOver init!!")
         self.score = score
     }
 
-    required override init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

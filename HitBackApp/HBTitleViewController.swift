@@ -12,12 +12,12 @@ import SpriteKit
 import GameKit
 
 class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterControllerDelegate, HBTutorialViewControllerDelegate {
-    var catView : UIImageView = UIImageView(image: UIImage(named: "spaceCat.png")?)
+    var catView : UIImageView = UIImageView(image: UIImage(named: "spaceCat.png"))
 
     var bannerView: GADBannerView?
-    var titleView : UIImageView = UIImageView(image: UIImage(named: "titleImage.png")?)
-    var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png")?)
-    var earthView : UIImageView = UIImageView(image: UIImage(named: "earth.png")?)
+    var titleView : UIImageView = UIImageView(image: UIImage(named: "titleImage.png"))
+    var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png"))
+    var earthView : UIImageView = UIImageView(image: UIImage(named: "earth.png"))
     
     let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 70.0
     let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 35.0
@@ -31,15 +31,16 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
     
     var isLogedIn = false
     
-    override init() {
-        super.init()
-    }
+//    // UIViewController
+//    override init() {
+//        super.init(nibName: nil, bundle: nil)
+//    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    required override init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -79,7 +80,7 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
         
         let horizontalTwistAnimation = CABasicAnimation(keyPath: "transform.rotation.y")
         horizontalTwistAnimation.toValue = twist
-        var rotateImage1 = self.catView.image?
+        var rotateImage1 = self.catView.image
         var rotateImage2 = self.catView.image?.rotateImage(8.0)
         var rotateImage3 = self.catView.image?.rotateImage(-8.0)
         self.catView.animationImages = [rotateImage1!, rotateImage2!, rotateImage1!, rotateImage3!, rotateImage1!]

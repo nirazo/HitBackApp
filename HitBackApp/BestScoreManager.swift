@@ -14,7 +14,7 @@ class BestScoreManager {
     var userDefault = NSUserDefaults.standardUserDefaults()
     
     func getBestScore() -> Int {
-        var bestScore = userDefault.objectForKey(BESTSCORE_KEY) as Int?
+        var bestScore = userDefault.objectForKey(BESTSCORE_KEY) as! Int?
         if bestScore == nil {
             userDefault.setObject(0, forKey:BESTSCORE_KEY)
             bestScore = 0

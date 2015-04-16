@@ -53,13 +53,13 @@ class EnemyBase : SKSpriteNode {
     }
     
     func decreaseLife() {
-        var life : Int = Int(self.userData?.objectForKey("life") as NSNumber) - 1
+        var life : Int = Int(self.userData?.objectForKey("life") as! NSNumber) - 1
         self.userData?.setObject(life, forKey: "life")
         self.updateAlpha()
     }
     
     func updateAlpha() {
-        var life = self.userData?.objectForKey("life") as Int
+        var life = self.userData?.objectForKey("life") as! Int
         self.alpha = 1.0
     }
     

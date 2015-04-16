@@ -17,7 +17,7 @@ class HBTutorialViewController: UIViewController, UIScrollViewDelegate {
     let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
     var scrView = UIScrollView()
     var pageControl: UIPageControl!
-    var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png")?)
+    var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png"))
     let backButtonSpace : CGFloat = 40.0
     var delegate : HBTutorialViewControllerDelegate?
     

@@ -14,6 +14,8 @@
 		D227FBAD1A988BCB00CBDFE2 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D227FBAC1A988BCB00CBDFE2 /* Alert.swift */; };
 		D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */; };
 		D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */; };
+		D230E2DD1AC81A75003A28E6 /* HBStageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230E2DC1AC81A75003A28E6 /* HBStageSelectViewController.swift */; };
+		D230E2DF1AC998E9003A28E6 /* HBStageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230E2DE1AC998E9003A28E6 /* HBStageCell.swift */; };
 		D24033BA1A9644EE003F0ACB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24033B91A9644EE003F0ACB /* Constants.swift */; };
 		D24CB2EC1AB2DF10007FFADD /* BestScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24CB2EB1AB2DF10007FFADD /* BestScoreManager.swift */; };
 		D24CB2EE1AB3F2BD007FFADD /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24CB2ED1AB3F2BD007FFADD /* Config.swift */; };
@@ -68,6 +70,11 @@
 		D2C6F8B31A5FF2880050552A /* HitBackAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8B21A5FF2880050552A /* HitBackAppTests.swift */; };
 		D2C6F8C41A5FF3B10050552A /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8C01A5FF3B10050552A /* spark.png */; };
 		D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = D2C6F8C11A5FF3B10050552A /* spark.sks */; };
+		D2C753871AC69D860037961E /* HBPlaySceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C753861AC69D860037961E /* HBPlaySceneFactory.swift */; };
+		D2C753891AC69EAA0037961E /* HBNormalPlaySceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C753881AC69EAA0037961E /* HBNormalPlaySceneFactory.swift */; };
+		D2C7538B1AC69ECA0037961E /* HBHighSpeedPlaySceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C7538A1AC69ECA0037961E /* HBHighSpeedPlaySceneFactory.swift */; };
+		D2C7538D1AC6A0BE0037961E /* HBPlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C7538C1AC6A0BE0037961E /* HBPlayScene.swift */; };
+		D2C753901AC6AF6C0037961E /* HBHighSpeedPlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C7538F1AC6AF6C0037961E /* HBHighSpeedPlayScene.swift */; };
 		D2C983A91A8F9828009013B8 /* scoreLabel_gameScene.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983A71A8F9828009013B8 /* scoreLabel_gameScene.png */; };
 		D2C983AB1A8F9842009013B8 /* bestScoreLabel.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983AA1A8F9842009013B8 /* bestScoreLabel.png */; };
 		D2C983AD1A8F9EA0009013B8 /* scoreLabel_gameOver.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983AC1A8F9EA0009013B8 /* scoreLabel_gameOver.png */; };
@@ -100,6 +107,8 @@
 		D227FBAC1A988BCB00CBDFE2 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		D22D48181A93688300ACDC43 /* HBAbstractBannerAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractBannerAdViewController.swift; sourceTree = "<group>"; };
 		D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractInterstitialAdViewController.swift; sourceTree = "<group>"; };
+		D230E2DC1AC81A75003A28E6 /* HBStageSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBStageSelectViewController.swift; sourceTree = "<group>"; };
+		D230E2DE1AC998E9003A28E6 /* HBStageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBStageCell.swift; sourceTree = "<group>"; };
 		D24033B91A9644EE003F0ACB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D24CB2EB1AB2DF10007FFADD /* BestScoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestScoreManager.swift; sourceTree = "<group>"; };
 		D24CB2ED1AB3F2BD007FFADD /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -191,6 +200,11 @@
 		D2C6F8B21A5FF2880050552A /* HitBackAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBackAppTests.swift; sourceTree = "<group>"; };
 		D2C6F8C01A5FF3B10050552A /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		D2C6F8C11A5FF3B10050552A /* spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark.sks; sourceTree = "<group>"; };
+		D2C753861AC69D860037961E /* HBPlaySceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBPlaySceneFactory.swift; sourceTree = "<group>"; };
+		D2C753881AC69EAA0037961E /* HBNormalPlaySceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBNormalPlaySceneFactory.swift; sourceTree = "<group>"; };
+		D2C7538A1AC69ECA0037961E /* HBHighSpeedPlaySceneFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBHighSpeedPlaySceneFactory.swift; sourceTree = "<group>"; };
+		D2C7538C1AC6A0BE0037961E /* HBPlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBPlayScene.swift; sourceTree = "<group>"; };
+		D2C7538F1AC6AF6C0037961E /* HBHighSpeedPlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBHighSpeedPlayScene.swift; sourceTree = "<group>"; };
 		D2C983A71A8F9828009013B8 /* scoreLabel_gameScene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreLabel_gameScene.png; sourceTree = "<group>"; };
 		D2C983AA1A8F9842009013B8 /* bestScoreLabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bestScoreLabel.png; sourceTree = "<group>"; };
 		D2C983AC1A8F9EA0009013B8 /* scoreLabel_gameOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreLabel_gameOver.png; sourceTree = "<group>"; };
@@ -249,6 +263,15 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		D230E2D91AC81574003A28E6 /* StageSelect */ = {
+			isa = PBXGroup;
+			children = (
+				D230E2DC1AC81A75003A28E6 /* HBStageSelectViewController.swift */,
+				D230E2DE1AC998E9003A28E6 /* HBStageCell.swift */,
+			);
+			name = StageSelect;
+			sourceTree = "<group>";
+		};
 		D2671A541A85F324007FFDBE /* Enemy */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,8 +293,11 @@
 		D2671A661A867A8A007FFDBE /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				D2C753851AC69CF80037961E /* Factory */,
 				D2C983D71A655DBB00EE60C6 /* HBSingleViewController.swift */,
 				D2C983D91A655E5A00EE60C6 /* HBSinglePlayScene.swift */,
+				D2C7538C1AC6A0BE0037961E /* HBPlayScene.swift */,
+				D2C7538F1AC6AF6C0037961E /* HBHighSpeedPlayScene.swift */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -487,6 +513,7 @@
 			isa = PBXGroup;
 			children = (
 				D2C6F89C1A5FF2880050552A /* AppDelegate.swift */,
+				D230E2D91AC81574003A28E6 /* StageSelect */,
 				D22D48151A9367BB00ACDC43 /* Advertisement */,
 				D2671A651A867A79007FFDBE /* Title */,
 				D2C983BD1A90B203009013B8 /* Tutorial */,
@@ -532,6 +559,16 @@
 				D2C6F8B11A5FF2880050552A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D2C753851AC69CF80037961E /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				D2C753861AC69D860037961E /* HBPlaySceneFactory.swift */,
+				D2C753881AC69EAA0037961E /* HBNormalPlaySceneFactory.swift */,
+				D2C7538A1AC69ECA0037961E /* HBHighSpeedPlaySceneFactory.swift */,
+			);
+			name = Factory;
 			sourceTree = "<group>";
 		};
 		D2C983AE1A8F9FC3009013B8 /* SpaceCat */ = {
@@ -705,9 +742,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2C753891AC69EAA0037961E /* HBNormalPlaySceneFactory.swift in Sources */,
 				D2671A621A867125007FFDBE /* UIImage+Utils.swift in Sources */,
 				D29012141A77B36B00C23E30 /* HBGameOverViewController.swift in Sources */,
 				D227FBAD1A988BCB00CBDFE2 /* Alert.swift in Sources */,
+				D2C7538B1AC69ECA0037961E /* HBHighSpeedPlaySceneFactory.swift in Sources */,
+				D2C753871AC69D860037961E /* HBPlaySceneFactory.swift in Sources */,
 				D2C983D61A63CDAD00EE60C6 /* HBTitleViewController.swift in Sources */,
 				D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */,
 				D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */,
@@ -718,11 +758,15 @@
 				D2C983C21A90B247009013B8 /* HBTutorialViewController.swift in Sources */,
 				D24CB2EE1AB3F2BD007FFADD /* Config.swift in Sources */,
 				D24CB2EC1AB2DF10007FFADD /* BestScoreManager.swift in Sources */,
+				D2C753901AC6AF6C0037961E /* HBHighSpeedPlayScene.swift in Sources */,
 				D2671A5A1A8612CE007FFDBE /* HBUtils.swift in Sources */,
 				D2671A581A85FFC8007FFDBE /* QuickEnemy.swift in Sources */,
+				D230E2DD1AC81A75003A28E6 /* HBStageSelectViewController.swift in Sources */,
+				D2C7538D1AC6A0BE0037961E /* HBPlayScene.swift in Sources */,
 				D2C35D9B1A77DE4900D829C3 /* SceneEscapeProtocol.swift in Sources */,
 				D2671A531A85EB31007FFDBE /* EnemyBase.swift in Sources */,
 				D2C983DA1A655E5A00EE60C6 /* HBSinglePlayScene.swift in Sources */,
+				D230E2DF1AC998E9003A28E6 /* HBStageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

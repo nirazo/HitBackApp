@@ -25,4 +25,9 @@ let IS_IPHONE_6P = IS_IPHONE && (SCREEN_MAX_LENGTH == 736.0)
 let BESTSCORE_KEY = "bestScore"
 let LEADERBOARD_ID = "spaceCat"
 
+enum GAME_STAGE : Int {
+    case NORMAL = 0
+    case HIGHSPEED = 1
+}
+
 let DEBUG = false
