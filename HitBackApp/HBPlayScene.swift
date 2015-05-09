@@ -34,12 +34,12 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
     // ボールのサイズ
     var ballSize : CGFloat = 0
     
-    var normalTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat.png")!)
-    var smileTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_smile.png")!)
-    var bounceTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_bounce.png")!)
-    var downTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_down.png")!)
-    
-    let backgroundTexture : SKTexture = SKTexture(image: UIImage(named: "background")!)
+//    var normalTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat.png")!)
+//    var smileTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_smile.png")!)
+//    var bounceTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_bounce.png")!)
+//    var downTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_down.png")!)
+//    
+//    let backgroundTexture : SKTexture = SKTexture(image: UIImage(named: "background_quick")!)
     let earthTexture : SKTexture = SKTexture(image: UIImage(named: "earth")!)
     let scoreTexture : SKTexture = SKTexture(image: UIImage(named: "scoreLabel_gameScene")!)
     let comboTexture : SKTexture = SKTexture(image: UIImage(named: "comboLabel")!)

@@ -15,6 +15,8 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
     // NSUserDefaults
     let ud = NSUserDefaults.standardUserDefaults()
     
+    let NUMOFSTAGES : Int = 2
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +52,7 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return NUMOFSTAGES + 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -59,18 +61,24 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
         switch indexPath.row {
         case 0:
             cell.stage = GAME_STAGE.NORMAL
+            cell.setImageAndTitle()
             break
         case 1:
             cell.stage = GAME_STAGE.HIGHSPEED
+            cell.setImageAndTitle()
+        case 2:
+            cell.setImageAndTitleForComingSoon()
         default:
             break
         }
-        cell.setImageAndTitle()
         return cell
     }
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.row == NUMOFSTAGES + 1) {
+            return;
+        }
         if (!ud.boolForKey("tutorialDisplayed")) {
             var vc : HBTutorialViewController = HBTutorialViewController()
             vc.delegate = self

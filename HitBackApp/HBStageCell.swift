@@ -64,6 +64,11 @@ class HBStageCell: UICollectionViewCell {
         self.titleLabel.text = stageNameDict[self.stage!]
     }
     
+    func setImageAndTitleForComingSoon() {
+        self.setImage(UIImage(named: "question")!)
+        self.titleLabel.text = "準備中..."
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.imageView.image = nil

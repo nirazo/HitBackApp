@@ -10,6 +10,13 @@ import SpriteKit
 
 class HBHighSpeedPlayScene: HBPlayScene {
     
+    var normalTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_red.png")!)
+    var smileTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_red_smile.png")!)
+    var bounceTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_red_bounce.png")!)
+    var downTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_red_down.png")!)
+    
+    let backgroundTexture : SKTexture = SKTexture(image: UIImage(named: "background_quick")!)
+    
     private struct Config {
         static let maxLife : Int = 2
         static let timeInterval : Double = 3.0 // 何秒おきにスピードアップするか
@@ -39,7 +46,7 @@ class HBHighSpeedPlayScene: HBPlayScene {
         
         self.paddleBaseY = self.frame.height / CGFloat(Paddle.PADDLE_BASE_Y_DEVIDE)
         
-        self.movableAreaNode = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: self.frame.width, height: CGFloat(Paddle.PADDLE_RADIUS * 3)))
+        self.movableAreaNode = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: self.frame.width, height: CGFloat(Paddle.PADDLE_RADIUS * 3)))
         
         self.movableAreaNode!.position = CGPoint(x: self.frame.width / 2, y: self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS / 2))
         self.movableAreaNode!.alpha = 0.17
@@ -71,12 +78,12 @@ class HBHighSpeedPlayScene: HBPlayScene {
         background.zPosition = -10
         self.addChild(background)
         
-        var earth = SKSpriteNode(texture: self.earthTexture)
-        earth.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame))
-        earth.size = CGSize(width: self.frame.size.width * 1.2, height: 250)
-        earth.alpha = 0.80
-        earth.zPosition = -10
-        self.addChild(earth)
+//        var earth = SKSpriteNode(texture: self.earthTexture)
+//        earth.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame))
+//        earth.size = CGSize(width: self.frame.size.width * 1.2, height: 250)
+//        earth.alpha = 0.80
+//        earth.zPosition = -10
+//        self.addChild(earth)
         
         self.showStartText()
     }
@@ -141,7 +148,7 @@ class HBHighSpeedPlayScene: HBPlayScene {
     //MARK: - paddle related methods
     func addPaddle() {
         var radius : CGFloat = CGFloat(Paddle.PADDLE_RADIUS)
-        var paddle : SKSpriteNode = SKSpriteNode(texture: SKTexture(image: UIImage(named: "spaceCat.png")!))
+        var paddle : SKSpriteNode = SKSpriteNode(texture: SKTexture(image: UIImage(named: "spaceCat_red.png")!))
         paddle.size = CGSize(width: Paddle.PADDLE_RADIUS*2*1.05, height: Paddle.PADDLE_RADIUS*2)
         
         var paddleY : CGFloat = self.paddleBaseY!
@@ -172,8 +179,8 @@ class HBHighSpeedPlayScene: HBPlayScene {
     func addBall() {
         var radius : CGFloat = self.ballSize
         var ball : SKSpriteNode = self.life == Config.maxLife ?
-            SKSpriteNode(texture: SKTexture(image: UIImage(named: "ball_covered.png")!)) :
-            SKSpriteNode(texture: SKTexture(image: UIImage(named: "ball_normal.png")!))
+            SKSpriteNode(texture: SKTexture(image: UIImage(named: "ball_green_covered.png")!)) :
+            SKSpriteNode(texture: SKTexture(image: UIImage(named: "ball_green_normal.png")!))
         ball.name = "ball"
         ball.position = CGPointMake(CGRectGetMidX(self.paddleNode().frame), CGRectGetMaxY(self.paddleNode().frame) + radius)
         ball.size = CGSize(width: radius * 2, height: radius * 2)

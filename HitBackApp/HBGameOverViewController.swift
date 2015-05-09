@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SpriteKit
 import GameKit
+import Social
 
 protocol HBGameOverViewControllerDelegate {
     
@@ -31,11 +32,18 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     var buttonToRetry : UIButton?
     var buttonToTitle : UIButton?
     var buttonToStageSelect : UIButton?
+    var buttonToFacebook : UIButton?
+    var buttonToTwitter : UIButton?
     let ud = NSUserDefaults.standardUserDefaults()
     var stage : GAME_STAGE!
     
-    let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 75.0
-    let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 30.0
+    let TITLE_MARGIN_Y_IPHONE6P : CGFloat = 60.0
+    let TITLE_MARGIN_Y_IPHONE5AND6 : CGFloat = 30.0
+    let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 0.0
+    
+    // ねこ以下のボタン画像群のマージン
+    let BUTTOMBUTTOM_MARGIN_Y_IPHONE6ORMORE : CGFloat = 30.0
+    let BUTTOMBUTTOM_MARGIN_Y_IPHONE5ORLESS : CGFloat = 10.0
     
     private struct Label {
         static let LABEL_MARGIN : CGFloat = 18.0
@@ -69,8 +77,11 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 広告表示
-        super.showAds(isWithStatusBar: true)
+        
+        // iPhone5以上の端末であれば広告表示
+        if (!IS_IPHONE_4_OR_LESS) {
+            super.showAds(isWithStatusBar: true)
+        }
         // 背景
         self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.view.addSubview(self.backgroundView)
@@ -82,7 +93,15 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         self.view.addSubview(self.earthView)
 
         // ゲームオーバーの文字
-        var titleMarginY : CGFloat = IS_IPHONE_4_OR_LESS ? TITLE_MARGIN_Y_IPHONE4ORLESS : TITLE_MARGIN_Y_IPHONE5ORMORE
+        var titleMarginY : CGFloat
+        if (IS_IPHONE_4_OR_LESS) {
+            titleMarginY = TITLE_MARGIN_Y_IPHONE4ORLESS
+        } else if (IS_IPHONE_5 || IS_IPHONE_6) {
+            titleMarginY = TITLE_MARGIN_Y_IPHONE5AND6
+        } else {
+            titleMarginY = TITLE_MARGIN_Y_IPHONE6P
+        }
+        
         var gameOverWidth = self.view.frame.size.width - 15
         var gameOverHeight = gameOverWidth / 7
         self.gameOverLabelImageView.frame.size = CGSize(width: gameOverWidth, height: gameOverHeight)
@@ -124,15 +143,46 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
 
         
         // ねこ
-        self.catView.frame.size = CGSize(width: 120, height: 102.8)
+        if (IS_IPHONE_4_OR_LESS) {
+            self.catView.frame.size = CGSize(width: 100, height: 85.6)
+        } else if (IS_IPHONE_5) {
+            self.catView.frame.size = CGSize(width: 110, height: 94.2)
+        } else {
+            self.catView.frame.size = CGSize(width: 120, height: 102.8)
+        }
+        
         self.catView.center = CGPoint(x:CGRectGetMidX(self.view.frame) , y: CGRectGetMaxY(bestScoreLabel!.frame) + Label.LABEL_MARGIN + catView.frame.size.height / 2)
         self.view.addSubview(self.catView)
+        
+        // ここから下を基準に配置するよ
+        var buttonsBottomBaseY : CGFloat
+        if (IS_IPHONE_4_OR_LESS) {
+            buttonsBottomBaseY = self.view.frame.size.height
+        } else {
+            buttonsBottomBaseY = self.view.frame.size.height - kGADAdSizeBanner.size.height
+        }
+        
+        var buttonsMarginY : CGFloat
+        if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
+            buttonsMarginY = BUTTOMBUTTOM_MARGIN_Y_IPHONE5ORLESS
+        } else {
+            buttonsMarginY = BUTTOMBUTTOM_MARGIN_Y_IPHONE6ORMORE
+        }
+        
+        // ステージセレクト画面へ飛ぶボタン
+        buttonToStageSelect = UIButton()
+        buttonToStageSelect!.bounds.size = CGSize(width: 120, height: 40)
+        buttonToStageSelect!.center = CGPointMake(self.view.frame.width/2, buttonsBottomBaseY - buttonsMarginY - buttonToStageSelect!.frame.size.height / 2)
+        buttonToStageSelect!.setBackgroundImage(UIImage(named: "toStageSelectButton.png"), forState: .Normal)
+        buttonToStageSelect!.addTarget(self, action: "toStageSelectTapped:", forControlEvents: .TouchUpInside)
+        buttonToStageSelect!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.view.addSubview(buttonToStageSelect!)
         
         // タイトルへ戻るボタン
         buttonToTitle = UIButton()
         buttonToTitle?.setBackgroundImage(UIImage(named: "toTitleBUtton.png"), forState: .Normal)
         buttonToTitle!.bounds.size = CGSize(width: 120, height: 40)
-        buttonToTitle!.center = CGPointMake(self.view.frame.width / 4, self.view.frame.size.height - kGADAdSizeBanner.size.height - 70 - buttonToTitle!.frame.size.height / 2)
+        buttonToTitle!.center = CGPointMake(self.view.frame.width / 4, CGRectGetMinY(buttonToStageSelect!.frame) - buttonToTitle!.frame.size.height/2 - buttonsMarginY)
         buttonToTitle!.setBackgroundImage(UIImage(named: "toTitleButton.png"), forState: .Normal)
         buttonToTitle!.addTarget(self, action: "toTitleTapped:", forControlEvents: .TouchUpInside)
         self.view.addSubview(buttonToTitle!)
@@ -146,17 +196,36 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         buttonToRetry!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.view.addSubview(buttonToRetry!)
         
-        // ステージセレクト画面へ飛ぶボタン
-        buttonToStageSelect = UIButton()
-        buttonToStageSelect!.bounds.size = CGSize(width: 120, height: 40)
-        buttonToStageSelect!.center = CGPointMake(self.view.frame.width/2, CGRectGetMaxY(self.buttonToRetry!.frame) + Label.LABEL_MARGIN + buttonToStageSelect!.frame.size.height / 2)
-        buttonToStageSelect!.setBackgroundImage(UIImage(named: "toStageSelectButton.png"), forState: .Normal)
-        buttonToStageSelect!.addTarget(self, action: "toStageSelectTapped:", forControlEvents: .TouchUpInside)
-        buttonToStageSelect!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.view.addSubview(buttonToStageSelect!)
-
-
-        self.view.bringSubviewToFront(self.bannerViewFooter!)
+        // SNSボタンサイズ
+        var snsButtonSize : CGFloat
+        if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
+            snsButtonSize = 48
+        } else {
+            snsButtonSize = 64
+        }
+        
+        // facebookボタン
+        buttonToFacebook = UIButton()
+        buttonToFacebook!.bounds.size = CGSize(width: snsButtonSize, height: snsButtonSize)
+        buttonToFacebook!.center = CGPointMake(self.view.frame.width / 4, CGRectGetMinY(buttonToTitle!.frame) - buttonToFacebook!.frame.size.height/2 - buttonsMarginY)
+        buttonToFacebook!.setBackgroundImage(UIImage(named: "facebook-128.png"), forState: .Normal)
+        buttonToFacebook!.addTarget(self, action: "toFacebookTapped:", forControlEvents: .TouchUpInside)
+        buttonToFacebook!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.view.addSubview(buttonToFacebook!)
+        
+        // twitterボタン
+        buttonToTwitter = UIButton()
+        buttonToTwitter!.bounds.size = CGSize(width: snsButtonSize, height: snsButtonSize)
+        buttonToTwitter!.center = CGPointMake(self.view.frame.width*3/4, buttonToFacebook!.center.y)
+        buttonToTwitter!.setBackgroundImage(UIImage(named: "twitter-128.png"), forState: .Normal)
+        buttonToTwitter!.addTarget(self, action: "toTwitterTapped:", forControlEvents: .TouchUpInside)
+        buttonToTwitter!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.view.addSubview(buttonToTwitter!)
+        
+        
+        if (self.bannerViewFooter != nil) {
+            self.view.bringSubviewToFront(self.bannerViewFooter!)
+        }
         super.showInterstitial()
     }
     
@@ -176,7 +245,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         return true
     }
     
-    
+    //MARK: - Button selected methods
     func toTitleTapped(sender : AnyObject?) {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
@@ -191,4 +260,49 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         self.navigationController?.popToViewController(vc, animated: true)
     }
     
+    func toFacebookTapped(sender : AnyObject?) {
+        postToSocial(self.score, stage: self.stage, type: SocialType.FACEBOOK)
+    }
+    
+    func toTwitterTapped(sender : AnyObject?) {
+        postToSocial(self.score, stage: self.stage, type: SocialType.TWITTER)
+    }
+    
+    //MARK: - SNS
+    func postToSocial(score: Int, stage: GAME_STAGE, type: SocialType) {
+        if type == SocialType.TWITTER {
+            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+                var tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+                tweetSheet.setInitialText("スコア: "
+                    + String(score)
+                    + "\n守れ！宇宙ねこ: "
+                    + stageNameDict[stage]! + "ステージ\n")
+                tweetSheet.addURL(NSURL(string: "https://itunes.apple.com/app/id963696838?l=ja"))
+                tweetSheet.addImage(UIImage(named: "icon_180"))
+                self.presentViewController(tweetSheet, animated: true, completion: nil)
+            } else {
+                println("tweet error")
+                Alert().showAlert(self, title: "Tweetエラー",
+                    buttonTitle: "OK",
+                    message: "OSの設定画面からtwitterにログインしてください。", tag: 0)
+            }
+        } else if type == SocialType.FACEBOOK {
+            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
+                var facebookSheet = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                facebookSheet.setInitialText("スコア: "
+                    + String(score)
+                    + "\n守れ！宇宙ねこ: "
+                    + stageNameDict[stage]! + "ステージ\n")
+                facebookSheet.addURL(NSURL(string: "https://itunes.apple.com/app/id963696838?l=ja"))
+                facebookSheet.addImage(UIImage(named: "icon_180"))
+                self.presentViewController(facebookSheet, animated: true, completion: nil)
+            } else {
+                println("facebook post error")
+                Alert().showAlert(self, title: "Facebook投稿エラー",
+                    buttonTitle: "OK",
+                    message: "OSの設定画面からFacebookにログインしてください。", tag: 0)
+                
+            }
+        }
+    }
 }

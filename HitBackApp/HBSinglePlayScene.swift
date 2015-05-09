@@ -9,6 +9,14 @@
 import SpriteKit
 
 class HBSinglePlayScene: HBPlayScene {
+    
+    var normalTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat.png")!)
+    var smileTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_smile.png")!)
+    var bounceTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_bounce.png")!)
+    var downTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_down.png")!)
+    
+    let backgroundTexture : SKTexture = SKTexture(image: UIImage(named: "background")!)
+    
     private struct Config {
         static let maxLife : Int = 2
         static let timeInterval : Double = 3.0 // 何秒おきにスピードアップするか
