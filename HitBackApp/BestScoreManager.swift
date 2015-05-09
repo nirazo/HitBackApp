@@ -13,28 +13,32 @@ class BestScoreManager {
     
     var userDefault = NSUserDefaults.standardUserDefaults()
     
-    func getBestScore() -> Int {
-        var bestScore = userDefault.objectForKey(BESTSCORE_KEY) as! Int?
+    func getBestScoreForStage(stage: GAME_STAGE) -> Int {
+        var key : String = userDefaultsKeyDict[stage]!
+        
+        var bestScore = userDefault.objectForKey(key) as! Int?
         if bestScore == nil {
-            userDefault.setObject(0, forKey:BESTSCORE_KEY)
+            userDefault.setObject(0, forKey:key)
             bestScore = 0
         }
         return bestScore!
     }
     
-    func updateBestScore(score: Int) {
-        let oldBestScore = getBestScore()
+    func updateBestScoreForStage(stage: GAME_STAGE, score: Int) {
+        let oldBestScore = getBestScoreForStage(stage)
         if oldBestScore < score {
-            userDefault.setObject(score, forKey:BESTSCORE_KEY)
+            var key : String = userDefaultsKeyDict[stage]!
+            userDefault.setObject(score, forKey:key)
             println("bestScore updated")
-            reportScoreToGameCenter(score)
+            reportScoreToGameCenterForStage(stage, value: score)
         }
     }
     
-    private func reportScoreToGameCenter(value:Int){
+    private func reportScoreToGameCenterForStage(stage:GAME_STAGE, value:Int){
         var score:GKScore = GKScore()
+        var id = leaderBoardIDDict[stage]
         score.value = Int64(value)
-        score.leaderboardIdentifier = LEADERBOARD_ID
+        score.leaderboardIdentifier = id
         var scoreArr:[GKScore] = [score]
         GKScore.reportScores(scoreArr, withCompletionHandler:{(error:NSError!) -> Void in
             if( (error != nil)){
@@ -45,12 +49,13 @@ class BestScoreManager {
         })
     }
     
-    
     func resetBestScore() {
-        userDefault.setObject(0, forKey:BESTSCORE_KEY)
+        userDefault.setObject(0, forKey:BESTSCORE_KEY_NORMAL)
     }
     
     func syncBestScore() {
-        reportScoreToGameCenter(getBestScore())
+        for stage in GAME_STAGE.allValues {
+            reportScoreToGameCenterForStage(stage, value: getBestScoreForStage(stage))
+        }
     }
 }

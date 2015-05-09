@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        //var viewController : HBTitleViewController = HBTitleViewController()
-        var viewController : HBStageSelectViewController = HBStageSelectViewController()
+        Fabric.with([Crashlytics()])
+        var viewController : HBTitleViewController = HBTitleViewController()
         self.navVC = UINavigationController(rootViewController: viewController)
         self.navVC?.setNavigationBarHidden(true, animated: false)
         self.window!.rootViewController = navVC
@@ -47,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
     
 }
 

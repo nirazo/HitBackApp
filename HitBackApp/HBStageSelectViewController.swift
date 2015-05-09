@@ -9,12 +9,16 @@
 import Foundation
 import UIKit
 
-class HBStageSelectViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectionViewDataSource, UICollectionViewDelegate, HBTutorialViewControllerDelegate {
     var collectionView:UICollectionView!
+    var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png"))
+    // NSUserDefaults
+    let ud = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.title = "ステージをえらんでね"
         
         // レイアウト作成
         let flowLayout = UICollectionViewFlowLayout()
@@ -28,7 +32,16 @@ class HBStageSelectViewController: UIViewController, UICollectionViewDataSource,
         collectionView.registerClass(HBStageCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundView = self.backgroundView
         view.addSubview(collectionView)
+        
+        // 広告表示
+        super.showAds(isWithStatusBar: false)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,15 +50,40 @@ class HBStageSelectViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 2
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell : HBStageCell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! HBStageCell
-        cell.backgroundColor = UIColor.grayColor()
-        //cell.imageView!.image = UIImage(named: "quickEnemy.png")!
-        cell.setImage(UIImage(named: "quickEnemy.png")!)
+        
+        switch indexPath.row {
+        case 0:
+            cell.stage = GAME_STAGE.NORMAL
+            break
+        case 1:
+            cell.stage = GAME_STAGE.HIGHSPEED
+        default:
+            break
+        }
+        cell.setImageAndTitle()
         return cell
     }
     
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if (!ud.boolForKey("tutorialDisplayed")) {
+            var vc : HBTutorialViewController = HBTutorialViewController()
+            vc.delegate = self
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as! HBStageCell
+        var vc : HBSingleViewController = HBSingleViewController(stage: selectedCell.stage!)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    //MARK: - Delegate method for HBTutorialViewControllerDelegate
+    func backButtonTapped() {
+        self.ud.setBool(true, forKey: "tutorialDisplayed")
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

@@ -113,17 +113,17 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
         self.loginGameCenter()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = true
+    }
+    
     override func viewDidAppear(animated: Bool) {
         self.catView.startAnimating()
     }
     
     func singleStartTapped(sender: AnyObject?) {
-        if (!ud.boolForKey("tutorialDisplayed")) {
-            var vc : HBTutorialViewController = HBTutorialViewController()
-            vc.delegate = self
-            self.presentViewController(vc, animated: true, completion: nil)
-        }
-        var vc : HBSingleViewController = HBSingleViewController()
+        var vc : HBStageSelectViewController = HBStageSelectViewController()
         self.navigationController?.pushViewController(vc, animated: true)        
     }
     
@@ -149,7 +149,7 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
                 let gameCenterController:GKGameCenterViewController = GKGameCenterViewController()
                 gameCenterController.gameCenterDelegate = self
                 gameCenterController.viewState = GKGameCenterViewControllerState.Leaderboards
-                gameCenterController.leaderboardIdentifier = "spaceCat" //該当するLeaderboardのIDを指定します
+                //gameCenterController.leaderboardIdentifier = "spaceCat" //該当するLeaderboardのIDを指定します
                 self.presentViewController(gameCenterController, animated: true, completion: nil)
             }
         })

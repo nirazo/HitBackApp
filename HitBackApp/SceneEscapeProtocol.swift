@@ -10,8 +10,6 @@ import SpriteKit
 
 @objc
 protocol SceneEscapeProtocol {
-    
     optional func sceneEscape(scene: SKScene)
     optional func sceneEscape(scene: SKScene, score: Int)
-    
 }

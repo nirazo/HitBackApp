@@ -30,7 +30,9 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     var bestScoreLabel : UILabel?
     var buttonToRetry : UIButton?
     var buttonToTitle : UIButton?
+    var buttonToStageSelect : UIButton?
     let ud = NSUserDefaults.standardUserDefaults()
+    var stage : GAME_STAGE!
     
     let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 75.0
     let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 30.0
@@ -40,18 +42,15 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         static let LABEL_FONT_SIZE : CGFloat = 20.0
     }
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//    }
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    init(score : Int) {
+    init(score : Int, stage : GAME_STAGE) {
         super.init(nibName: nil, bundle: nil)
         println("gameOver init!!")
         self.score = score
+        self.stage = stage
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -64,6 +63,8 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = true
     }
     
     override func viewDidLoad() {
@@ -113,7 +114,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         
         // ベストスコア表示
         bestScoreLabel = UILabel(frame: CGRectMake(0, 0, self.view.frame.size.width, 30))
-        let bestScore = ud.integerForKey(BESTSCORE_KEY)
+        let bestScore = ud.integerForKey(userDefaultsKeyDict[stage]!)
         bestScoreLabel!.text = String(bestScore)
         bestScoreLabel!.font = UIFont(name: "Helvetica", size: Label.LABEL_FONT_SIZE)
         bestScoreLabel!.textColor = UIColor.whiteColor()
@@ -131,7 +132,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         buttonToTitle = UIButton()
         buttonToTitle?.setBackgroundImage(UIImage(named: "toTitleBUtton.png"), forState: .Normal)
         buttonToTitle!.bounds.size = CGSize(width: 120, height: 40)
-        buttonToTitle!.center = CGPointMake(self.view.frame.width / 4, self.view.frame.size.height - kGADAdSizeBanner.size.height - 10 - buttonToTitle!.frame.size.height / 2)
+        buttonToTitle!.center = CGPointMake(self.view.frame.width / 4, self.view.frame.size.height - kGADAdSizeBanner.size.height - 70 - buttonToTitle!.frame.size.height / 2)
         buttonToTitle!.setBackgroundImage(UIImage(named: "toTitleButton.png"), forState: .Normal)
         buttonToTitle!.addTarget(self, action: "toTitleTapped:", forControlEvents: .TouchUpInside)
         self.view.addSubview(buttonToTitle!)
@@ -144,6 +145,16 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         buttonToRetry!.addTarget(self, action: "toRetryTapped:", forControlEvents: .TouchUpInside)
         buttonToRetry!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.view.addSubview(buttonToRetry!)
+        
+        // ステージセレクト画面へ飛ぶボタン
+        buttonToStageSelect = UIButton()
+        buttonToStageSelect!.bounds.size = CGSize(width: 120, height: 40)
+        buttonToStageSelect!.center = CGPointMake(self.view.frame.width/2, CGRectGetMaxY(self.buttonToRetry!.frame) + Label.LABEL_MARGIN + buttonToStageSelect!.frame.size.height / 2)
+        buttonToStageSelect!.setBackgroundImage(UIImage(named: "toStageSelectButton.png"), forState: .Normal)
+        buttonToStageSelect!.addTarget(self, action: "toStageSelectTapped:", forControlEvents: .TouchUpInside)
+        buttonToStageSelect!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.view.addSubview(buttonToStageSelect!)
+
 
         self.view.bringSubviewToFront(self.bannerViewFooter!)
         super.showInterstitial()
@@ -172,6 +183,12 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     
     func toRetryTapped(sender : AnyObject?) {
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func toStageSelectTapped(sender : AnyObject?) {
+        var count : NSInteger = self.navigationController!.viewControllers.count - 3;
+        var vc : HBStageSelectViewController = self.navigationController!.viewControllers[count] as! HBStageSelectViewController;
+        self.navigationController?.popToViewController(vc, animated: true)
     }
     
 }

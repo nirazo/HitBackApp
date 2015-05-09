@@ -16,9 +16,13 @@
 		D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */; };
 		D230E2DD1AC81A75003A28E6 /* HBStageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230E2DC1AC81A75003A28E6 /* HBStageSelectViewController.swift */; };
 		D230E2DF1AC998E9003A28E6 /* HBStageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230E2DE1AC998E9003A28E6 /* HBStageCell.swift */; };
-		D24033BA1A9644EE003F0ACB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24033B91A9644EE003F0ACB /* Constants.swift */; };
+		D2327B551AF86716002D56EC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2327B531AF86716002D56EC /* Fabric.framework */; };
+		D2327B561AF86716002D56EC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2327B541AF86716002D56EC /* Crashlytics.framework */; };
+		D2327B591AFA5B97002D56EC /* HBStageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2327B581AFA5B97002D56EC /* HBStageConstants.swift */; };
+		D2327B621AFA6B87002D56EC /* toStageSelectButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D2327B611AFA6B87002D56EC /* toStageSelectButton.png */; };
+		D24033BA1A9644EE003F0ACB /* HBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24033B91A9644EE003F0ACB /* HBConstants.swift */; };
 		D24CB2EC1AB2DF10007FFADD /* BestScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24CB2EB1AB2DF10007FFADD /* BestScoreManager.swift */; };
-		D24CB2EE1AB3F2BD007FFADD /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24CB2ED1AB3F2BD007FFADD /* Config.swift */; };
+		D24CB2EE1AB3F2BD007FFADD /* HBAdConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24CB2ED1AB3F2BD007FFADD /* HBAdConstants.swift */; };
 		D2671A531A85EB31007FFDBE /* EnemyBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A521A85EB31007FFDBE /* EnemyBase.swift */; };
 		D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A551A85F33B007FFDBE /* NormalEnemy.swift */; };
 		D2671A581A85FFC8007FFDBE /* QuickEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */; };
@@ -83,7 +87,6 @@
 		D2C983C21A90B247009013B8 /* HBTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C983C11A90B247009013B8 /* HBTutorialViewController.swift */; };
 		D2C983C41A90B69E009013B8 /* tutorialButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983C31A90B69E009013B8 /* tutorialButton.png */; };
 		D2C983CC1A90EFED009013B8 /* tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983CB1A90EFED009013B8 /* tutorial2.png */; };
-		D2C983D11A63B97200EE60C6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */; };
 		D2C983D61A63CDAD00EE60C6 /* HBTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */; };
 		D2C983D81A655DBB00EE60C6 /* HBSingleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C983D71A655DBB00EE60C6 /* HBSingleViewController.swift */; };
 		D2C983DA1A655E5A00EE60C6 /* HBSinglePlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C983D91A655E5A00EE60C6 /* HBSinglePlayScene.swift */; };
@@ -109,9 +112,13 @@
 		D22D481A1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAbstractInterstitialAdViewController.swift; sourceTree = "<group>"; };
 		D230E2DC1AC81A75003A28E6 /* HBStageSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBStageSelectViewController.swift; sourceTree = "<group>"; };
 		D230E2DE1AC998E9003A28E6 /* HBStageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBStageCell.swift; sourceTree = "<group>"; };
-		D24033B91A9644EE003F0ACB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D2327B531AF86716002D56EC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D2327B541AF86716002D56EC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D2327B581AFA5B97002D56EC /* HBStageConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBStageConstants.swift; sourceTree = "<group>"; };
+		D2327B611AFA6B87002D56EC /* toStageSelectButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toStageSelectButton.png; sourceTree = "<group>"; };
+		D24033B91A9644EE003F0ACB /* HBConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBConstants.swift; sourceTree = "<group>"; };
 		D24CB2EB1AB2DF10007FFADD /* BestScoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestScoreManager.swift; sourceTree = "<group>"; };
-		D24CB2ED1AB3F2BD007FFADD /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		D24CB2ED1AB3F2BD007FFADD /* HBAdConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBAdConstants.swift; sourceTree = "<group>"; };
 		D2671A521A85EB31007FFDBE /* EnemyBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyBase.swift; sourceTree = "<group>"; };
 		D2671A551A85F33B007FFDBE /* NormalEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalEnemy.swift; sourceTree = "<group>"; };
 		D2671A571A85FFC8007FFDBE /* QuickEnemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickEnemy.swift; sourceTree = "<group>"; };
@@ -213,7 +220,6 @@
 		D2C983C11A90B247009013B8 /* HBTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBTutorialViewController.swift; sourceTree = "<group>"; };
 		D2C983C31A90B69E009013B8 /* tutorialButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorialButton.png; sourceTree = "<group>"; };
 		D2C983CB1A90EFED009013B8 /* tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial2.png; sourceTree = "<group>"; };
-		D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBTitleViewController.swift; sourceTree = "<group>"; };
 		D2C983D71A655DBB00EE60C6 /* HBSingleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBSingleViewController.swift; sourceTree = "<group>"; };
 		D2C983D91A655E5A00EE60C6 /* HBSinglePlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBSinglePlayScene.swift; sourceTree = "<group>"; };
@@ -234,11 +240,13 @@
 				D29011FE1A77966A00C23E30 /* CoreGraphics.framework in Frameworks */,
 				D29011FC1A77966200C23E30 /* AVFoundation.framework in Frameworks */,
 				D29011FA1A77965A00C23E30 /* AudioToolbox.framework in Frameworks */,
+				D2327B561AF86716002D56EC /* Crashlytics.framework in Frameworks */,
 				D29011F81A77964300C23E30 /* AdSupport.framework in Frameworks */,
 				D29011F41A7795BE00C23E30 /* libAdapterIAd.a in Frameworks */,
 				D29011F31A7795BD00C23E30 /* libGoogleAdMobAds.a in Frameworks */,
 				D29011F51A7795BE00C23E30 /* libAdapterNend.a in Frameworks */,
 				D29011F61A7795BE00C23E30 /* libNendAd.a in Frameworks */,
+				D2327B551AF86716002D56EC /* Fabric.framework in Frameworks */,
 				D2C538CB1A7F993F00CC8E3B /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +278,32 @@
 				D230E2DE1AC998E9003A28E6 /* HBStageCell.swift */,
 			);
 			name = StageSelect;
+			sourceTree = "<group>";
+		};
+		D2327B5A1AFA5C72002D56EC /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				D24033B91A9644EE003F0ACB /* HBConstants.swift */,
+				D2327B581AFA5B97002D56EC /* HBStageConstants.swift */,
+				D24CB2ED1AB3F2BD007FFADD /* HBAdConstants.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		D2327B5B1AFA5C9D002D56EC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D2671A611A867125007FFDBE /* UIImage+Utils.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		D2327B5C1AFA5CC5002D56EC /* GameCenter */ = {
+			isa = PBXGroup;
+			children = (
+				D24CB2EB1AB2DF10007FFADD /* BestScoreManager.swift */,
+			);
+			name = GameCenter;
 			sourceTree = "<group>";
 		};
 		D2671A541A85F324007FFDBE /* Enemy */ = {
@@ -313,6 +347,7 @@
 		D26A84751A8EFD3D00904761 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D2327B611AFA6B87002D56EC /* toStageSelectButton.png */,
 				D294B3E41A9996080053439F /* team_logo.png */,
 				D294B3E01A9987C60053439F /* touchText.png */,
 				D2C983C31A90B69E009013B8 /* tutorialButton.png */,
@@ -351,6 +386,8 @@
 		D29011C61A7795BD00C23E30 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D2327B531AF86716002D56EC /* Fabric.framework */,
+				D2327B541AF86716002D56EC /* Crashlytics.framework */,
 				D2C538CA1A7F993F00CC8E3B /* GameKit.framework */,
 				D290120B1A7796D000C23E30 /* ImageIO.framework */,
 				D29012091A7796CA00C23E30 /* Security.framework */,
@@ -491,7 +528,6 @@
 		D2C6F88E1A5FF2880050552A = {
 			isa = PBXGroup;
 			children = (
-				D2C983D01A63B97200EE60C6 /* Default-568h@2x.png */,
 				D2C6F8991A5FF2880050552A /* HitBackApp */,
 				D29011C61A7795BD00C23E30 /* lib */,
 				D2C6F8AF1A5FF2880050552A /* HitBackAppTests */,
@@ -520,18 +556,17 @@
 				D2671A661A867A8A007FFDBE /* Game */,
 				D2671A671A867AA1007FFDBE /* Result */,
 				D2671A541A85F324007FFDBE /* Enemy */,
+				D2327B5A1AFA5C72002D56EC /* Constants */,
 				D29D9EF61A7CC7260055D55D /* img */,
-				D2C6F8A31A5FF2880050552A /* Images.xcassets */,
-				D2C6F8C01A5FF3B10050552A /* spark.png */,
-				D2C6F8C11A5FF3B10050552A /* spark.sks */,
+				D2327B5B1AFA5C9D002D56EC /* Extension */,
+				D2327B5C1AFA5CC5002D56EC /* GameCenter */,
 				D2C6F89A1A5FF2880050552A /* Supporting Files */,
 				D2C35D9A1A77DE4900D829C3 /* SceneEscapeProtocol.swift */,
 				D2671A591A8612CE007FFDBE /* HBUtils.swift */,
-				D2671A611A867125007FFDBE /* UIImage+Utils.swift */,
-				D24033B91A9644EE003F0ACB /* Constants.swift */,
 				D227FBAC1A988BCB00CBDFE2 /* Alert.swift */,
-				D24CB2EB1AB2DF10007FFADD /* BestScoreManager.swift */,
-				D24CB2ED1AB3F2BD007FFADD /* Config.swift */,
+				D2C6F8A31A5FF2880050552A /* Images.xcassets */,
+				D2C6F8C01A5FF3B10050552A /* spark.png */,
+				D2C6F8C11A5FF3B10050552A /* spark.sks */,
 			);
 			path = HitBackApp;
 			sourceTree = "<group>";
@@ -611,6 +646,7 @@
 				D2C6F8931A5FF2880050552A /* Sources */,
 				D2C6F8941A5FF2880050552A /* Frameworks */,
 				D2C6F8951A5FF2880050552A /* Resources */,
+				D2327B521AF866DB002D56EC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -702,7 +738,6 @@
 				D2AB0EDF1A8B9DDE00BA1A27 /* retry.png in Resources */,
 				D29D9EFE1A7CE1190055D55D /* ball_normal.png in Resources */,
 				D227FBAA1A97934700CBDFE2 /* startText1.png in Resources */,
-				D2C983D11A63B97200EE60C6 /* Default-568h@2x.png in Resources */,
 				D2C983BB1A90B1F2009013B8 /* backButton.png in Resources */,
 				D26A84801A8F00F700904761 /* toTitleButton.png in Resources */,
 				D2C983AD1A8F9EA0009013B8 /* scoreLabel_gameOver.png in Resources */,
@@ -719,6 +754,7 @@
 				D26A847B1A8F000200904761 /* titleImage.png in Resources */,
 				D27063DE1A87886400D21E9D /* spaceCat_down.png in Resources */,
 				D2C983C41A90B69E009013B8 /* tutorialButton.png in Resources */,
+				D2327B621AFA6B87002D56EC /* toStageSelectButton.png in Resources */,
 				D28B19151A8BA60500758A87 /* earth.png in Resources */,
 				D26A847F1A8F00F700904761 /* retryButton.png in Resources */,
 				D2C6F8C41A5FF3B10050552A /* spark.png in Resources */,
@@ -737,6 +773,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D2327B521AF866DB002D56EC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 2d60535bc8c1859611b7d1bc30a74d0cf51d5c27 f558b3e3da95b4b93482e68505db1c565487f5af45a5e84227e575877eb90960";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D2C6F8931A5FF2880050552A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -752,11 +804,12 @@
 				D22D481B1A93755700ACDC43 /* HBAbstractInterstitialAdViewController.swift in Sources */,
 				D22D48191A93688300ACDC43 /* HBAbstractBannerAdViewController.swift in Sources */,
 				D2C983D81A655DBB00EE60C6 /* HBSingleViewController.swift in Sources */,
-				D24033BA1A9644EE003F0ACB /* Constants.swift in Sources */,
+				D24033BA1A9644EE003F0ACB /* HBConstants.swift in Sources */,
 				D2671A561A85F33B007FFDBE /* NormalEnemy.swift in Sources */,
 				D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */,
 				D2C983C21A90B247009013B8 /* HBTutorialViewController.swift in Sources */,
-				D24CB2EE1AB3F2BD007FFADD /* Config.swift in Sources */,
+				D2327B591AFA5B97002D56EC /* HBStageConstants.swift in Sources */,
+				D24CB2EE1AB3F2BD007FFADD /* HBAdConstants.swift in Sources */,
 				D24CB2EC1AB2DF10007FFADD /* BestScoreManager.swift in Sources */,
 				D2C753901AC6AF6C0037961E /* HBHighSpeedPlayScene.swift in Sources */,
 				D2671A5A1A8612CE007FFDBE /* HBUtils.swift in Sources */,
@@ -883,6 +936,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				INFOPLIST_FILE = HitBackApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -905,6 +962,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				INFOPLIST_FILE = HitBackApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

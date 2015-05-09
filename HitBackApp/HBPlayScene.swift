@@ -102,19 +102,6 @@ class HBPlayScene: SKScene, SKPhysicsContactDelegate {
         static let LABEL_FONT_SIZE : CGFloat = 14.0
     }
     
-//    struct Config {
-//        static let maxLife : Int = 2
-//        static let timeInterval : Double = 3.0 // 何秒おきにスピードアップするか
-//        static let minNumOfEnemies : Int = 3
-//        static let maxNumOfEnemies : Int = 5
-//        static let scoreStep = 100
-//        static let speedUp_rate = 20
-//        static let emenyFrequency : Double = 4.3 // 何秒おきに敵が出現するかの初期値
-//        static let emenyFrequency_MAX : Double = 2.5 // 何秒おきに敵が出現するかの最速値
-//        static let changeEnemyFrequencySeconds = 0.2 // 敵が出現する頻度が何秒ずつ早くなっていくか
-//        static let enemyQuickenLevels = 3 // 何レベルおきに敵が出現する頻度が早くなるか
-//    }
-    
     enum ENEMY_TYPE : Int {
         case NORMAL = 0
         case QUICK = 1

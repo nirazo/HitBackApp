@@ -10,11 +10,14 @@ import Foundation
 import UIKit
 
 protocol HBStageCellDelegate {
-    func stageCellTapped()
+    func stageCellTapped(cell: HBStageCell)
 }
 
 class HBStageCell: UICollectionViewCell {
     var imageView : UIImageView!
+    var stage : GAME_STAGE?
+    var titleLabel : UILabel!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.clipsToBounds = true;
@@ -22,11 +25,23 @@ class HBStageCell: UICollectionViewCell {
         self.imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.imageView.contentMode = .ScaleAspectFit
         self.contentView.addSubview(self.imageView!)
-        let viewsDictionary = ["imageView" : imageView]
-        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[imageView]", options: .allZeros, metrics: nil, views: viewsDictionary))
-        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[imageView]", options: .allZeros, metrics: nil, views: viewsDictionary))
+        
+        var titleLabelHeight = frame.size.height / 3
+        self.titleLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height*2 / 3, width: frame.size.width, height: frame.size.height / 3))
+        self.titleLabel.textColor = UIColor.whiteColor()
+        self.titleLabel.textAlignment = NSTextAlignment.Center
+        self.titleLabel.adjustsFontSizeToFitWidth = true
+        self.contentView.addSubview(self.titleLabel)
+        
+        // let viewsDictionary = ["imageView" : imageView]
+//        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[imageView]", options: .allZeros, metrics: nil, views: viewsDictionary))
+//        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[imageView]", options: .allZeros, metrics: nil, views: viewsDictionary))
 
-        //self.setNeedsUpdateConstraints()
+        // self.setNeedsUpdateConstraints()
+    }
+    
+    override func layoutSubviews() {
+        self.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -42,6 +57,11 @@ class HBStageCell: UICollectionViewCell {
     func setImage(image: UIImage) {
         resetImage()
         self.imageView.image = image
+    }
+    
+    func setImageAndTitle() {
+        self.setImage(UIImage(named: stageThumbnailDict[self.stage!]!)!)
+        self.titleLabel.text = stageNameDict[self.stage!]
     }
     
     override func prepareForReuse() {

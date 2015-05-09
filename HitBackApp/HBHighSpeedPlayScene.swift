@@ -518,7 +518,7 @@ class HBHighSpeedPlayScene: HBPlayScene {
     
     func gameOver() {
         self.removeTouchAreaAndText()
-        self.bestScoreManager.updateBestScore(self.score)
+        self.bestScoreManager.updateBestScoreForStage(GAME_STAGE.HIGHSPEED, score: self.score)
         
         self.gameState = GAME_STATE.BEFORE_GAMEOVER
         // アニメーション消す
