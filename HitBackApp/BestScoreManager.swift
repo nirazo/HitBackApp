@@ -14,7 +14,7 @@ class BestScoreManager {
     var userDefault = NSUserDefaults.standardUserDefaults()
     
     func getBestScoreForStage(stage: GAME_STAGE) -> Int {
-        var key : String = userDefaultsKeyDict[stage]!
+        var key : String = bestScoreUserDefaultsKeyDict[stage]!
         
         var bestScore = userDefault.objectForKey(key) as! Int?
         if bestScore == nil {
@@ -27,7 +27,7 @@ class BestScoreManager {
     func updateBestScoreForStage(stage: GAME_STAGE, score: Int) {
         let oldBestScore = getBestScoreForStage(stage)
         if oldBestScore < score {
-            var key : String = userDefaultsKeyDict[stage]!
+            var key : String = bestScoreUserDefaultsKeyDict[stage]!
             userDefault.setObject(score, forKey:key)
             println("bestScore updated")
             reportScoreToGameCenterForStage(stage, value: score)

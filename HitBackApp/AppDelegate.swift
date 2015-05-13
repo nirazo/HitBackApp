@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.navVC?.setNavigationBarHidden(true, animated: false)
         self.window!.rootViewController = navVC
         self.window!.makeKeyAndVisible()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "nav_background"), forBarMetrics: UIBarMetrics.Default)
         return true
     }
     

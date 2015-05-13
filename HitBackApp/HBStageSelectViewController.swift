@@ -44,6 +44,21 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false
+        
+        // タイトルの設定
+        var titleImageView : UIImageView = UIImageView(image: UIImage(named: "stageSelectTitle"))
+        titleImageView.frame.size = CGSize(width: self.view.frame.size.width/2, height: self.navigationController!.navigationBar.frame.size.height)
+        var bgView : UIView = UIView(frame: titleImageView.frame)
+        bgView.backgroundColor = UIColor.clearColor()
+        bgView.addSubview(titleImageView)
+        self.navigationItem.titleView = bgView
+        
+        // 戻るボタンの設定
+        var backButton : UIButton = UIButton(frame: CGRectMake(0, 0, 70, 35))
+        backButton.setBackgroundImage(UIImage(named: "back"), forState: UIControlState.Normal)
+        backButton.addTarget(self, action: "backButtonTapped:", forControlEvents: .TouchUpInside)
+        var buttonItem : UIBarButtonItem = UIBarButtonItem(customView: backButton)
+        self.navigationItem.leftBarButtonItem = buttonItem
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,6 +66,11 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
         // Dispose of any resources that can be recreated.
     }
     
+    func backButtonTapped(sender : AnyObject?) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    //MARK: UICollectionViewDelegate methods
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return NUMOFSTAGES + 1
     }
@@ -76,7 +96,7 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.row == NUMOFSTAGES + 1) {
+        if (indexPath.row == NUMOFSTAGES) {
             return;
         }
         if (!ud.boolForKey("tutorialDisplayed")) {

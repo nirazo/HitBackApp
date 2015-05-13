@@ -60,7 +60,7 @@ class HBStageCell: UICollectionViewCell {
     }
     
     func setImageAndTitle() {
-        self.setImage(UIImage(named: stageThumbnailDict[self.stage!]!)!)
+        self.setImage(UIImage(named: stageThumbnailImageNameDict[self.stage!]!)!)
         self.titleLabel.text = stageNameDict[self.stage!]
     }
     

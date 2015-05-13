@@ -13,7 +13,6 @@
 		D2096CE11AFDF5730051B189 /* SocialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2096CE01AFDF5730051B189 /* SocialType.swift */; };
 		D2096CE31AFDFD150051B189 /* icon_180.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096CE21AFDFD150051B189 /* icon_180.png */; };
 		D2096CF11AFE12DF0051B189 /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096CF01AFE12DF0051B189 /* question.png */; };
-		D2096CF31AFE13470051B189 /* background_quick.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096CF21AFE13470051B189 /* background_quick.png */; };
 		D2096D071AFE41820051B189 /* ball_green_covered.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D051AFE41820051B189 /* ball_green_covered.png */; };
 		D2096D081AFE41820051B189 /* ball_green_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D061AFE41820051B189 /* ball_green_normal.png */; };
 		D2096D111AFE4AEC0051B189 /* spaceCat_red_bounce.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D0D1AFE4AEC0051B189 /* spaceCat_red_bounce.png */; };
@@ -24,6 +23,11 @@
 		D2096D1A1AFE4CC60051B189 /* spaceCat_down.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D161AFE4CC60051B189 /* spaceCat_down.png */; };
 		D2096D1B1AFE4CC60051B189 /* spaceCat_smile.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D171AFE4CC60051B189 /* spaceCat_smile.png */; };
 		D2096D1C1AFE4CC60051B189 /* spaceCat.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D181AFE4CC60051B189 /* spaceCat.png */; };
+		D2096D1E1AFE50180051B189 /* background_quick.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D1D1AFE50180051B189 /* background_quick.png */; };
+		D2096D201AFE51810051B189 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2096D1F1AFE51810051B189 /* UIColorExtension.swift */; };
+		D2096D221AFFAD5C0051B189 /* stageSelectTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D211AFFAD5C0051B189 /* stageSelectTitle.png */; };
+		D2096D261AFFB7B60051B189 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D251AFFB7B60051B189 /* back.png */; };
+		D2096D301AFFC0970051B189 /* nav_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096D2F1AFFC0970051B189 /* nav_background.png */; };
 		D227FBA61A97922A00CBDFE2 /* tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA41A97922A00CBDFE2 /* tutorial3.png */; };
 		D227FBA71A97922A00CBDFE2 /* tutorial4.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA51A97922A00CBDFE2 /* tutorial4.png */; };
 		D227FBAA1A97934700CBDFE2 /* startText1.png in Resources */ = {isa = PBXBuildFile; fileRef = D227FBA81A97934700CBDFE2 /* startText1.png */; };
@@ -122,7 +126,6 @@
 		D2096CE01AFDF5730051B189 /* SocialType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialType.swift; sourceTree = "<group>"; };
 		D2096CE21AFDFD150051B189 /* icon_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_180.png; sourceTree = "<group>"; };
 		D2096CF01AFE12DF0051B189 /* question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question.png; sourceTree = "<group>"; };
-		D2096CF21AFE13470051B189 /* background_quick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_quick.png; sourceTree = "<group>"; };
 		D2096D051AFE41820051B189 /* ball_green_covered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_green_covered.png; sourceTree = "<group>"; };
 		D2096D061AFE41820051B189 /* ball_green_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_green_normal.png; sourceTree = "<group>"; };
 		D2096D0D1AFE4AEC0051B189 /* spaceCat_red_bounce.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceCat_red_bounce.png; sourceTree = "<group>"; };
@@ -133,6 +136,11 @@
 		D2096D161AFE4CC60051B189 /* spaceCat_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceCat_down.png; sourceTree = "<group>"; };
 		D2096D171AFE4CC60051B189 /* spaceCat_smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceCat_smile.png; sourceTree = "<group>"; };
 		D2096D181AFE4CC60051B189 /* spaceCat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceCat.png; sourceTree = "<group>"; };
+		D2096D1D1AFE50180051B189 /* background_quick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_quick.png; sourceTree = "<group>"; };
+		D2096D1F1AFE51810051B189 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		D2096D211AFFAD5C0051B189 /* stageSelectTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stageSelectTitle.png; sourceTree = "<group>"; };
+		D2096D251AFFB7B60051B189 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		D2096D2F1AFFC0970051B189 /* nav_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_background.png; sourceTree = "<group>"; };
 		D227FBA41A97922A00CBDFE2 /* tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial3.png; sourceTree = "<group>"; };
 		D227FBA51A97922A00CBDFE2 /* tutorial4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial4.png; sourceTree = "<group>"; };
 		D227FBA81A97934700CBDFE2 /* startText1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startText1.png; sourceTree = "<group>"; };
@@ -309,6 +317,16 @@
 			name = Ball;
 			sourceTree = "<group>";
 		};
+		D2096D2A1AFFBF4B0051B189 /* Nav */ = {
+			isa = PBXGroup;
+			children = (
+				D2096D2F1AFFC0970051B189 /* nav_background.png */,
+				D2096D251AFFB7B60051B189 /* back.png */,
+				D2096D211AFFAD5C0051B189 /* stageSelectTitle.png */,
+			);
+			name = Nav;
+			sourceTree = "<group>";
+		};
 		D22D48151A9367BB00ACDC43 /* Advertisement */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				D2671A611A867125007FFDBE /* UIImage+Utils.swift */,
+				D2096D1F1AFE51810051B189 /* UIColorExtension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -558,6 +577,7 @@
 		D29D9EF61A7CC7260055D55D /* img */ = {
 			isa = PBXGroup;
 			children = (
+				D2096D2A1AFFBF4B0051B189 /* Nav */,
 				D2096CF41AFE16DF0051B189 /* Ball */,
 				D2096CDC1AFDE2B80051B189 /* SNS */,
 				D2C983B01A90B149009013B8 /* Tutorial */,
@@ -566,7 +586,7 @@
 				D26A847C1A8F000D00904761 /* enemy */,
 				D26A84751A8EFD3D00904761 /* UI */,
 				D26A84611A8BA81D00904761 /* background.png */,
-				D2096CF21AFE13470051B189 /* background_quick.png */,
+				D2096D1D1AFE50180051B189 /* background_quick.png */,
 				D28B19141A8BA60500758A87 /* earth.png */,
 				D2AB0ED91A8B9DDE00BA1A27 /* retry.png */,
 				D2AB0ED51A8B9DCE00BA1A27 /* icon.png */,
@@ -781,6 +801,7 @@
 			files = (
 				D2096D131AFE4AEC0051B189 /* spaceCat_red_smile.png in Resources */,
 				D2C983CC1A90EFED009013B8 /* tutorial2.png in Resources */,
+				D2096D261AFFB7B60051B189 /* back.png in Resources */,
 				D2096D1B1AFE4CC60051B189 /* spaceCat_smile.png in Resources */,
 				D26A84661A8BA92900904761 /* quickEnemy.png in Resources */,
 				D2096D1A1AFE4CC60051B189 /* spaceCat_down.png in Resources */,
@@ -799,6 +820,7 @@
 				D2C6F8A41A5FF2880050552A /* Images.xcassets in Resources */,
 				D2C983A91A8F9828009013B8 /* scoreLabel_gameScene.png in Resources */,
 				D2AB0EDF1A8B9DDE00BA1A27 /* retry.png in Resources */,
+				D2096D301AFFC0970051B189 /* nav_background.png in Resources */,
 				D2096CF11AFE12DF0051B189 /* question.png in Resources */,
 				D29D9EFE1A7CE1190055D55D /* ball_normal.png in Resources */,
 				D227FBAA1A97934700CBDFE2 /* startText1.png in Resources */,
@@ -813,7 +835,6 @@
 				D2C6F8C51A5FF3B10050552A /* spark.sks in Resources */,
 				D26A84871A8F0D9A00904761 /* comboLabel.png in Resources */,
 				D2096D121AFE4AEC0051B189 /* spaceCat_red_down.png in Resources */,
-				D2096CF31AFE13470051B189 /* background_quick.png in Resources */,
 				D2096CE31AFDFD150051B189 /* icon_180.png in Resources */,
 				D2096D1C1AFE4CC60051B189 /* spaceCat.png in Resources */,
 				D227FBA71A97922A00CBDFE2 /* tutorial4.png in Resources */,
@@ -823,8 +844,10 @@
 				D2096D111AFE4AEC0051B189 /* spaceCat_red_bounce.png in Resources */,
 				D2C983C41A90B69E009013B8 /* tutorialButton.png in Resources */,
 				D2327B621AFA6B87002D56EC /* toStageSelectButton.png in Resources */,
+				D2096D221AFFAD5C0051B189 /* stageSelectTitle.png in Resources */,
 				D28B19151A8BA60500758A87 /* earth.png in Resources */,
 				D26A847F1A8F00F700904761 /* retryButton.png in Resources */,
+				D2096D1E1AFE50180051B189 /* background_quick.png in Resources */,
 				D2C6F8C41A5FF3B10050552A /* spark.png in Resources */,
 				D294B3E51A9996080053439F /* team_logo.png in Resources */,
 				D26A84791A8F000200904761 /* rankingButton.png in Resources */,
@@ -876,6 +899,7 @@
 				D2C6F89D1A5FF2880050552A /* AppDelegate.swift in Sources */,
 				D2C983C21A90B247009013B8 /* HBTutorialViewController.swift in Sources */,
 				D2327B591AFA5B97002D56EC /* HBStageConstants.swift in Sources */,
+				D2096D201AFE51810051B189 /* UIColorExtension.swift in Sources */,
 				D24CB2EE1AB3F2BD007FFADD /* HBAdConstants.swift in Sources */,
 				D2096CE11AFDF5730051B189 /* SocialType.swift in Sources */,
 				D24CB2EC1AB2DF10007FFADD /* BestScoreManager.swift in Sources */,

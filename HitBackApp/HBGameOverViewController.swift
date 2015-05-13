@@ -23,10 +23,10 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     var score : Int!
     var bannerView: GADBannerView?
     var delegate : HBGameOverViewControllerDelegate?
-    var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png"))
+    var backgroundView : UIImageView!
     var earthView : UIImageView = UIImageView(image: UIImage(named: "earth.png"))
     var gameOverLabelImageView : UIImageView = UIImageView(image: UIImage(named: "gameOverLabel.png"))
-    var catView : UIImageView = UIImageView(image: UIImage(named: "spaceCat_down.png"))
+    var catView : UIImageView!
     var scoreLabel : UILabel?
     var bestScoreLabel : UILabel?
     var buttonToRetry : UIButton?
@@ -83,15 +83,18 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
             super.showAds(isWithStatusBar: true)
         }
         // 背景
+        self.backgroundView = UIImageView(image: UIImage(named: stageBackgroundImageNameDict[self.stage]!))
         self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.view.addSubview(self.backgroundView)
         self.view.sendSubviewToBack(self.backgroundView)
         
         // 地球
-        self.earthView.frame.size = CGSize(width: self.view.frame.size.width * 1.2, height: self.view.frame.size.width)
-        self.earthView.center = CGPoint(x: CGRectGetMidX(self.view.frame), y: self.view.frame.size.height)
-        self.view.addSubview(self.earthView)
-
+        if (self.stage == GAME_STAGE.NORMAL) {
+            self.earthView.frame.size = CGSize(width: self.view.frame.size.width * 1.2, height: self.view.frame.size.width)
+            self.earthView.center = CGPoint(x: CGRectGetMidX(self.view.frame), y: self.view.frame.size.height)
+            self.view.addSubview(self.earthView)
+        }
+        
         // ゲームオーバーの文字
         var titleMarginY : CGFloat
         if (IS_IPHONE_4_OR_LESS) {
@@ -133,7 +136,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         
         // ベストスコア表示
         bestScoreLabel = UILabel(frame: CGRectMake(0, 0, self.view.frame.size.width, 30))
-        let bestScore = ud.integerForKey(userDefaultsKeyDict[stage]!)
+        let bestScore = ud.integerForKey(bestScoreUserDefaultsKeyDict[self.stage]!)
         bestScoreLabel!.text = String(bestScore)
         bestScoreLabel!.font = UIFont(name: "Helvetica", size: Label.LABEL_FONT_SIZE)
         bestScoreLabel!.textColor = UIColor.whiteColor()
@@ -143,6 +146,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
 
         
         // ねこ
+        catView = UIImageView(image: UIImage(named: spaceCatDownImageNameDict[self.stage]!))
         if (IS_IPHONE_4_OR_LESS) {
             self.catView.frame.size = CGSize(width: 100, height: 85.6)
         } else if (IS_IPHONE_5) {

@@ -46,7 +46,7 @@ class HBHighSpeedPlayScene: HBPlayScene {
         
         self.paddleBaseY = self.frame.height / CGFloat(Paddle.PADDLE_BASE_Y_DEVIDE)
         
-        self.movableAreaNode = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: self.frame.width, height: CGFloat(Paddle.PADDLE_RADIUS * 3)))
+        self.movableAreaNode = SKSpriteNode(color: UIColor.rgb(r: 150, g: 150, b: 150, alpha: 1.0), size: CGSize(width: self.frame.width, height: CGFloat(Paddle.PADDLE_RADIUS * 3)))
         
         self.movableAreaNode!.position = CGPoint(x: self.frame.width / 2, y: self.paddleBaseY! + CGFloat(Paddle.PADDLE_RADIUS / 2))
         self.movableAreaNode!.alpha = 0.17
