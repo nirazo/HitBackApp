@@ -31,7 +31,7 @@ extension UIImage {
         let radian : CGFloat  = degree * CGFloat(Float.pi) / CGFloat(180)  // 45°回転させたい場合
         context.rotate(by: radian)
         
-        context.draw(UIGraphicsGetCurrentContext() as! CGImage, in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height), byTiling: (self.cgImage != nil))
+        context.draw(self.cgImage!, in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height), byTiling: (self.cgImage != nil))
         
         let rotatedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext();

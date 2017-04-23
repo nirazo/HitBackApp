@@ -14,15 +14,16 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var navVC: UINavigationController?
+    //var navVC: UINavigationController?
     
-    private func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         Fabric.with([Crashlytics()])
         let viewController = HBTitleViewController()
-        self.navVC = UINavigationController(rootViewController: viewController)
-        self.navVC?.setNavigationBarHidden(true, animated: false)
-        self.window!.rootViewController = navVC
+        let navVC = UINavigationController(rootViewController: viewController)
+        //self.navVC = UINavigationController(rootViewController: viewController)
+        navVC.setNavigationBarHidden(true, animated: false)
+        self.window?.rootViewController = navVC
         self.window!.makeKeyAndVisible()
         UINavigationBar.appearance().setBackgroundImage(UIImage(named: "nav_background"), for: .default)
         return true

@@ -17,8 +17,6 @@ class HBPlaySceneFactory {
             return HBNormalPlaySceneFactory().createGameScene(size: size)
         case GAME_STAGE.HIGHSPEED:
             return HBHighSpeedPlaySceneFactory().createGameScene(size: size)
-        default:
-            return HBNormalPlaySceneFactory().createGameScene(size: size)
         }
     }
     
