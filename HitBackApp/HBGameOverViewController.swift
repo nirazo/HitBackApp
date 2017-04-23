@@ -20,22 +20,22 @@ protocol HBGameOverViewControllerDelegate {
 }
 
 class HBGameOverViewController: HBAbstractInterstitialAdViewController {
-    var score : Int!
+    var score = 0
     var bannerView: GADBannerView?
     var delegate : HBGameOverViewControllerDelegate?
-    var backgroundView : UIImageView!
-    var earthView : UIImageView = UIImageView(image: UIImage(named: "earth.png"))
-    var gameOverLabelImageView : UIImageView = UIImageView(image: UIImage(named: "gameOverLabel.png"))
-    var catView : UIImageView!
-    var scoreLabel : UILabel?
-    var bestScoreLabel : UILabel?
-    var buttonToRetry : UIButton?
-    var buttonToTitle : UIButton?
-    var buttonToStageSelect : UIButton?
-    var buttonToFacebook : UIButton?
-    var buttonToTwitter : UIButton?
-    let ud = NSUserDefaults.standardUserDefaults()
-    var stage : GAME_STAGE!
+    var backgroundView = UIImageView()
+    var earthView = UIImageView(image: UIImage(named: "earth.png"))
+    var gameOverLabelImageView = UIImageView(image: UIImage(named: "gameOverLabel.png"))
+    var catView = UIImageView()
+    var scoreLabel = UILabel()
+    var bestScoreLabel = UILabel()
+    var buttonToRetry = UIButton()
+    var buttonToTitle = UIButton()
+    var buttonToStageSelect = UIButton()
+    var buttonToFacebook = UIButton()
+    var buttonToTwitter = UIButton()
+    let ud = UserDefaults.standard
+    var stage : GAME_STAGE
     
     let TITLE_MARGIN_Y_IPHONE6P : CGFloat = 60.0
     let TITLE_MARGIN_Y_IPHONE5AND6 : CGFloat = 30.0
@@ -50,15 +50,10 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         static let LABEL_FONT_SIZE : CGFloat = 20.0
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
     init(score : Int, stage : GAME_STAGE) {
-        super.init(nibName: nil, bundle: nil)
-        println("gameOver init!!")
         self.score = score
         self.stage = stage
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -66,13 +61,13 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     }
     
     override func loadView() {
-        self.view = UIView(frame: UIScreen.mainScreen().bounds)
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view = UIView(frame: UIScreen.main.bounds)
+        self.view.backgroundColor = .black
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewDidLoad() {
@@ -86,12 +81,12 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         self.backgroundView = UIImageView(image: UIImage(named: stageBackgroundImageNameDict[self.stage]!))
         self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.view.addSubview(self.backgroundView)
-        self.view.sendSubviewToBack(self.backgroundView)
+        self.view.sendSubview(toBack: self.backgroundView)
         
         // 地球
         if (self.stage == GAME_STAGE.NORMAL) {
             self.earthView.frame.size = CGSize(width: self.view.frame.size.width * 1.2, height: self.view.frame.size.width)
-            self.earthView.center = CGPoint(x: CGRectGetMidX(self.view.frame), y: self.view.frame.size.height)
+            self.earthView.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.size.height)
             self.view.addSubview(self.earthView)
         }
         
@@ -105,44 +100,44 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
             titleMarginY = TITLE_MARGIN_Y_IPHONE6P
         }
         
-        var gameOverWidth = self.view.frame.size.width - 15
-        var gameOverHeight = gameOverWidth / 7
+        let gameOverWidth = self.view.frame.size.width - 15
+        let gameOverHeight = gameOverWidth / 7
         self.gameOverLabelImageView.frame.size = CGSize(width: gameOverWidth, height: gameOverHeight)
-        self.gameOverLabelImageView.center = CGPointMake(CGRectGetMidX(self.view.frame), self.gameOverLabelImageView.frame.size.height / 2 + titleMarginY)
+        self.gameOverLabelImageView.center = CGPoint(x: self.view.frame.midX, y: self.gameOverLabelImageView.frame.size.height / 2 + titleMarginY)
         self.view.addSubview(self.gameOverLabelImageView)
         
         
         // スコアのテキスト
-        var scoreText : UIImageView = UIImageView(image: UIImage(named: "scoreLabel_gameOver.png"))
+        let scoreText : UIImageView = UIImageView(image: UIImage(named: "scoreLabel_gameOver.png"))
         scoreText.frame.size = CGSize(width: 120, height: 37.747)
-        scoreText.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(self.gameOverLabelImageView.frame) + Label.LABEL_MARGIN + scoreText.frame.height / 2)
+        scoreText.center = CGPoint(x: self.view.frame.midX, y: self.gameOverLabelImageView.frame.maxY + Label.LABEL_MARGIN + scoreText.frame.height / 2)
         self.view.addSubview(scoreText)
         
         // スコア表示
-        scoreLabel = UILabel(frame: CGRectMake(0, 0, self.view.frame.size.width, 30))
-        scoreLabel!.text = String(self.score)
-        scoreLabel!.font = UIFont(name: "Helvetica", size: Label.LABEL_FONT_SIZE)
-        scoreLabel!.textAlignment = .Center
-        scoreLabel!.textColor = UIColor.whiteColor()
-        scoreLabel!.center = CGPointMake(CGRectGetMidX(self.view.frame), scoreText.center.y + Label.LABEL_MARGIN + scoreLabel!.frame.size.height / 2)
-        self.view.addSubview(scoreLabel!)
+        scoreLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 30))
+        scoreLabel.text = String(self.score)
+        scoreLabel.font = UIFont(name: "Helvetica", size: Label.LABEL_FONT_SIZE)
+        scoreLabel.textAlignment = .center
+        scoreLabel.textColor = .white
+        scoreLabel.center = CGPoint(x: self.view.frame.midX, y: scoreText.center.y + Label.LABEL_MARGIN + scoreLabel.frame.size.height / 2)
+        self.view.addSubview(scoreLabel)
         
         
         // ベストスコアのテキスト
-        var bestScoreText : UIImageView = UIImageView(image: UIImage(named: "bestScoreLabel.png"))
+        let bestScoreText : UIImageView = UIImageView(image: UIImage(named: "bestScoreLabel.png"))
         bestScoreText.frame.size = CGSize(width: 120, height: 31.063)
-        bestScoreText.center = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMaxY(scoreLabel!.frame) + Label.LABEL_MARGIN + bestScoreText.frame.height / 2)
+        bestScoreText.center = CGPoint(x: self.view.frame.midX, y: scoreLabel.frame.maxY + Label.LABEL_MARGIN + bestScoreText.frame.height / 2)
         self.view.addSubview(bestScoreText)
         
         // ベストスコア表示
-        bestScoreLabel = UILabel(frame: CGRectMake(0, 0, self.view.frame.size.width, 30))
-        let bestScore = ud.integerForKey(bestScoreUserDefaultsKeyDict[self.stage]!)
-        bestScoreLabel!.text = String(bestScore)
-        bestScoreLabel!.font = UIFont(name: "Helvetica", size: Label.LABEL_FONT_SIZE)
-        bestScoreLabel!.textColor = UIColor.whiteColor()
-        bestScoreLabel!.textAlignment = .Center
-        bestScoreLabel!.center = CGPointMake(CGRectGetMidX(self.view.frame), bestScoreText.center.y + Label.LABEL_MARGIN + bestScoreLabel!.frame.size.height / 2)
-        self.view.addSubview(bestScoreLabel!)
+        bestScoreLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 30))
+        let bestScore = ud.integer(forKey: bestScoreUserDefaultsKeyDict[self.stage]!)
+        bestScoreLabel.text = String(bestScore)
+        bestScoreLabel.font = UIFont(name: "Helvetica", size: Label.LABEL_FONT_SIZE)
+        bestScoreLabel.textColor = .white
+        bestScoreLabel.textAlignment = .center
+        bestScoreLabel.center = CGPoint(x: self.view.frame.midX, y: bestScoreText.center.y + Label.LABEL_MARGIN + bestScoreLabel.frame.size.height / 2)
+        self.view.addSubview(bestScoreLabel)
 
         
         // ねこ
@@ -155,7 +150,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
             self.catView.frame.size = CGSize(width: 120, height: 102.8)
         }
         
-        self.catView.center = CGPoint(x:CGRectGetMidX(self.view.frame) , y: CGRectGetMaxY(bestScoreLabel!.frame) + Label.LABEL_MARGIN + catView.frame.size.height / 2)
+        self.catView.center = CGPoint(x: self.view.frame.midX , y: bestScoreLabel.frame.maxY + Label.LABEL_MARGIN + catView.frame.size.height / 2)
         self.view.addSubview(self.catView)
         
         // ここから下を基準に配置するよ
@@ -175,30 +170,30 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         
         // ステージセレクト画面へ飛ぶボタン
         buttonToStageSelect = UIButton()
-        buttonToStageSelect!.bounds.size = CGSize(width: 120, height: 40)
-        buttonToStageSelect!.center = CGPointMake(self.view.frame.width/2, buttonsBottomBaseY - buttonsMarginY - buttonToStageSelect!.frame.size.height / 2)
-        buttonToStageSelect!.setBackgroundImage(UIImage(named: "toStageSelectButton.png"), forState: .Normal)
-        buttonToStageSelect!.addTarget(self, action: "toStageSelectTapped:", forControlEvents: .TouchUpInside)
-        buttonToStageSelect!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.view.addSubview(buttonToStageSelect!)
+        buttonToStageSelect.bounds.size = CGSize(width: 120, height: 40)
+        buttonToStageSelect.center = CGPoint(x: self.view.frame.width/2, y: buttonsBottomBaseY - buttonsMarginY - buttonToStageSelect.frame.size.height / 2)
+        buttonToStageSelect.setBackgroundImage(UIImage(named: "toStageSelectButton.png"), for: .normal)
+        buttonToStageSelect.addTarget(self, action: #selector(toStageSelectTapped(sender:)), for: .touchUpInside)
+        buttonToStageSelect.setTitleColor(.white, for: .normal)
+        self.view.addSubview(buttonToStageSelect)
         
         // タイトルへ戻るボタン
         buttonToTitle = UIButton()
-        buttonToTitle?.setBackgroundImage(UIImage(named: "toTitleBUtton.png"), forState: .Normal)
-        buttonToTitle!.bounds.size = CGSize(width: 120, height: 40)
-        buttonToTitle!.center = CGPointMake(self.view.frame.width / 4, CGRectGetMinY(buttonToStageSelect!.frame) - buttonToTitle!.frame.size.height/2 - buttonsMarginY)
-        buttonToTitle!.setBackgroundImage(UIImage(named: "toTitleButton.png"), forState: .Normal)
-        buttonToTitle!.addTarget(self, action: "toTitleTapped:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(buttonToTitle!)
+        buttonToTitle.setBackgroundImage(UIImage(named: "toTitleBUtton.png"), for: .normal)
+        buttonToTitle.bounds.size = CGSize(width: 120, height: 40)
+        buttonToTitle.center = CGPoint(x: self.view.frame.width / 4, y: buttonToStageSelect.frame.minY - buttonToTitle.frame.size.height/2 - buttonsMarginY)
+        buttonToTitle.setBackgroundImage(UIImage(named: "toTitleButton.png"), for: .normal)
+        buttonToTitle.addTarget(self, action: #selector(toTitleTapped(sender:)), for: .touchUpInside)
+        self.view.addSubview(buttonToTitle)
         
         // リトライボタン
         buttonToRetry = UIButton()
-        buttonToRetry!.bounds.size = CGSize(width: 120, height: 40)
-        buttonToRetry!.center = CGPointMake(self.view.frame.width*3/4, buttonToTitle!.center.y)
-        buttonToRetry!.setBackgroundImage(UIImage(named: "retryButton.png"), forState: .Normal)
-        buttonToRetry!.addTarget(self, action: "toRetryTapped:", forControlEvents: .TouchUpInside)
-        buttonToRetry!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.view.addSubview(buttonToRetry!)
+        buttonToRetry.bounds.size = CGSize(width: 120, height: 40)
+        buttonToRetry.center = CGPoint(x: self.view.frame.width*3/4, y: buttonToTitle.center.y)
+        buttonToRetry.setBackgroundImage(UIImage(named: "retryButton.png"), for: .normal)
+        buttonToRetry.addTarget(self, action: #selector(toRetryTapped(sender:)), for: .touchUpInside)
+        buttonToRetry.setTitleColor(.white, for: .normal)
+        self.view.addSubview(buttonToRetry)
         
         // SNSボタンサイズ
         var snsButtonSize : CGFloat
@@ -210,30 +205,30 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         
         // facebookボタン
         buttonToFacebook = UIButton()
-        buttonToFacebook!.bounds.size = CGSize(width: snsButtonSize, height: snsButtonSize)
-        buttonToFacebook!.center = CGPointMake(self.view.frame.width / 4, CGRectGetMinY(buttonToTitle!.frame) - buttonToFacebook!.frame.size.height/2 - buttonsMarginY)
-        buttonToFacebook!.setBackgroundImage(UIImage(named: "facebook-128.png"), forState: .Normal)
-        buttonToFacebook!.addTarget(self, action: "toFacebookTapped:", forControlEvents: .TouchUpInside)
-        buttonToFacebook!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.view.addSubview(buttonToFacebook!)
+        buttonToFacebook.bounds.size = CGSize(width: snsButtonSize, height: snsButtonSize)
+        buttonToFacebook.center = CGPoint(x: self.view.frame.width / 4, y: buttonToTitle.frame.minY - buttonToFacebook.frame.size.height/2 - buttonsMarginY)
+        buttonToFacebook.setBackgroundImage(UIImage(named: "facebook-128.png"), for: .normal)
+        buttonToFacebook.addTarget(self, action: #selector(toFacebookTapped(sender:)), for: .touchUpInside)
+        buttonToFacebook.setTitleColor(.white, for: .normal)
+        self.view.addSubview(buttonToFacebook)
         
         // twitterボタン
         buttonToTwitter = UIButton()
-        buttonToTwitter!.bounds.size = CGSize(width: snsButtonSize, height: snsButtonSize)
-        buttonToTwitter!.center = CGPointMake(self.view.frame.width*3/4, buttonToFacebook!.center.y)
-        buttonToTwitter!.setBackgroundImage(UIImage(named: "twitter-128.png"), forState: .Normal)
-        buttonToTwitter!.addTarget(self, action: "toTwitterTapped:", forControlEvents: .TouchUpInside)
-        buttonToTwitter!.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.view.addSubview(buttonToTwitter!)
+        buttonToTwitter.bounds.size = CGSize(width: snsButtonSize, height: snsButtonSize)
+        buttonToTwitter.center = CGPoint(x: self.view.frame.width*3/4, y: buttonToFacebook.center.y)
+        buttonToTwitter.setBackgroundImage(UIImage(named: "twitter-128.png"), for: .normal)
+        buttonToTwitter.addTarget(self, action: #selector(toTwitterTapped(sender:)), for: .touchUpInside)
+        buttonToTwitter.setTitleColor(UIColor.white, for: .normal)
+        self.view.addSubview(buttonToTwitter)
         
         
         if (self.bannerViewFooter != nil) {
-            self.view.bringSubviewToFront(self.bannerViewFooter!)
+            self.view.bringSubview(toFront: self.bannerViewFooter!)
         }
         super.showInterstitial()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         if self.bannerView != nil {
             self.bannerView?.removeFromSuperview()
             self.bannerView = nil
@@ -245,64 +240,66 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return true
     }
     
     //MARK: - Button selected methods
     func toTitleTapped(sender : AnyObject?) {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func toRetryTapped(sender : AnyObject?) {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func toStageSelectTapped(sender : AnyObject?) {
-        var count : NSInteger = self.navigationController!.viewControllers.count - 3;
-        var vc : HBStageSelectViewController = self.navigationController!.viewControllers[count] as! HBStageSelectViewController;
+        let count : NSInteger = self.navigationController!.viewControllers.count - 3;
+        let vc : HBStageSelectViewController = self.navigationController!.viewControllers[count] as! HBStageSelectViewController;
         self.navigationController?.popToViewController(vc, animated: true)
     }
     
     func toFacebookTapped(sender : AnyObject?) {
-        postToSocial(self.score, stage: self.stage, type: SocialType.FACEBOOK)
+        postToSocial(score: self.score, stage: self.stage, type: SocialType.FACEBOOK)
     }
     
     func toTwitterTapped(sender : AnyObject?) {
-        postToSocial(self.score, stage: self.stage, type: SocialType.TWITTER)
+        postToSocial(score: self.score, stage: self.stage, type: SocialType.TWITTER)
     }
     
     //MARK: - SNS
     func postToSocial(score: Int, stage: GAME_STAGE, type: SocialType) {
         if type == SocialType.TWITTER {
-            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
-                var tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-                tweetSheet.setInitialText("スコア: "
+            if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
+                let tweetSheet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+                guard let ts = tweetSheet else { return }
+                ts.setInitialText("スコア: "
                     + String(score)
                     + "\n守れ！宇宙ねこ: "
                     + stageNameDict[stage]! + "ステージ\n")
-                tweetSheet.addURL(NSURL(string: "https://itunes.apple.com/app/id963696838?l=ja"))
-                tweetSheet.addImage(UIImage(named: "icon_180"))
-                self.presentViewController(tweetSheet, animated: true, completion: nil)
+                ts.add(URL(string: "https://itunes.apple.com/app/id963696838?l=ja"))
+                ts.add(UIImage(named: "icon_180"))
+                self.present(ts, animated: true, completion: nil)
             } else {
-                println("tweet error")
-                Alert().showAlert(self, title: "Tweetエラー",
+                print("tweet error")
+                Alert().showAlert(viewController: self, title: "Tweetエラー",
                     buttonTitle: "OK",
                     message: "OSの設定画面からtwitterにログインしてください。", tag: 0)
             }
         } else if type == SocialType.FACEBOOK {
-            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
-                var facebookSheet = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-                facebookSheet.setInitialText("スコア: "
+            if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
+                let facebookSheet = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                guard let fs = facebookSheet else { return }
+                fs.setInitialText("スコア: "
                     + String(score)
                     + "\n守れ！宇宙ねこ: "
                     + stageNameDict[stage]! + "ステージ\n")
-                facebookSheet.addURL(NSURL(string: "https://itunes.apple.com/app/id963696838?l=ja"))
-                facebookSheet.addImage(UIImage(named: "icon_180"))
-                self.presentViewController(facebookSheet, animated: true, completion: nil)
+                fs.add(URL(string: "https://itunes.apple.com/app/id963696838?l=ja"))
+                fs.add(UIImage(named: "icon_180"))
+                self.present(fs, animated: true, completion: nil)
             } else {
-                println("facebook post error")
-                Alert().showAlert(self, title: "Facebook投稿エラー",
+                print("facebook post error")
+                Alert().showAlert(viewController: self, title: "Facebook投稿エラー",
                     buttonTitle: "OK",
                     message: "OSの設定画面からFacebookにログインしてください。", tag: 0)
                 

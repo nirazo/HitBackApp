@@ -11,51 +11,50 @@ import GameKit
 
 class BestScoreManager {
     
-    var userDefault = NSUserDefaults.standardUserDefaults()
+    var userDefault = UserDefaults.standard
     
     func getBestScoreForStage(stage: GAME_STAGE) -> Int {
-        var key : String = bestScoreUserDefaultsKeyDict[stage]!
+        let key : String = bestScoreUserDefaultsKeyDict[stage]!
         
-        var bestScore = userDefault.objectForKey(key) as! Int?
+        var bestScore = userDefault.object(forKey: key) as! Int?
         if bestScore == nil {
-            userDefault.setObject(0, forKey:key)
+            userDefault.set(0, forKey:key)
             bestScore = 0
         }
         return bestScore!
     }
     
     func updateBestScoreForStage(stage: GAME_STAGE, score: Int) {
-        let oldBestScore = getBestScoreForStage(stage)
+        let oldBestScore = getBestScoreForStage(stage: stage)
         if oldBestScore < score {
-            var key : String = bestScoreUserDefaultsKeyDict[stage]!
-            userDefault.setObject(score, forKey:key)
-            println("bestScore updated")
-            reportScoreToGameCenterForStage(stage, value: score)
+            let key : String = bestScoreUserDefaultsKeyDict[stage]!
+            userDefault.set(score, forKey:key)
+            reportScoreToGameCenterForStage(stage: stage, value: score)
         }
     }
     
-    private func reportScoreToGameCenterForStage(stage:GAME_STAGE, value:Int){
-        var score:GKScore = GKScore()
-        var id = leaderBoardIDDict[stage]
+    private func reportScoreToGameCenterForStage(stage: GAME_STAGE, value: Int){
+        let score = GKScore()
+        let id = leaderBoardIDDict[stage] ?? ""
         score.value = Int64(value)
         score.leaderboardIdentifier = id
-        var scoreArr:[GKScore] = [score]
-        GKScore.reportScores(scoreArr, withCompletionHandler:{(error:NSError!) -> Void in
+        let scoreArr = [score]
+        GKScore.report(scoreArr, withCompletionHandler:{(error:NSError!) -> Void in
             if( (error != nil)){
-                println("reportScore NG \n\(score)")
+                print("reportScore NG \n\(score)")
             }else{
-                println("reportScore OK \n\(score)")
+                print("reportScore OK \n\(score)")
             }
-        })
+        } as? (Error?) -> Void)
     }
     
     func resetBestScore() {
-        userDefault.setObject(0, forKey:BESTSCORE_KEY_NORMAL)
+        userDefault.set(0, forKey:BESTSCORE_KEY_NORMAL)
     }
     
     func syncBestScore() {
         for stage in GAME_STAGE.allValues {
-            reportScoreToGameCenterForStage(stage, value: getBestScoreForStage(stage))
+            reportScoreToGameCenterForStage(stage: stage, value: getBestScoreForStage(stage: stage))
         }
     }
 }

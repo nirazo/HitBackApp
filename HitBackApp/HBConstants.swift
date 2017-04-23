@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 Kenzo. All rights reserved.
 //
 
-let IS_IPHONE = UIDevice.currentDevice().userInterfaceIdiom == .Phone
+let IS_IPHONE = UIDevice.current.userInterfaceIdiom == .phone
 
-let IS_IPAD = UIDevice.currentDevice().userInterfaceIdiom == .Pad
-let IS_RETINA = UIScreen.mainScreen().scale >= 2.0
+let IS_IPAD = UIDevice.current.userInterfaceIdiom == .pad
+let IS_RETINA = UIScreen.main.scale >= 2.0
 
-let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
-let SCREEN_HEIGHT = UIScreen.mainScreen().bounds.size.height
+let SCREEN_WIDTH = UIScreen.main.bounds.size.width
+let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
 
 let SCREEN_MAX_LENGTH: CGFloat = max(SCREEN_WIDTH, SCREEN_HEIGHT)
 let SCREEN_MIN_LENGTH: CGFloat = min(SCREEN_WIDTH, SCREEN_HEIGHT)

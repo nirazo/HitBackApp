@@ -22,26 +22,20 @@ class HBStageCell: UICollectionViewCell {
         super.init(frame: frame)
         self.clipsToBounds = true;
         self.imageView = UIImageView(frame: frame)
-        self.imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.imageView.contentMode = .ScaleAspectFit
+        self.imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.imageView.contentMode = .scaleAspectFit
         self.contentView.addSubview(self.imageView!)
         
-        var titleLabelHeight = frame.size.height / 3
+        _ = frame.size.height / 3
         self.titleLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height*2 / 3, width: frame.size.width, height: frame.size.height / 3))
-        self.titleLabel.textColor = UIColor.whiteColor()
-        self.titleLabel.textAlignment = NSTextAlignment.Center
+        self.titleLabel.textColor = .white
+        self.titleLabel.textAlignment = NSTextAlignment.center
         self.titleLabel.adjustsFontSizeToFitWidth = true
         self.contentView.addSubview(self.titleLabel)
-        
-        // let viewsDictionary = ["imageView" : imageView]
-//        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[imageView]", options: .allZeros, metrics: nil, views: viewsDictionary))
-//        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[imageView]", options: .allZeros, metrics: nil, views: viewsDictionary))
-
-        // self.setNeedsUpdateConstraints()
     }
     
     override func layoutSubviews() {
-        self.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.5)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -49,7 +43,7 @@ class HBStageCell: UICollectionViewCell {
     }
     
     func resetImage() {
-        self.imageView.contentMode = .ScaleAspectFit
+        self.imageView.contentMode = .scaleAspectFit
         self.imageView.frame = contentView.bounds
         self.imageView.clipsToBounds = true
     }
@@ -60,12 +54,12 @@ class HBStageCell: UICollectionViewCell {
     }
     
     func setImageAndTitle() {
-        self.setImage(UIImage(named: stageThumbnailImageNameDict[self.stage!]!)!)
+        self.setImage(image: UIImage(named: stageThumbnailImageNameDict[self.stage!]!)!)
         self.titleLabel.text = stageNameDict[self.stage!]
     }
     
     func setImageAndTitleForComingSoon() {
-        self.setImage(UIImage(named: "question")!)
+        self.setImage(image: UIImage(named: "question")!)
         self.titleLabel.text = "準備中..."
     }
     

@@ -13,7 +13,7 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
     var collectionView:UICollectionView!
     var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png"))
     // NSUserDefaults
-    let ud = NSUserDefaults.standardUserDefaults()
+    let ud = UserDefaults.standard
     
     let NUMOFSTAGES : Int = 2
     
@@ -24,14 +24,14 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
         
         // レイアウト作成
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .Vertical
+        flowLayout.scrollDirection = .vertical
         flowLayout.minimumInteritemSpacing = 5.0
         flowLayout.minimumLineSpacing = 5.0
-        flowLayout.itemSize = CGSizeMake(100, 100)
+        flowLayout.itemSize = CGSize(width: 100, height: 100)
         
         // コレクションビュー作成
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: flowLayout)
-        collectionView.registerClass(HBStageCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(HBStageCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundView = self.backgroundView
@@ -41,23 +41,23 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
         super.showAds(isWithStatusBar: false)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         
         // タイトルの設定
-        var titleImageView : UIImageView = UIImageView(image: UIImage(named: "stageSelectTitle"))
+        let titleImageView : UIImageView = UIImageView(image: UIImage(named: "stageSelectTitle"))
         titleImageView.frame.size = CGSize(width: self.view.frame.size.width/2, height: self.navigationController!.navigationBar.frame.size.height)
-        var bgView : UIView = UIView(frame: titleImageView.frame)
-        bgView.backgroundColor = UIColor.clearColor()
+        let bgView : UIView = UIView(frame: titleImageView.frame)
+        bgView.backgroundColor = .clear
         bgView.addSubview(titleImageView)
         self.navigationItem.titleView = bgView
         
         // 戻るボタンの設定
-        var backButton : UIButton = UIButton(frame: CGRectMake(0, 0, 70, 35))
-        backButton.setBackgroundImage(UIImage(named: "back"), forState: UIControlState.Normal)
-        backButton.addTarget(self, action: "backButtonTapped:", forControlEvents: .TouchUpInside)
-        var buttonItem : UIBarButtonItem = UIBarButtonItem(customView: backButton)
+        let backButton : UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 70, height: 35))
+        backButton.setBackgroundImage(UIImage(named: "back"), for: .normal)
+        backButton.addTarget(self, action: #selector(backButtonTapped(sender:)), for: .touchUpInside)
+        let buttonItem : UIBarButtonItem = UIBarButtonItem(customView: backButton)
         self.navigationItem.leftBarButtonItem = buttonItem
     }
     
@@ -67,16 +67,16 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
     }
     
     func backButtonTapped(sender : AnyObject?) {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: UICollectionViewDelegate methods
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return NUMOFSTAGES + 1
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell : HBStageCell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! HBStageCell
+    internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell : HBStageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath) as! HBStageCell
         
         switch indexPath.row {
         case 0:
@@ -95,23 +95,23 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
     }
     
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if (indexPath.row == NUMOFSTAGES) {
             return;
         }
-        if (!ud.boolForKey("tutorialDisplayed")) {
-            var vc : HBTutorialViewController = HBTutorialViewController()
+        if (!ud.bool(forKey: "tutorialDisplayed")) {
+            let vc : HBTutorialViewController = HBTutorialViewController()
             vc.delegate = self
-            self.presentViewController(vc, animated: true, completion: nil)
+            self.present(vc, animated: true, completion: nil)
         }
-        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as! HBStageCell
-        var vc : HBSingleViewController = HBSingleViewController(stage: selectedCell.stage!)
+        let selectedCell = collectionView.cellForItem(at: indexPath as IndexPath) as! HBStageCell
+        let vc : HBSingleViewController = HBSingleViewController(stage: selectedCell.stage!)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK: - Delegate method for HBTutorialViewControllerDelegate
     func backButtonTapped() {
-        self.ud.setBool(true, forKey: "tutorialDisplayed")
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.ud.set(true, forKey: "tutorialDisplayed")
+        self.dismiss(animated: true, completion: nil)
     }
 }

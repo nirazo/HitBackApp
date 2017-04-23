@@ -14,11 +14,11 @@ class HBPlaySceneFactory {
     func create(size:CGSize, stage: GAME_STAGE) -> HBPlayScene {
         switch stage {
         case GAME_STAGE.NORMAL:
-            return HBNormalPlaySceneFactory().createGameScene(size)
+            return HBNormalPlaySceneFactory().createGameScene(size: size)
         case GAME_STAGE.HIGHSPEED:
-            return HBHighSpeedPlaySceneFactory().createGameScene(size)
+            return HBHighSpeedPlaySceneFactory().createGameScene(size: size)
         default:
-            return HBNormalPlaySceneFactory().createGameScene(size)
+            return HBNormalPlaySceneFactory().createGameScene(size: size)
         }
     }
     

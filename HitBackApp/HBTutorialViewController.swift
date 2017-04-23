@@ -13,8 +13,8 @@ protocol HBTutorialViewControllerDelegate {
 }
 
 class HBTutorialViewController: UIViewController, UIScrollViewDelegate {
-    let frameSize = UIScreen.mainScreen().applicationFrame.size
-    let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
+    let frameSize = UIScreen.main.bounds
+    let statusBarHeight = UIApplication.shared.statusBarFrame.height
     var scrView = UIScrollView()
     var pageControl: UIPageControl!
     var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png"))
@@ -27,13 +27,13 @@ class HBTutorialViewController: UIViewController, UIScrollViewDelegate {
         // 背景
         self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
         self.view.addSubview(self.backgroundView)
-        self.view.sendSubviewToBack(self.backgroundView)
+        self.view.sendSubview(toBack: self.backgroundView)
         
         // 戻るボタン
-        var backButton : UIButton = UIButton(frame: CGRectMake(0.0, 0.0, self.backButtonSpace * 3, self.backButtonSpace))
-        backButton.setBackgroundImage(UIImage(named: "backButton.png"), forState: .Normal)
-        backButton.center = CGPointMake(CGRectGetMidX(self.view.frame), backButton.frame.size.height / 2 + statusBarHeight)
-        backButton.addTarget(self, action: "backTapped:", forControlEvents:.TouchUpInside)
+        let backButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: self.backButtonSpace * 3, height: self.backButtonSpace))
+        backButton.setBackgroundImage(UIImage(named: "backButton.png"), for: .normal)
+        backButton.center = CGPoint(x: self.view.frame.midX, y: backButton.frame.size.height / 2 + statusBarHeight)
+        backButton.addTarget(self, action: #selector(backTapped(sender:)), for:.touchUpInside)
         self.view.addSubview(backButton)
         
         // tutorial用画像
@@ -43,33 +43,33 @@ class HBTutorialViewController: UIViewController, UIScrollViewDelegate {
         let img4 = UIImage(named: "tutorial4.png")
         
         //UIImageViewにUIIimageを追加
-        var imageView1 = UIImageView(image:img1)
+        let imageView1 = UIImageView(image:img1)
         let imageView2 = UIImageView(image:img2)
         let imageView3 = UIImageView(image:img3)
         let imageView4 = UIImageView(image:img4)
-        var imageViewArray = [imageView1, imageView2, imageView3, imageView4]
+        let imageViewArray = [imageView1, imageView2, imageView3, imageView4]
         
         // pageControl
         pageControl = UIPageControl()
-        pageControl.bounds = CGRectMake(0, 0, self.frameSize.width, 12)
-        pageControl.center = CGPoint(x: self.frameSize.width / 2, y: CGRectGetMaxY(backButton.frame) + pageControl.frame.size.height / 2)
+        pageControl.bounds = CGRect(x: 0, y: 0, width: self.frameSize.width, height: 12)
+        pageControl.center = CGPoint(x: self.frameSize.width / 2, y: backButton.frame.maxY + pageControl.frame.size.height / 2)
         pageControl.numberOfPages = imageViewArray.count
         pageControl.currentPage = 0
         self.view.addSubview(pageControl)
         
         scrView.delegate = self
         //表示位置 + 1ページ分のサイズ
-        var scrViewOriginY = CGRectGetMaxY(pageControl.frame)
-        scrView.frame = CGRectMake(0, scrViewOriginY, frameSize.width, frameSize.height)
+        let scrViewOriginY = pageControl.frame.maxY
+        scrView.frame = CGRect(x: 0, y: scrViewOriginY, width: frameSize.width, height: frameSize.height)
         
         //全体のサイズ
-        scrView.contentSize = CGSizeMake(frameSize.width * CGFloat(imageViewArray.count), frameSize.height)
+        scrView.contentSize = CGSize(width: frameSize.width * CGFloat(imageViewArray.count), height: frameSize.height)
         
         //左右に並べる
-        imageView1.frame = CGRectMake(0, 0, frameSize.width, frameSize.height - statusBarHeight)
-        imageView2.frame = CGRectMake(frameSize.width * 1, 0, frameSize.width, frameSize.height - statusBarHeight)
-        imageView3.frame = CGRectMake(frameSize.width * 2, 0, frameSize.width, frameSize.height - statusBarHeight)
-        imageView4.frame = CGRectMake(frameSize.width * 3, 0, frameSize.width, frameSize.height - statusBarHeight)
+        imageView1.frame = CGRect(x: 0, y: 0, width: frameSize.width, height: frameSize.height - statusBarHeight)
+        imageView2.frame = CGRect(x: frameSize.width * 1, y: 0, width: frameSize.width, height: frameSize.height - statusBarHeight)
+        imageView3.frame = CGRect(x: frameSize.width * 2, y: 0, width: frameSize.width, height: frameSize.height - statusBarHeight)
+        imageView4.frame = CGRect(x: frameSize.width * 3, y: 0, width: frameSize.width, height: frameSize.height - statusBarHeight)
         
         //viewに追加
         self.view.addSubview(scrView)
@@ -78,10 +78,10 @@ class HBTutorialViewController: UIViewController, UIScrollViewDelegate {
         }
         
         // １ページ単位でスクロールさせる
-        scrView.pagingEnabled = true
+        scrView.isPagingEnabled = true
         
         //scroll画面の初期位置
-        scrView.contentOffset = CGPointMake(0, 0);
+        scrView.contentOffset = CGPoint(x: 0, y: 0);
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,9 +89,9 @@ class HBTutorialViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        var pageWidth : CGFloat = self.scrView.frame.size.width
-        var fractionalPage : CGFloat = self.scrView.contentOffset.x / pageWidth
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageWidth : CGFloat = self.scrView.frame.size.width
+        let fractionalPage : CGFloat = self.scrView.contentOffset.x / pageWidth
         
         let page : Int = lround(Double(fractionalPage))
         self.pageControl.currentPage = page

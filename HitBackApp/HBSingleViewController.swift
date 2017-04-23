@@ -23,31 +23,31 @@ class HBSingleViewController: HBAbstractBannerAdViewController, SceneEscapeProto
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
 //        skView!.showsDrawCount = true;
 //        skView!.showsNodeCount = true;
 //        skView!.showsFPS = true;
 //        skView!.ignoresSiblingOrder = true
-        goGameScene(self.stage)
+        goGameScene(stage: self.stage)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.skView?.presentScene(nil)
     }
     
     
     func goGameScene(stage : GAME_STAGE) {
-        self.skView?.paused = false
+        self.skView?.isPaused = false
         if (self.skView?.scene != nil) {
             self.skView?.scene?.removeAllChildren()
             self.skView?.presentScene(self.skView?.scene)
         } else {
-            let gameScene = HBPlaySceneFactory().create(self.skView!.bounds.size, stage: stage)
+            let gameScene = HBPlaySceneFactory().create(size: self.skView!.bounds.size, stage: stage)
             gameScene.escapeDelegate = self
-            gameScene.scaleMode = SKSceneScaleMode.AspectFill
+            gameScene.scaleMode = .aspectFill
             self.skView!.presentScene(gameScene)
         }
     }
@@ -59,7 +59,7 @@ class HBSingleViewController: HBAbstractBannerAdViewController, SceneEscapeProto
         //super.showAds(isWithStatusBar: true)
         //var height = self.view.frame.size.height - self.bannerViewFooter!.frame.size.height
         //self.skView = SKView(frame: CGRectMake(0, 0, self.view.frame.size.width, height))
-        self.skView = SKView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height))
+        self.skView = SKView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         self.view.addSubview(self.skView!)
     }
     
@@ -67,23 +67,23 @@ class HBSingleViewController: HBAbstractBannerAdViewController, SceneEscapeProto
         super.didReceiveMemoryWarning()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return true
     }
     
     func toRetryTapped() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: - SceneEscapeProtocol method
     func sceneEscape(scene: SKScene, score: Int) {
-        var gameOverVC = HBGameOverViewController(score: score, stage: stage)
+        let gameOverVC = HBGameOverViewController(score: score, stage: stage)
         self.navigationController?.pushViewController(gameOverVC, animated: true)
     }
     
     //MARK: - HBGameOverViewControllerDelegate method
     func toTitleTapped() {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

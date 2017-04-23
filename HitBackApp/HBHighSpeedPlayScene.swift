@@ -10,18 +10,18 @@ import SpriteKit
 
 class HBHighSpeedPlayScene: HBPlayScene {
     
-    var normalTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_red.png")!)
-    var smileTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_red_smile.png")!)
-    var bounceTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_red_bounce.png")!)
-    var downTexture : SKTexture = SKTexture(image: UIImage(named: "spaceCat_red_down.png")!)
+    var normalTexture = SKTexture(image: UIImage(named: "spaceCat_red.png")!)
+    var smileTexture = SKTexture(image: UIImage(named: "spaceCat_red_smile.png")!)
+    var bounceTexture = SKTexture(image: UIImage(named: "spaceCat_red_bounce.png")!)
+    var downTexture = SKTexture(image: UIImage(named: "spaceCat_red_down.png")!)
     
     let backgroundTexture : SKTexture = SKTexture(image: UIImage(named: "background_quick")!)
     
     private struct Config {
-        static let maxLife : Int = 2
+        static let maxLife = 2
         static let timeInterval : Double = 3.0 // 何秒おきにスピードアップするか
-        static let minNumOfEnemies : Int = 3
-        static let maxNumOfEnemies : Int = 5
+        static let minNumOfEnemies = 3
+        static let maxNumOfEnemies = 5
         static let scoreStep = 100
         static let speedUp_rate = 20
         static let emenyFrequency : Double = 3.0 // 何秒おきに敵が出現するかの初期値
@@ -34,8 +34,8 @@ class HBHighSpeedPlayScene: HBPlayScene {
         self.init(size:size, life: Config.maxLife, stage: 1)
     }
     
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
         self.bestScoreManager = BestScoreManager()
         self.life = Config.maxLife
         self.stage = 1
@@ -57,7 +57,7 @@ class HBHighSpeedPlayScene: HBPlayScene {
         self.addScoreLabel()
         self.addComboLabel()
         
-        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsBody?.categoryBitMask = Category.worldCategory
         self.physicsWorld.contactDelegate = self
         
@@ -71,19 +71,12 @@ class HBHighSpeedPlayScene: HBPlayScene {
         self.addBall()
         
         // 背景
-        var background = SKSpriteNode(texture: backgroundTexture)
-        background.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        let background = SKSpriteNode(texture: backgroundTexture)
+        background.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         background.size = self.frame.size
         background.alpha = 0.90
         background.zPosition = -10
         self.addChild(background)
-        
-//        var earth = SKSpriteNode(texture: self.earthTexture)
-//        earth.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame))
-//        earth.size = CGSize(width: self.frame.size.width * 1.2, height: 250)
-//        earth.alpha = 0.80
-//        earth.zPosition = -10
-//        self.addChild(earth)
         
         self.showStartText()
     }
@@ -93,46 +86,48 @@ class HBHighSpeedPlayScene: HBPlayScene {
         if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
-        let numOfEnemies : Int = Int(HBUtils.getRandomNumber(Float(Config.minNumOfEnemies), Max: Float(Config.minNumOfEnemies + (self.level() / 5) * 2)))
-        for var i=0; i < numOfEnemies; i++ {
-            var enemyType : ENEMY_TYPE = ENEMY_TYPE.QUICK
-            var enemy : SKSpriteNode = self.newEnemy(enemyType)
+        let numOfEnemies = Int(HBUtils.getRandomNumber(Min: Float(Config.minNumOfEnemies), Max: Float(Config.minNumOfEnemies + (self.level() / 5) * 2)))
+        for _ in 0..<numOfEnemies {
+            let enemyType = ENEMY_TYPE.QUICK
+            let enemy = self.newEnemy(type: enemyType)
             self.addChild(enemy)
         }
     }
     
     func newEnemy(type : ENEMY_TYPE) -> SKSpriteNode {
-        var enemy : EnemyBase? = nil
+        var enemy: EnemyBase
         switch type {
         case ENEMY_TYPE.NORMAL:
             enemy = NormalEnemy(level: self.level(), category: Category.enemyCategory)
         case ENEMY_TYPE.QUICK:
             enemy = QuickEnemy(level: self.level(), category: Category.enemyCategory)
         default:
-            break
+            enemy = NormalEnemy(level: self.level(), category: Category.enemyCategory)
         }
-        var xMin = enemy!.size.width/2
-        var xMax = (Int(self.frame.size.width) - Int(enemy!.size.width) / 2)
-        var x = CGFloat(HBUtils.getRandomNumber(Float(xMin), Max: Float(xMax)))
-        var y = self.frame.size.height
-        enemy!.position = CGPointMake(x, y)
-        return enemy!
+        let xMin = enemy.size.width/2
+        let xMax = (Int(self.frame.size.width) - Int(enemy.size.width) / 2)
+        let x = CGFloat(HBUtils.getRandomNumber(Min: Float(xMin), Max: Float(xMax)))
+        let y = self.frame.size.height
+        enemy.position = CGPoint(x: x, y: y)
+        return enemy
     }
     
     
     // enemyの動きを止める
     func stopEnemies() {
-        if (self.enemyNodes()?.count != 0) {
-            for enemy in self.enemyNodes()! as! [SKSpriteNode!] {
-                enemy.removeActionForKey("fallEnemy")
+        if (!self.enemyNodes().isEmpty) {
+            self.enemyNodes().forEach {
+                $0.removeAction(forKey: "fallEnemy")
             }
         }
     }
     
-    func enemyNodes() -> NSArray? {
-        var nodes : NSMutableArray = [] as NSMutableArray
-        self.enumerateChildNodesWithName("enemy", usingBlock: {node, stop in
-            nodes.addObject(node)
+    func enemyNodes() -> Array<EnemyBase> {
+        var nodes = [EnemyBase]()
+        self.enumerateChildNodes(withName: "enemy", using: { node, stop in
+            if let n = node as? EnemyBase {
+                nodes.append(n)
+            }
         })
         return nodes
     }
@@ -147,22 +142,23 @@ class HBHighSpeedPlayScene: HBPlayScene {
     
     //MARK: - paddle related methods
     func addPaddle() {
-        var radius : CGFloat = CGFloat(Paddle.PADDLE_RADIUS)
-        var paddle : SKSpriteNode = SKSpriteNode(texture: SKTexture(image: UIImage(named: "spaceCat_red.png")!))
+        let radius : CGFloat = CGFloat(Paddle.PADDLE_RADIUS)
+        let paddle : SKSpriteNode = SKSpriteNode(texture: SKTexture(image: UIImage(named: "spaceCat_red.png")!))
         paddle.size = CGSize(width: Paddle.PADDLE_RADIUS*2*1.05, height: Paddle.PADDLE_RADIUS*2)
         
-        var paddleY : CGFloat = self.paddleBaseY!
+        let paddleY : CGFloat = self.paddleBaseY!
         paddle.name = "paddle"
-        paddle.position = CGPointMake(CGRectGetMidX(self.frame), paddleY)
-        var path : CGMutablePathRef = CGPathCreateMutable()
-        CGPathAddArc(path, nil, 0, 0, radius, 0, CGFloat(M_PI*2), true)
+        paddle.position = CGPoint(x: self.frame.midX, y: paddleY)
+        let path : CGMutablePath = CGMutablePath()
+        path.addArc(center: .zero, radius: 0, startAngle: radius, endAngle: CGFloat(Float.pi * 2), clockwise: true)
+        //CGPathAddArc(path, nil, 0, 0, radius, 0, CGFloat(Float.pi * 2), true)
         
         paddle.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         paddle.physicsBody?.affectedByGravity = false
         paddle.physicsBody?.restitution = 1.0
         paddle.physicsBody?.linearDamping = 0
         paddle.physicsBody?.friction = 0
-        paddle.physicsBody?.dynamic = false
+        paddle.physicsBody?.isDynamic = false
         paddle.physicsBody?.categoryBitMask = Category.paddleCategory
         paddle.physicsBody?.contactTestBitMask = Category.ballCategory
         
@@ -171,18 +167,18 @@ class HBHighSpeedPlayScene: HBPlayScene {
     }
     
     func paddleNode() -> SKNode {
-        return self.childNodeWithName("paddle")!
+        return self.childNode(withName: "paddle")!
     }
     
     
     //MARK: - ball related methods
     func addBall() {
-        var radius : CGFloat = self.ballSize
-        var ball : SKSpriteNode = self.life == Config.maxLife ?
+        let radius : CGFloat = self.ballSize
+        let ball : SKSpriteNode = self.life == Config.maxLife ?
             SKSpriteNode(texture: SKTexture(image: UIImage(named: "ball_green_covered.png")!)) :
             SKSpriteNode(texture: SKTexture(image: UIImage(named: "ball_green_normal.png")!))
         ball.name = "ball"
-        ball.position = CGPointMake(CGRectGetMidX(self.paddleNode().frame), CGRectGetMaxY(self.paddleNode().frame) + radius)
+        ball.position = CGPoint(x: self.paddleNode().frame.midX, y: self.paddleNode().frame.maxY + radius)
         ball.size = CGSize(width: radius * 2, height: radius * 2)
         
         ball.physicsBody = SKPhysicsBody(circleOfRadius: radius)
@@ -198,20 +194,20 @@ class HBHighSpeedPlayScene: HBPlayScene {
     }
     
     func shootBall() {
-        var velocityX : CGFloat = 1.0/sqrt(2) * CGFloat(self.ballSpeed)
-        var velocityY : CGFloat = 1.0/sqrt(2) * CGFloat(self.ballSpeed)
-        if (self.ballNodes()?.count != 0) {
-            for ballNode in self.ballNodes()! {
-                var node : SKSpriteNode = ballNode as! SKSpriteNode
-                node.physicsBody!.velocity = CGVectorMake(velocityX + CGFloat(self.stage), velocityY)
+        let velocityX : CGFloat = 1.0/sqrt(2) * CGFloat(self.ballSpeed)
+        let velocityY : CGFloat = 1.0/sqrt(2) * CGFloat(self.ballSpeed)
+        if (!self.ballNodes().isEmpty) {
+            for ballNode in self.ballNodes() {
+                let node = ballNode
+                node.physicsBody!.velocity = CGVector(dx: velocityX + CGFloat(self.stage), dy: velocityY)
             }
         }
     }
     
     // ボールがアウトになった際の処理
     func ballIsDead(node : SKNode) {
-        self.removeNodeWithSpark(node)
-        self.life--
+        self.removeNodeWithSpark(node: node)
+        self.life -= 1
         self.changeBallSize()
         self.lastSpeedUpTime = 0
         self.combo = 0
@@ -222,26 +218,28 @@ class HBHighSpeedPlayScene: HBPlayScene {
     
     // ボールの動きを止める
     func stopBalls() {
-        if (self.ballNodes()?.count != 0) {
-            for ball in self.ballNodes()! as! [SKSpriteNode!] {
-                ball!.physicsBody!.velocity = CGVector(dx: 0.0, dy: 0.0)
+        if (!self.ballNodes().isEmpty) {
+            for ball in self.ballNodes() {
+                ball.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
             }
         }
     }
     
     // ballのノードの配列を返す
-    func ballNodes() -> NSArray?{
-        var nodes : NSMutableArray = [] as NSMutableArray
-        self.enumerateChildNodesWithName("ball", usingBlock: {node, stop in
-            nodes.addObject(node)
+    func ballNodes() -> Array<SKSpriteNode>{
+        var nodes = [SKSpriteNode]()
+        self.enumerateChildNodes(withName: "ball", using: {node, stop in
+            if let n = node as? SKSpriteNode {
+                nodes.append(n)
+            }
         })
         return nodes
     }
     
     // ballのノードを返す
     func ballNode() -> SKSpriteNode? {
-        if (self.ballNodes()?.count != 0) {
-            return self.ballNodes()![0] as? SKSpriteNode
+        if (!self.ballNodes().isEmpty) {
+            return self.ballNodes().first
         } else {
             return nil
         }
@@ -252,8 +250,8 @@ class HBHighSpeedPlayScene: HBPlayScene {
     func compensateBallAngle(ballPhysicsBody : SKPhysicsBody) {
         let velX :CGFloat = ballPhysicsBody.velocity.dx
         let velY : CGFloat = ballPhysicsBody.velocity.dy
-        var rad : CGFloat = atan2(velY, velX)
-        let angle : CGFloat = (rad / CGFloat(M_PI*2) * 360.0)
+        let rad : CGFloat = atan2(velY, velX)
+        let angle : CGFloat = (rad / CGFloat(Float.pi * 2) * 360.0)
         var newAngle : CGFloat = angle
         
         if (CGFloat(abs(angle)) < CGFloat(Ball.BALL_ANGLE_MIN) || CGFloat(abs(angle)) > CGFloat(Ball.BALL_ANGLE_MAX)) {
@@ -263,11 +261,11 @@ class HBHighSpeedPlayScene: HBPlayScene {
                 newAngle = angle == 180.0 ? CGFloat(Ball.BALL_ANGLE_MAX) : CGFloat(angle/abs(angle) * CGFloat(Ball.BALL_ANGLE_MAX))
             }
             
-            var newRad : CGFloat = newAngle * CGFloat(M_PI*2) / 360
+            let newRad : CGFloat = newAngle * CGFloat(Float.pi * 2) / 360
             let newDx = (cos(newRad) * CGFloat(self.ballSpeed))
             let newDy = (sin(newRad) * CGFloat(self.ballSpeed))
-            ballPhysicsBody.velocity = CGVectorMake(newDx, newDy)
-            let newAngle = newRad / CGFloat(M_PI*2) * 360.0
+            ballPhysicsBody.velocity = CGVector(dx: newDx, dy: newDy)
+            _ = newRad / CGFloat(Float.pi*2) * 360.0
         }
     }
     
@@ -275,10 +273,10 @@ class HBHighSpeedPlayScene: HBPlayScene {
     func compensateBallSpeed(ballPhysicsBody : SKPhysicsBody) {
         let velX :CGFloat = ballPhysicsBody.velocity.dx
         let velY : CGFloat = ballPhysicsBody.velocity.dy
-        var rad : CGFloat = atan2(velY, velX)
+        let rad : CGFloat = atan2(velY, velX)
         let newDx = (cos(rad) * CGFloat(self.ballSpeed))
         let newDy = (sin(rad) * CGFloat(self.ballSpeed))
-        ballPhysicsBody.velocity = CGVectorMake(newDx, newDy)
+        ballPhysicsBody.velocity = CGVector(dx: newDx, dy: newDy)
     }
     
     
@@ -291,11 +289,11 @@ class HBHighSpeedPlayScene: HBPlayScene {
             self.ballSpeed = self.ballSpeed < Ball.BALL_MAXSPEED ? self.ballSpeed + Double(Config.speedUp_rate) : Ball.BALL_MAXSPEED
             let velX : CGFloat = self.ballNode()!.physicsBody!.velocity.dx
             let velY : CGFloat = self.ballNode()!.physicsBody!.velocity.dy
-            var rad : CGFloat = atan2(velY, velX)
+            let rad : CGFloat = atan2(velY, velX)
             let newDx = (cos(rad) * CGFloat(self.ballSpeed))
             let newDy = (sin(rad) * CGFloat(self.ballSpeed))
-            self.ballNode()!.physicsBody!.velocity = CGVectorMake(newDx, newDy)
-            println("ballSpeed: \(self.ballSpeed)")
+            self.ballNode()!.physicsBody!.velocity = CGVector(dx: newDx, dy: newDy)
+            print("ballSpeed: \(self.ballSpeed)")
         }
     }
     
@@ -304,7 +302,7 @@ class HBHighSpeedPlayScene: HBPlayScene {
     }
     
     //MARK: - touch related methods
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
@@ -314,26 +312,26 @@ class HBHighSpeedPlayScene: HBPlayScene {
             self.isFirstTouched = true
             //self.addBall()
             // 表情変える
-            var anim = SKAction.animateWithTextures([self.normalTexture, self.normalTexture], timePerFrame: 0.5)
-            self.paddleNode().runAction(anim)
+            let anim = SKAction.animate(with: [self.normalTexture, self.normalTexture], timePerFrame: 0.5)
+            self.paddleNode().run(anim)
         }
         if (self.stageStartLabel() != nil) {
             self.stageStartLabel()!.removeFromParent()
         }
-        for touch in touches as! Set<UITouch> {
-            let location = touch.locationInNode(self)
+        for touch in touches {
+            let location = touch.location(in: self)
             self.touchesStartY = location.y
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
         self.removeTouchAreaAndText()
-        if (self.ballNodes()?.count != 0 && !self.isBallMoving()) {
-            var ball = self.ballNodes()![0] as! SKSpriteNode
-            if (ball.physicsBody?.velocity == CGVectorMake(0, 0) && self.isBallReady) {
+        if (!self.ballNodes().isEmpty && !self.isBallMoving()) {
+            let ball = self.ballNodes().first
+            if (ball?.physicsBody?.velocity == CGVector(dx: 0, dy: 0) && self.isBallReady) {
                 self.shootBall()
                 self.isBallReady = false
             }
@@ -341,18 +339,17 @@ class HBHighSpeedPlayScene: HBPlayScene {
         }
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
         
-        var location : CGPoint?
         var prevPos : CGPoint?
         var currentPos : CGPoint?
         var changePosY : CGFloat?
-        for touch in touches as! Set<UITouch> {
-            prevPos = touch.previousLocationInNode(self)
-            currentPos = touch.locationInNode(self)
+        for touch in touches {
+            prevPos = touch.previousLocation(in: self)
+            currentPos = touch.location(in: self)
             changePosY = currentPos!.y - prevPos!.y
         }
         
@@ -367,23 +364,23 @@ class HBHighSpeedPlayScene: HBPlayScene {
     
     //MARK: - label related methods
     func addScoreLabel() {
-        var margin : CGFloat = Label.LABEL_MARGIN
-        var fontSize : CGFloat = Label.LABEL_FONT_SIZE
+        let margin : CGFloat = Label.LABEL_MARGIN
+        let fontSize : CGFloat = Label.LABEL_FONT_SIZE
         
         // 「とくてん」の文字画像
         self.scoreStringImage = SKSpriteNode(texture: self.scoreTexture)
         self.scoreStringImage!.size = CGSize(width: 80, height: 17.46)
-        self.scoreStringImage!.position = CGPointMake(margin + self.scoreStringImage!.size.width / 2, CGRectGetMaxY(self.frame) - margin * 2)
+        self.scoreStringImage!.position = CGPoint(x: margin + self.scoreStringImage!.size.width / 2, y: self.frame.maxY - margin * 2)
         self.scoreStringImage!.alpha = 1.00
         self.scoreStringImage!.zPosition = 1
         self.addChild(scoreStringImage!)
         
         // 得点表示用ラベル
-        var label : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
+        let label : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
         label.text = String(self.score)
-        label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        label.position = CGPointMake(CGRectGetMaxX(self.scoreStringImage!.frame) + margin, self.scoreStringImage!.position.y)
+        label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        label.position = CGPoint(x: self.scoreStringImage!.frame.maxX + margin, y: self.scoreStringImage!.position.y)
         label.fontSize = fontSize
         label.zPosition = 1.0
         label.name = "scoreLabel"
@@ -391,22 +388,22 @@ class HBHighSpeedPlayScene: HBPlayScene {
     }
     
     func addComboLabel() {
-        var margin : CGFloat = Label.LABEL_MARGIN
-        var fontSize : CGFloat = Label.LABEL_FONT_SIZE
+        let margin : CGFloat = Label.LABEL_MARGIN
+        let fontSize : CGFloat = Label.LABEL_FONT_SIZE
         
         // 「コンボ」の文字画像
         self.comboStringImage = SKSpriteNode(texture: self.comboTexture)
         self.comboStringImage!.size = CGSize(width: 80, height: 17.46)
-        self.comboStringImage!.position = CGPointMake(margin + self.comboStringImage!.size.width / 2, CGRectGetMaxY(self.scoreStringImage!.frame) - margin * 2 - self.comboStringImage!.size.height / 2)
+        self.comboStringImage!.position = CGPoint(x: margin + self.comboStringImage!.size.width / 2, y: self.scoreStringImage!.frame.maxY - margin * 2 - self.comboStringImage!.size.height / 2)
         self.comboStringImage!.zPosition = 1
         comboStringImage!.alpha = 1.00
         self.addChild(self.comboStringImage!)
         
-        var label : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
+        let label : SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue-Bold")
         label.text = String(self.combo)
-        label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        label.position = CGPointMake(CGRectGetMaxX(self.comboStringImage!.frame) + margin, self.comboStringImage!.position.y)
+        label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        label.position = CGPoint(x: self.comboStringImage!.frame.maxX + margin, y: self.comboStringImage!.position.y)
         label.fontSize = fontSize
         label.name = "comboLabel"
         self.addChild(label)
@@ -414,16 +411,16 @@ class HBHighSpeedPlayScene: HBPlayScene {
     
     
     func addLifeLabel() {
-        var margin : CGFloat = Label.LABEL_MARGIN
-        var fontSize : CGFloat = Label.LABEL_FONT_SIZE
+        let margin : CGFloat = Label.LABEL_MARGIN
+        let fontSize : CGFloat = Label.LABEL_FONT_SIZE
         
-        var label : SKLabelNode = SKLabelNode(fontNamed: "HiraKakuProN-W3")
-        label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
-        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        label.position = CGPointMake(self.size.width - margin * 6, CGRectGetMaxY(self.frame) - margin)
+        let label : SKLabelNode = SKLabelNode(fontNamed: "HiraKakuProN-W3")
+        label.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
+        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        label.position = CGPoint(x: self.size.width - margin * 6, y: self.frame.maxY - margin)
         label.fontSize = fontSize
         label.zPosition = 1.0
-        label.color = SKColor.magentaColor()
+        label.color = SKColor.magenta
         label.colorBlendFactor = 1.0
         label.name = "lifeLabel"
         self.addChild(label)
@@ -438,23 +435,23 @@ class HBHighSpeedPlayScene: HBPlayScene {
     }
     
     func updateLifeLabel() {
-        var s : NSMutableString = ""
-        for (var i = 0; i < self.life; i++) {
-            s.appendString("♥")
+        var s = ""
+        for _ in 0 ..< self.life {
+            s.append("♥")
         }
-        self.lifeLabel().text = s as String
+        self.lifeLabel().text = s
     }
     
     func scoreLabel() -> SKLabelNode {
-        return self.childNodeWithName("scoreLabel")! as! SKLabelNode
+        return self.childNode(withName: "scoreLabel")! as! SKLabelNode
     }
     
     func comboLabel() -> SKLabelNode {
-        return self.childNodeWithName("comboLabel")! as! SKLabelNode
+        return self.childNode(withName: "comboLabel")! as! SKLabelNode
     }
     
     func lifeLabel() -> SKLabelNode {
-        return self.childNodeWithName("lifeLabel")! as! SKLabelNode
+        return self.childNode(withName: "lifeLabel")! as! SKLabelNode
     }
     
     
@@ -475,30 +472,30 @@ class HBHighSpeedPlayScene: HBPlayScene {
         }
         if (firstBody.categoryBitMask & Category.enemyCategory != 0) {
             if (secondBody.categoryBitMask & Category.ballCategory != 0) {
-                secondBody = self.contactedBallAndEnemy(secondBody.node! as! SKSpriteNode)
-                var contactedNode = firstBody.node! as! EnemyBase
+                secondBody = self.contactedBallAndEnemy(ball: secondBody.node! as! SKSpriteNode)
+                let contactedNode = firstBody.node! as! EnemyBase
                 contactedNode.contactedWithBall()
-                if (Int(contactedNode.userData?.objectForKey("life") as! NSNumber) < 1) {
+                if (Int(contactedNode.userData?.object(forKey: "life") as! NSNumber) < 1) {
                     
                     // 表情変える
-                    var anim = SKAction.animateWithTextures([self.smileTexture, self.normalTexture], timePerFrame: 0.5)
-                    self.paddleNode().runAction(anim)
+                    let anim = SKAction.animate(with: [self.smileTexture, self.normalTexture], timePerFrame: 0.5)
+                    self.paddleNode().run(anim)
                     
-                    self.removeNodeWithSpark(contactedNode)
+                    self.removeNodeWithSpark(node: contactedNode)
                     contactedNode.removeFromParent()
                     self.enemyBrokenInThisTurn = true
                     self.comboContinue = true
                     if (self.comboContinue || self.combo == 0) {
-                        self.combo++
+                        self.combo += 1
                         self.updateComboLabel()
                     }
-                    self.score += Config.scoreStep + self.comboBonus(Config.scoreStep, comboNum: self.combo)
+                    self.score += Config.scoreStep + self.comboBonus(base: Config.scoreStep, comboNum: self.combo)
                     self.updateScoreLabel()
                 }
             }
         } else if (firstBody.categoryBitMask & Category.ballCategory != 0) {
             if (secondBody.categoryBitMask & Category.paddleCategory != 0) {
-                firstBody = contactedBallAndPaddle(firstBody.node! as! SKSpriteNode)
+                firstBody = contactedBallAndPaddle(ball: firstBody.node! as! SKSpriteNode)
             }
         }
     }
@@ -509,54 +506,54 @@ class HBHighSpeedPlayScene: HBPlayScene {
     }
     
     func removeNodeWithSpark(node : SKNode) {
-        var sparkPath : String = NSBundle.mainBundle().pathForResource("spark", ofType: "sks")!
-        var spark : SKEmitterNode = NSKeyedUnarchiver.unarchiveObjectWithFile(sparkPath) as! SKEmitterNode
+        let sparkPath : String = Bundle.main.path(forResource: "spark", ofType: "sks")!
+        let spark : SKEmitterNode = NSKeyedUnarchiver.unarchiveObject(withFile: sparkPath) as! SKEmitterNode
         spark.position = node.position
         spark.xScale = 0.3
         spark.yScale = 0.3
         self.addChild(spark)
         
-        var fadeOut : SKAction = SKAction.fadeOutWithDuration(0.3)
-        var remove : SKAction = SKAction.removeFromParent()
-        var sequence : SKAction = SKAction.sequence([fadeOut, remove])
-        spark.runAction(sequence)
+        let fadeOut : SKAction = SKAction.fadeOut(withDuration: 0.3)
+        let remove : SKAction = SKAction.removeFromParent()
+        let sequence : SKAction = SKAction.sequence([fadeOut, remove])
+        spark.run(sequence)
         node.removeFromParent()
     }
     
     func gameOver() {
         self.removeTouchAreaAndText()
-        self.bestScoreManager.updateBestScoreForStage(GAME_STAGE.HIGHSPEED, score: self.score)
+        self.bestScoreManager.updateBestScoreForStage(stage: GAME_STAGE.HIGHSPEED, score: self.score)
         
         self.gameState = GAME_STATE.BEFORE_GAMEOVER
         // アニメーション消す
         self.paddleNode().removeAllActions()
         
         // 表情変える
-        var anim = SKAction.setTexture(self.downTexture)
-        self.paddleNode().runAction(anim)
+        let anim = SKAction.setTexture(self.downTexture)
+        self.paddleNode().run(anim)
         
         self.stopBalls()
         self.stopEnemies()
         
         // 横揺れアニメーション
-        var right : SKAction = SKAction.moveByX(-10.0, y: 0.0, duration: 0.05)
-        var left : SKAction = SKAction.moveByX(10, y: 0.0, duration: 0.05)
-        var sequence : SKAction = SKAction.sequence([right, left, left, right])
-        var repeatSequence : SKAction = SKAction.repeatAction(sequence, count: 6)
-        self.paddleNode().runAction(repeatSequence, completion: {() -> Void in
+        let right : SKAction = SKAction.moveBy(x: -10.0, y: 0.0, duration: 0.05)
+        let left : SKAction = SKAction.moveBy(x: 10, y: 0.0, duration: 0.05)
+        let sequence : SKAction = SKAction.sequence([right, left, left, right])
+        let repeatSequence : SKAction = SKAction.repeat(sequence, count: 6)
+        self.paddleNode().run(repeatSequence, completion: {() -> Void in
             // 横揺れが終わったら、一旦止まってふらふらしながら落ちていくアニメーション
-            var wait : SKAction = SKAction.waitForDuration(0.6)
-            self.paddleNode().runAction(wait, completion: {() -> Void in
-                var right : SKAction = SKAction.moveByX(-15.0, y: 0.0, duration: 0.1)
-                var left : SKAction = SKAction.moveByX(15, y: 0.0, duration: 0.1)
-                var swingSequence : SKAction = SKAction.sequence([right, left, left, right])
-                var repeatSequence : SKAction = SKAction.repeatActionForever(swingSequence)
-                self.paddleNode().runAction(repeatSequence)
+            let wait : SKAction = SKAction.wait(forDuration: 0.6)
+            self.paddleNode().run(wait, completion: {() -> Void in
+                let right : SKAction = SKAction.moveBy(x: -15.0, y: 0.0, duration: 0.1)
+                let left : SKAction = SKAction.moveBy(x: 15, y: 0.0, duration: 0.1)
+                let swingSequence : SKAction = SKAction.sequence([right, left, left, right])
+                let repeatSequence : SKAction = SKAction.repeatForever(swingSequence)
+                self.paddleNode().run(repeatSequence)
                 
-                var fall : SKAction = SKAction.moveToY(CGFloat(-Paddle.PADDLE_RADIUS), duration: 1.20)
-                self.paddleNode().runAction(fall, completion: {() -> Void in
-                    self.view?.paused = true
-                    self.escapeDelegate?.sceneEscape!(self, score: self.score)
+                let fall : SKAction = SKAction.moveTo(y: CGFloat(-Paddle.PADDLE_RADIUS), duration: 1.20)
+                self.paddleNode().run(fall, completion: {() -> Void in
+                    self.view?.isPaused = true
+                    self.escapeDelegate?.sceneEscape!(scene: self, score: self.score)
                 })
             })
         })
@@ -565,15 +562,15 @@ class HBHighSpeedPlayScene: HBPlayScene {
     // ボールとパドル衝突時のアクション
     func contactedBallAndPaddle(ball : SKSpriteNode) -> SKPhysicsBody{
         // 回転
-        var up : SKAction = SKAction.rotateByAngle(10 * CGFloat(M_PI*2) / 360, duration: 0.03)
-        var down : SKAction = SKAction.rotateByAngle(-10 * CGFloat(M_PI*2) / 360, duration: 0.03)
-        var sequence : SKAction = SKAction.sequence([up, down, down, up])
-        var repeatSequence : SKAction = SKAction.repeatAction(sequence, count: 2)
-        self.paddleNode().runAction(repeatSequence)
+        let up : SKAction = SKAction.rotate(byAngle: 10 * CGFloat(Float.pi * 2) / 360, duration: 0.03)
+        let down : SKAction = SKAction.rotate(byAngle: -10 * CGFloat(Float.pi * 2) / 360, duration: 0.03)
+        let sequence : SKAction = SKAction.sequence([up, down, down, up])
+        let repeatSequence : SKAction = SKAction.repeat(sequence, count: 2)
+        self.paddleNode().run(repeatSequence)
         
         // 表情変える
-        var anim = SKAction.animateWithTextures([self.bounceTexture, self.normalTexture], timePerFrame: 0.5)
-        self.paddleNode().runAction(anim)
+        let anim = SKAction.animate(with: [self.bounceTexture, self.normalTexture], timePerFrame: 0.5)
+        self.paddleNode().run(anim)
         
         // コンボ判定
         if (!self.enemyBrokenInThisTurn) {
@@ -583,11 +580,8 @@ class HBHighSpeedPlayScene: HBPlayScene {
         }
         self.enemyBrokenInThisTurn = false
         
-        let velX = ball.physicsBody?.velocity.dx
-        let velY = ball.physicsBody?.velocity.dy
-        let rad : CGFloat = atan2(velY!, velX!)
-        self.compensateBallSpeed(ball.physicsBody!)
-        self.compensateBallAngle(ball.physicsBody!)
+        self.compensateBallSpeed(ballPhysicsBody: ball.physicsBody!)
+        self.compensateBallAngle(ballPhysicsBody: ball.physicsBody!)
         return ball.physicsBody!
     }
     
@@ -597,8 +591,8 @@ class HBHighSpeedPlayScene: HBPlayScene {
             self.shootBall()
             self.isBallReady = false
         }
-        self.compensateBallSpeed(ball.physicsBody!)
-        self.compensateBallAngle(ball.physicsBody!)
+        self.compensateBallSpeed(ballPhysicsBody: ball.physicsBody!)
+        self.compensateBallAngle(ballPhysicsBody: ball.physicsBody!)
         return ball.physicsBody!
     }
     
@@ -613,31 +607,31 @@ class HBHighSpeedPlayScene: HBPlayScene {
     
     // ステージ開始前のテキスト表示
     func displayStageStartLabel() {
-        var stageStartLabel = SKLabelNode(fontNamed: "HiraKakuProN-W3")
+        let stageStartLabel = SKLabelNode(fontNamed: "HiraKakuProN-W3")
         stageStartLabel.text = "タップして準備、離して発射！"
-        stageStartLabel.fontColor = UIColor.whiteColor()
+        stageStartLabel.fontColor = .white
         stageStartLabel.fontSize = 20
         stageStartLabel.name = "stageStartLabel"
-        stageStartLabel.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        stageStartLabel.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
     }
     
     // イントロダクション用のタッチエリアとテキストを削除
     func removeTouchAreaAndText() {
-        var touchArea = self.childNodeWithName(self.touchAreaName)
-        var touchText = self.childNodeWithName(self.touchTextName)
+        let touchArea = self.childNode(withName: self.touchAreaName)
+        let touchText = self.childNode(withName: self.touchTextName)
         if (touchArea != nil && touchText != nil) {
             touchArea?.removeFromParent()
             touchText?.removeFromParent()
-            self.ud.setBool(true, forKey: self.touchDisplayedKey)
+            self.ud.set(true, forKey: self.touchDisplayedKey)
         }
     }
     
     func stageStartLabel() -> SKLabelNode? {
-        return self.childNodeWithName("stageStartLabel") as? SKLabelNode
+        return self.childNode(withName: "stageStartLabel") as? SKLabelNode
     }
     
     // MARK: - Callbacks
-    override func update(currentTime: NSTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         if (self.gameState != GAME_STATE.NORMAL) {
             return
         }
@@ -649,7 +643,7 @@ class HBHighSpeedPlayScene: HBPlayScene {
             }
         }
         
-        var enemyJudge : NSTimeInterval = self.lastEnemyAddedTime + Config.emenyFrequency - NSTimeInterval(Config.changeEnemyFrequencySeconds * NSTimeInterval(self.level() / Config.enemyQuickenLevels))
+        var enemyJudge : TimeInterval = self.lastEnemyAddedTime + Config.emenyFrequency - TimeInterval(Config.changeEnemyFrequencySeconds * TimeInterval(self.level() / Config.enemyQuickenLevels))
         enemyJudge = enemyJudge > Config.emenyFrequency_MAX ? enemyJudge : Config.emenyFrequency_MAX
         if (enemyJudge <= currentTime) {
             self.addEnemy()
@@ -666,7 +660,7 @@ class HBHighSpeedPlayScene: HBPlayScene {
             return
         }
         
-        var paddleRadius : CGFloat = CGFloat(Paddle.PADDLE_RADIUS)
+        let paddleRadius : CGFloat = CGFloat(Paddle.PADDLE_RADIUS)
         
         var paddlePosition : CGPoint = self.paddleNode().position
         var ballPosition : CGPoint? = self.ballNode()?.position
@@ -675,8 +669,8 @@ class HBHighSpeedPlayScene: HBPlayScene {
         if (self.gameState != GAME_STATE.BEFORE_GAMEOVER) {
             if (paddlePosition.x < paddleRadius) {
                 paddlePosition.x = paddleRadius
-            } else if (paddlePosition.x > CGRectGetWidth(self.frame) - paddleRadius) {
-                paddlePosition.x = CGRectGetWidth(self.frame) - paddleRadius
+            } else if (paddlePosition.x > self.frame.width - paddleRadius) {
+                paddlePosition.x = self.frame.width - paddleRadius
             }
             
             // Paddleのyの可動範囲限定
@@ -699,20 +693,20 @@ class HBHighSpeedPlayScene: HBPlayScene {
             return
         }
         
-        if (self.ballNodes()?.count != 0) {
+        if (!self.ballNodes().isEmpty) {
             if (self.ballNode()!.position.y < self.ballSize*2) {
                 // 表情変える
-                var anim = SKAction.animateWithTextures([self.normalTexture, self.downTexture], timePerFrame: 0.01)
-                self.paddleNode().runAction(anim)
-                self.ballIsDead(self.ballNode()! as SKNode)
+                let anim = SKAction.animate(with: [self.normalTexture, self.downTexture], timePerFrame: 0.01)
+                self.paddleNode().run(anim)
+                self.ballIsDead(node: self.ballNode()! as SKNode)
                 if (self.life < 1) {
                     self.gameOver()
                 }
             }
         }
-        if (self.enemyNodes()?.count != 0) {
-            for enemyNode in self.enemyNodes()! {
-                if (self.judgeEnemyHeightIsGameOver(enemyNode as! EnemyBase)) {
+        if (!self.enemyNodes().isEmpty) {
+            for enemyNode in self.enemyNodes() {
+                if (self.judgeEnemyHeightIsGameOver(enemy: enemyNode)) {
                     self.gameOver()
                     break
                 }
@@ -727,35 +721,35 @@ class HBHighSpeedPlayScene: HBPlayScene {
             return
         }
         
-        var readyTextNode = SKSpriteNode(texture: self.readyTextTexture)
-        var goTextNode = SKSpriteNode(texture: self.goTextTexture)
+        let readyTextNode = SKSpriteNode(texture: self.readyTextTexture)
+        let goTextNode = SKSpriteNode(texture: self.goTextTexture)
         
         readyTextNode.size = CGSize(width: self.size.width * 2 / 3, height: self.size.width * 2 / 3 / 3.912)
-        readyTextNode.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - 200)
+        readyTextNode.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - 200)
         goTextNode.size = CGSize(width: self.size.width * 2 / 3, height: self.size.width * 2 / 3 / 5.318)
-        goTextNode.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - 200)
+        goTextNode.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - 200)
         
-        let scaleUp = SKAction.scaleTo(1.8, duration: 0.1)
-        let scaleDown = SKAction.scaleTo(1.5, duration: 0.1)
-        let scaleStay = SKAction.scaleBy(1.0, duration: 1.0)
-        let fadeout = SKAction.fadeOutWithDuration(0.1)
+        let scaleUp = SKAction.scale(to: 1.8, duration: 0.1)
+        let scaleDown = SKAction.scale(to: 1.5, duration: 0.1)
+        let scaleStay = SKAction.scale(by: 1.0, duration: 1.0)
+        let fadeout = SKAction.fadeOut(withDuration: 0.1)
         let remove = SKAction.removeFromParent()
         let readyTextSequence = SKAction.sequence([scaleStay, fadeout, remove])
         let goTextSequence    = SKAction.sequence([scaleUp, scaleDown, scaleStay, fadeout, remove])
         
         self.addChild(readyTextNode)
-        readyTextNode.runAction(readyTextSequence, completion: {
+        readyTextNode.run(readyTextSequence, completion: {
             self.addChild(goTextNode)
-            goTextNode.runAction(goTextSequence, completion: {
+            goTextNode.run(goTextSequence, completion: {
                 self.gameState = GAME_STATE.NORMAL
-                if (!self.ud.boolForKey(self.touchDisplayedKey)) {
-                    var touchAreaNode : SKSpriteNode = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: self.size.width, height: CGRectGetMinY(self.movableAreaNode!.frame)))
-                    touchAreaNode.position = CGPoint(x: self.frame.width / 2, y: CGRectGetMinY(self.movableAreaNode!.frame) / 2)
+                if (!self.ud.bool(forKey: self.touchDisplayedKey)) {
+                    let touchAreaNode : SKSpriteNode = SKSpriteNode(color: .red, size: CGSize(width: self.size.width, height: self.movableAreaNode!.frame.minY))
+                    touchAreaNode.position = CGPoint(x: self.frame.width / 2, y: self.movableAreaNode!.frame.minY / 2)
                     touchAreaNode.alpha = 0.40
                     touchAreaNode.name = self.touchAreaName
                     
                     let touchTextTexture : SKTexture = SKTexture(image: UIImage(named: "touchText")!)
-                    var touchTextNode = SKSpriteNode(texture: touchTextTexture)
+                    let touchTextNode = SKSpriteNode(texture: touchTextTexture)
                     touchTextNode.size = CGSize(width: touchAreaNode.size.width, height: touchAreaNode.size.width * touchTextTexture.size().height / touchTextTexture.size().width)
                     touchTextNode.position = touchAreaNode.position
                     touchTextNode.name = self.touchTextName

@@ -9,21 +9,21 @@
 import SpriteKit
 
 class HBPlayScene: SKScene, SKPhysicsContactDelegate {
-    var life : Int = 0
-    var stage : Int = 0
+    var life = 0
+    var stage = 0
     var ballSpeed : Double = 0
-    var lastSpeedUpTime : NSTimeInterval = 0
-    var lastEnemyAddedTime : NSTimeInterval = 0
-    var isFirstTouched : Bool = false // 経過時間測定用フラグ
-    var isBallReady : Bool = false // ボールがセットされ、発射する直前の状態になっているか否か
+    var lastSpeedUpTime : TimeInterval = 0
+    var lastEnemyAddedTime : TimeInterval = 0
+    var isFirstTouched = false // 経過時間測定用フラグ
+    var isBallReady = false // ボールがセットされ、発射する直前の状態になっているか否か
     var isDisplayManipulatable : Bool = true
-    var score : Int = 0
-    var combo : Int = 0
-    var highScore : Int = 0
+    var score = 0
+    var combo = 0
+    var highScore = 0
     var bestScoreManager : BestScoreManager!
     
     // ハイスコア保存用NSUserDefaults
-    let ud = NSUserDefaults.standardUserDefaults()
+    let ud = UserDefaults.standard
     var escapeDelegate : SceneEscapeProtocol?
     var touchesStartY : CGFloat? = 0.0 // touchesBeganが始まった際のy座標
     
