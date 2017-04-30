@@ -221,7 +221,7 @@
 		D29012071A7796C200C23E30 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		D29012091A7796CA00C23E30 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D290120B1A7796D000C23E30 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		D29012111A779C8300C23E30 /* HitBackApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HitBackApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		D29012111A779C8300C23E30 /* SpaceCat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpaceCat-Bridging-Header.h"; sourceTree = "<group>"; };
 		D29012131A77B36B00C23E30 /* HBGameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBGameOverViewController.swift; sourceTree = "<group>"; };
 		D294B3E01A9987C60053439F /* touchText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touchText.png; sourceTree = "<group>"; };
 		D294B3E21A9995BA0053439F /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 		D2C6F89B1A5FF2880050552A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C6F89C1A5FF2880050552A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2C6F8A31A5FF2880050552A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D2C6F8AC1A5FF2880050552A /* HitBackAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HitBackAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2C6F8AC1A5FF2880050552A /* SpaceCatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceCatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C6F8B11A5FF2880050552A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C6F8B21A5FF2880050552A /* HitBackAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBackAppTests.swift; sourceTree = "<group>"; };
 		D2C6F8C01A5FF3B10050552A /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
@@ -600,11 +600,11 @@
 		D2C6F88E1A5FF2880050552A = {
 			isa = PBXGroup;
 			children = (
-				D2C6F8991A5FF2880050552A /* HitBackApp */,
+				D2C6F8991A5FF2880050552A /* SpaceCat */,
 				D29011C61A7795BD00C23E30 /* lib */,
-				D2C6F8AF1A5FF2880050552A /* HitBackAppTests */,
+				D2C6F8AF1A5FF2880050552A /* SpaceCatTests */,
 				D2C6F8981A5FF2880050552A /* Products */,
-				D29012111A779C8300C23E30 /* HitBackApp-Bridging-Header.h */,
+				D29012111A779C8300C23E30 /* SpaceCat-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -612,12 +612,12 @@
 			isa = PBXGroup;
 			children = (
 				D2C6F8971A5FF2880050552A /* SpaceCat.app */,
-				D2C6F8AC1A5FF2880050552A /* HitBackAppTests.xctest */,
+				D2C6F8AC1A5FF2880050552A /* SpaceCatTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2C6F8991A5FF2880050552A /* HitBackApp */ = {
+		D2C6F8991A5FF2880050552A /* SpaceCat */ = {
 			isa = PBXGroup;
 			children = (
 				D2C6F89C1A5FF2880050552A /* AppDelegate.swift */,
@@ -640,7 +640,7 @@
 				D2C6F8C01A5FF3B10050552A /* spark.png */,
 				D2C6F8C11A5FF3B10050552A /* spark.sks */,
 			);
-			path = HitBackApp;
+			path = SpaceCat;
 			sourceTree = "<group>";
 		};
 		D2C6F89A1A5FF2880050552A /* Supporting Files */ = {
@@ -651,13 +651,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D2C6F8AF1A5FF2880050552A /* HitBackAppTests */ = {
+		D2C6F8AF1A5FF2880050552A /* SpaceCatTests */ = {
 			isa = PBXGroup;
 			children = (
 				D2C6F8B21A5FF2880050552A /* HitBackAppTests.swift */,
 				D2C6F8B01A5FF2880050552A /* Supporting Files */,
 			);
-			path = HitBackAppTests;
+			path = SpaceCatTests;
 			sourceTree = "<group>";
 		};
 		D2C6F8B01A5FF2880050552A /* Supporting Files */ = {
@@ -733,9 +733,9 @@
 			productReference = D2C6F8971A5FF2880050552A /* SpaceCat.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D2C6F8AB1A5FF2880050552A /* HitBackAppTests */ = {
+		D2C6F8AB1A5FF2880050552A /* SpaceCatTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2C6F8B91A5FF2880050552A /* Build configuration list for PBXNativeTarget "HitBackAppTests" */;
+			buildConfigurationList = D2C6F8B91A5FF2880050552A /* Build configuration list for PBXNativeTarget "SpaceCatTests" */;
 			buildPhases = (
 				D2C6F8A81A5FF2880050552A /* Sources */,
 				D2C6F8A91A5FF2880050552A /* Frameworks */,
@@ -746,9 +746,9 @@
 			dependencies = (
 				D2C6F8AE1A5FF2880050552A /* PBXTargetDependency */,
 			);
-			name = HitBackAppTests;
+			name = SpaceCatTests;
 			productName = HitBackAppTests;
-			productReference = D2C6F8AC1A5FF2880050552A /* HitBackAppTests.xctest */;
+			productReference = D2C6F8AC1A5FF2880050552A /* SpaceCatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -773,11 +773,12 @@
 					};
 					D2C6F8AB1A5FF2880050552A = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = HZ4Q3RZNQT;
 						TestTargetID = D2C6F8961A5FF2880050552A;
 					};
 				};
 			};
-			buildConfigurationList = D2C6F8921A5FF2880050552A /* Build configuration list for PBXProject "HitBackApp" */;
+			buildConfigurationList = D2C6F8921A5FF2880050552A /* Build configuration list for PBXProject "SpaceCat" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -791,7 +792,7 @@
 			projectRoot = "";
 			targets = (
 				D2C6F8961A5FF2880050552A /* SpaceCat */,
-				D2C6F8AB1A5FF2880050552A /* HitBackAppTests */,
+				D2C6F8AB1A5FF2880050552A /* SpaceCatTests */,
 			);
 		};
 /* End PBXProject section */
@@ -958,6 +959,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Takahiro Nakamaru (X6Y4M9NQW3)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Takahiro Nakamaru (X6Y4M9NQW3)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1009,6 +1011,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Takahiro Nakamaru (9E44EWSQF3)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1045,7 +1048,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				INFOPLIST_FILE = HitBackApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SpaceCat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1057,7 +1060,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.niraapps.SpaceCat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HitBackApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SpaceCat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1074,7 +1077,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
-				INFOPLIST_FILE = HitBackApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SpaceCat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1086,7 +1089,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.niraapps.SpaceCat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HitBackApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/SpaceCat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -1095,6 +1098,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = HZ4Q3RZNQT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1107,7 +1112,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nirapps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HitBackApp.app/HitBackApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceCat.app/SpaceCat";
 			};
 			name = Debug;
 		};
@@ -1115,6 +1120,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = HZ4Q3RZNQT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1123,14 +1130,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nirapps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HitBackApp.app/HitBackApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceCat.app/SpaceCat";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2C6F8921A5FF2880050552A /* Build configuration list for PBXProject "HitBackApp" */ = {
+		D2C6F8921A5FF2880050552A /* Build configuration list for PBXProject "SpaceCat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2C6F8B41A5FF2880050552A /* Debug */,
@@ -1148,7 +1155,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2C6F8B91A5FF2880050552A /* Build configuration list for PBXNativeTarget "HitBackAppTests" */ = {
+		D2C6F8B91A5FF2880050552A /* Build configuration list for PBXNativeTarget "SpaceCatTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2C6F8BA1A5FF2880050552A /* Debug */,
