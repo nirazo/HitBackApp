@@ -12,12 +12,12 @@ import SpriteKit
 import GameKit
 
 class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterControllerDelegate, HBTutorialViewControllerDelegate {
-    var catView : UIImageView = UIImageView(image: UIImage(named: "spaceCat.png"))
+    var catView = UIImageView(image: UIImage(named: "spaceCat.png"))
 
     var bannerView: GADBannerView?
-    var titleView : UIImageView = UIImageView(image: UIImage(named: "titleImage.png"))
-    var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png"))
-    var earthView : UIImageView = UIImageView(image: UIImage(named: "earth.png"))
+    var titleView = UIImageView(image: UIImage(named: "titleImage.png"))
+    var backgroundView = UIImageView(image: UIImage(named: "background.png"))
+    var earthView = UIImageView(image: UIImage(named: "earth.png"))
     
     let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 70.0
     let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 35.0
@@ -64,20 +64,17 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
         
         // ねこ
         self.catView.frame.size = CGSize(width: 120, height: 102.8)
-        self.catView.center = CGPoint(x:self.view.frame.midX , y: self.titleView.frame.maxY + self.catView.frame.size.height/2 + partsMarginY)
-        self.catView.animationRepeatCount = 0
+        self.catView.center = CGPoint(x: self.view.frame.midX , y: self.titleView.frame.maxY + self.catView.frame.size.height/2 + partsMarginY)
         self.view.addSubview(self.catView)
         
         // ねこのアニメーション
-        _ = 0.1
         let twist = Float.pi / 18
-        _ = -Float.pi / 18
         
         let horizontalTwistAnimation = CABasicAnimation(keyPath: "transform.rotation.y")
         horizontalTwistAnimation.toValue = twist
         let rotateImage1 = self.catView.image
-        let rotateImage2 = self.catView.image?.rotateImage(degree: 8.0)
-        let rotateImage3 = self.catView.image?.rotateImage(degree: -8.0)
+        let rotateImage2 = self.catView.image?.rotate(degree: 8.0)
+        let rotateImage3 = self.catView.image?.rotate(degree: -8.0)
         self.catView.animationImages = [rotateImage1!, rotateImage2!, rotateImage1!, rotateImage3!, rotateImage1!]
         self.catView.animationRepeatCount = 0
         self.catView.animationDuration = 1.0
@@ -144,7 +141,7 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
                 let gameCenterController:GKGameCenterViewController = GKGameCenterViewController()
                 gameCenterController.gameCenterDelegate = self
                 gameCenterController.viewState = GKGameCenterViewControllerState.leaderboards
-                //gameCenterController.leaderboardIdentifier = "spaceCat" //該当するLeaderboardのIDを指定します
+                gameCenterController.leaderboardIdentifier = "spaceCat" //該当するLeaderboardのIDを指定します
                 self.present(gameCenterController, animated: true, completion: nil)
             }
         } as? (String?, Error?) -> Void)

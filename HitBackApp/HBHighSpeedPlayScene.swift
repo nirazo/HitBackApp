@@ -456,10 +456,9 @@ class HBHighSpeedPlayScene: HBPlayScene {
     
     
     // MARK: - SKPhyscicsContactDelegate
-    func didEndContact(contact: SKPhysicsContact) {
-        if (self.gameState == GAME_STATE.BEFORE_GAMEOVER) {
-            return
-        }
+    //func didEndContact(contact: SKPhysicsContact) {
+    func didEnd(_ contact: SKPhysicsContact) {
+        if (self.gameState == GAME_STATE.BEFORE_GAMEOVER) { return }
         var firstBody : SKPhysicsBody = SKPhysicsBody()
         var secondBody : SKPhysicsBody = SKPhysicsBody()
         

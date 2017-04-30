@@ -462,10 +462,8 @@ class HBSinglePlayScene: HBPlayScene {
     
     
     // MARK: - SKPhyscicsContactDelegate
-    func didEndContact(contact: SKPhysicsContact) {
-        if (self.gameState == GAME_STATE.BEFORE_GAMEOVER) {
-            return
-        }
+    func didEnd(_ contact: SKPhysicsContact) {
+        if (self.gameState == GAME_STATE.BEFORE_GAMEOVER) { return }
         var firstBody : SKPhysicsBody = SKPhysicsBody()
         var secondBody : SKPhysicsBody = SKPhysicsBody()
         
@@ -568,10 +566,10 @@ class HBSinglePlayScene: HBPlayScene {
     // ボールとパドル衝突時のアクション
     func contactedBallAndPaddle(ball : SKSpriteNode) -> SKPhysicsBody{
         // 回転
-        let up : SKAction = SKAction.rotate(byAngle: 10 * CGFloat(Float.pi * 2) / 360, duration: 0.03)
-        let down : SKAction = SKAction.rotate(byAngle: -10 * CGFloat(Float.pi * 2) / 360, duration: 0.03)
-        let sequence : SKAction = SKAction.sequence([up, down, down, up])
-        let repeatSequence : SKAction = SKAction.repeat(sequence, count: 2)
+        let up = SKAction.rotate(byAngle: 10 * CGFloat(Float.pi * 2) / 360, duration: 0.03)
+        let down = SKAction.rotate(byAngle: -10 * CGFloat(Float.pi * 2) / 360, duration: 0.03)
+        let sequence = SKAction.sequence([up, down, down, up])
+        let repeatSequence = SKAction.repeat(sequence, count: 2)
         self.paddleNode().run(repeatSequence)
         
         // 表情変える
