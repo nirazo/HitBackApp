@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C521779B14667ADDC7E1AF6 /* Pods_SpaceCat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2F66BB4E46ABBF5762A0C0 /* Pods_SpaceCat.framework */; };
+		8261198839F1F0F04F997F74 /* Pods_SpaceCatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C52303A01D13F59302B686 /* Pods_SpaceCatTests.framework */; };
 		D2096CD91AFDE2AA0051B189 /* twitter-128.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096CD81AFDE2AA0051B189 /* twitter-128.png */; };
 		D2096CDB1AFDE2B10051B189 /* facebook-128.png in Resources */ = {isa = PBXBuildFile; fileRef = D2096CDA1AFDE2B10051B189 /* facebook-128.png */; };
 		D2096CDE1AFDF3C40051B189 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2096CDD1AFDF3C40051B189 /* Social.framework */; };
@@ -120,6 +122,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D9C1CF0412FAC228BDF09C8 /* Pods-SpaceCatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceCatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpaceCatTests/Pods-SpaceCatTests.release.xcconfig"; sourceTree = "<group>"; };
+		67C52303A01D13F59302B686 /* Pods_SpaceCatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpaceCatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E2F66BB4E46ABBF5762A0C0 /* Pods_SpaceCat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpaceCat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DFAE65A81F1DE63724FFD25 /* Pods-SpaceCat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceCat.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpaceCat/Pods-SpaceCat.release.xcconfig"; sourceTree = "<group>"; };
+		B59DCFDC85BCC28CB73D8937 /* Pods-SpaceCatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceCatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpaceCatTests/Pods-SpaceCatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D2096CD81AFDE2AA0051B189 /* twitter-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter-128.png"; sourceTree = "<group>"; };
 		D2096CDA1AFDE2B10051B189 /* facebook-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-128.png"; sourceTree = "<group>"; };
 		D2096CDD1AFDF3C40051B189 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -257,6 +264,7 @@
 		D2C983D51A63CDAD00EE60C6 /* HBTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBTitleViewController.swift; sourceTree = "<group>"; };
 		D2C983D71A655DBB00EE60C6 /* HBSingleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBSingleViewController.swift; sourceTree = "<group>"; };
 		D2C983D91A655E5A00EE60C6 /* HBSinglePlayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBSinglePlayScene.swift; sourceTree = "<group>"; };
+		E7D7A6D95B4E13CC712339FE /* Pods-SpaceCat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceCat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpaceCat/Pods-SpaceCat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +291,7 @@
 				D29011F61A7795BE00C23E30 /* libNendAd.a in Frameworks */,
 				D2327B551AF86716002D56EC /* Fabric.framework in Frameworks */,
 				D2C538CB1A7F993F00CC8E3B /* GameKit.framework in Frameworks */,
+				5C521779B14667ADDC7E1AF6 /* Pods_SpaceCat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,12 +299,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8261198839F1F0F04F997F74 /* Pods_SpaceCatTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		503CB5ED026FA9005E120683 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E2F66BB4E46ABBF5762A0C0 /* Pods_SpaceCat.framework */,
+				67C52303A01D13F59302B686 /* Pods_SpaceCatTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B82BFD5DF715A130439DFF9E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E7D7A6D95B4E13CC712339FE /* Pods-SpaceCat.debug.xcconfig */,
+				9DFAE65A81F1DE63724FFD25 /* Pods-SpaceCat.release.xcconfig */,
+				B59DCFDC85BCC28CB73D8937 /* Pods-SpaceCatTests.debug.xcconfig */,
+				3D9C1CF0412FAC228BDF09C8 /* Pods-SpaceCatTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D2096CDC1AFDE2B80051B189 /* SNS */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +635,8 @@
 				D2C6F8AF1A5FF2880050552A /* SpaceCatTests */,
 				D2C6F8981A5FF2880050552A /* Products */,
 				D29012111A779C8300C23E30 /* SpaceCat-Bridging-Header.h */,
+				B82BFD5DF715A130439DFF9E /* Pods */,
+				503CB5ED026FA9005E120683 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -719,10 +751,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2C6F8B61A5FF2880050552A /* Build configuration list for PBXNativeTarget "SpaceCat" */;
 			buildPhases = (
+				CB1C45AF562186CFEBE860F1 /* [CP] Check Pods Manifest.lock */,
 				D2C6F8931A5FF2880050552A /* Sources */,
 				D2C6F8941A5FF2880050552A /* Frameworks */,
 				D2C6F8951A5FF2880050552A /* Resources */,
 				D2327B521AF866DB002D56EC /* ShellScript */,
+				E6C6DA36DA13789954C1BE53 /* [CP] Embed Pods Frameworks */,
+				0FB4580A6F8F808106FF8AA5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -737,9 +772,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2C6F8B91A5FF2880050552A /* Build configuration list for PBXNativeTarget "SpaceCatTests" */;
 			buildPhases = (
+				B1F604EC9FCA6F4850859936 /* [CP] Check Pods Manifest.lock */,
 				D2C6F8A81A5FF2880050552A /* Sources */,
 				D2C6F8A91A5FF2880050552A /* Frameworks */,
 				D2C6F8AA1A5FF2880050552A /* Resources */,
+				17CD1C33AC08EFD9B1A442B7 /* [CP] Embed Pods Frameworks */,
+				4AEB2019D64FFBA0F14B6DEE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -867,6 +905,81 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0FB4580A6F8F808106FF8AA5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpaceCat/Pods-SpaceCat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		17CD1C33AC08EFD9B1A442B7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpaceCatTests/Pods-SpaceCatTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4AEB2019D64FFBA0F14B6DEE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpaceCatTests/Pods-SpaceCatTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1F604EC9FCA6F4850859936 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CB1C45AF562186CFEBE860F1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		D2327B521AF866DB002D56EC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -879,6 +992,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 2d60535bc8c1859611b7d1bc30a74d0cf51d5c27 f558b3e3da95b4b93482e68505db1c565487f5af45a5e84227e575877eb90960";
+		};
+		E6C6DA36DA13789954C1BE53 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpaceCat/Pods-SpaceCat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1038,12 +1166,14 @@
 		};
 		D2C6F8B71A5FF2880050552A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7D7A6D95B4E13CC712339FE /* Pods-SpaceCat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = HZ4Q3RZNQT;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -1057,6 +1187,7 @@
 					"$(PROJECT_DIR)/lib/Ad/Admob_Adapter",
 					"$(PROJECT_DIR)/lib/Ad/Nend",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.niraapps.SpaceCat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1067,12 +1198,14 @@
 		};
 		D2C6F8B81A5FF2880050552A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DFAE65A81F1DE63724FFD25 /* Pods-SpaceCat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = HZ4Q3RZNQT;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -1086,6 +1219,7 @@
 					"$(PROJECT_DIR)/lib/Ad/Admob_Adapter",
 					"$(PROJECT_DIR)/lib/Ad/Nend",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.niraapps.SpaceCat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1096,6 +1230,7 @@
 		};
 		D2C6F8BA1A5FF2880050552A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B59DCFDC85BCC28CB73D8937 /* Pods-SpaceCatTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1118,6 +1253,7 @@
 		};
 		D2C6F8BB1A5FF2880050552A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D9C1CF0412FAC228BDF09C8 /* Pods-SpaceCatTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
