@@ -9,6 +9,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,11 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics()])
         let viewController = HBTitleViewController()
         let navVC = UINavigationController(rootViewController: viewController)
-        //self.navVC = UINavigationController(rootViewController: viewController)
         navVC.setNavigationBarHidden(true, animated: false)
         self.window?.rootViewController = navVC
         self.window!.makeKeyAndVisible()
         UINavigationBar.appearance().setBackgroundImage(UIImage(named: "nav_background"), for: .default)
+        FIRApp.configure()
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-1155557522194155~2378494020")
+        
         return true
     }
     

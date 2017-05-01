@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 @objc protocol RegisterAlertDelegate {
     @objc optional func buttonTapped(tag: Int)

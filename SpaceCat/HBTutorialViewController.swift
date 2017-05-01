@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 Kenzo. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 protocol HBTutorialViewControllerDelegate {

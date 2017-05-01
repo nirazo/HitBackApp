@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectionViewDataSource, UICollectionViewDelegate, HBTutorialViewControllerDelegate {
+class HBStageSelectViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, HBTutorialViewControllerDelegate {
     var collectionView:UICollectionView!
     var backgroundView : UIImageView = UIImageView(image: UIImage(named: "background.png"))
     // NSUserDefaults
@@ -38,7 +38,7 @@ class HBStageSelectViewController: HBAbstractBannerAdViewController, UICollectio
         view.addSubview(collectionView)
         
         // 広告表示
-        super.showAds(isWithStatusBar: false)
+        //super.showAds(isWithStatusBar: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -11,6 +11,7 @@ import UIKit
 import SpriteKit
 import GameKit
 import Social
+import GoogleMobileAds
 
 protocol HBGameOverViewControllerDelegate {
     
@@ -19,9 +20,8 @@ protocol HBGameOverViewControllerDelegate {
     
 }
 
-class HBGameOverViewController: HBAbstractInterstitialAdViewController {
+class HBGameOverViewController: UIViewController, GADBannerViewDelegate {
     var score = 0
-    var bannerView: GADBannerView?
     var delegate : HBGameOverViewControllerDelegate?
     var backgroundView = UIImageView()
     var earthView = UIImageView(image: UIImage(named: "earth.png"))
@@ -44,6 +44,15 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
     // ねこ以下のボタン画像群のマージン
     let BUTTOMBUTTOM_MARGIN_Y_IPHONE6ORMORE : CGFloat = 30.0
     let BUTTOMBUTTOM_MARGIN_Y_IPHONE5ORLESS : CGFloat = 10.0
+    
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        adBannerView.adUnitID = gameOverFooterAdID
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+        
+        return adBannerView
+    }()
     
     private struct Label {
         static let LABEL_MARGIN : CGFloat = 18.0
@@ -75,7 +84,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         
         // iPhone5以上の端末であれば広告表示
         if (!IS_IPHONE_4_OR_LESS) {
-            super.showAds(isWithStatusBar: true)
+            //super.showAds(isWithStatusBar: true)
         }
         // 背景
         self.backgroundView = UIImageView(image: UIImage(named: stageBackgroundImageNameDict[self.stage]!))
@@ -158,7 +167,7 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         if (IS_IPHONE_4_OR_LESS) {
             buttonsBottomBaseY = self.view.frame.size.height
         } else {
-            buttonsBottomBaseY = self.view.frame.size.height - kGADAdSizeBanner.size.height
+            buttonsBottomBaseY = self.view.frame.size.height - 44
         }
         
         var buttonsMarginY : CGFloat
@@ -221,19 +230,19 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
         buttonToTwitter.setTitleColor(UIColor.white, for: .normal)
         self.view.addSubview(buttonToTwitter)
         
+        // フッター広告
+        let req = GADRequest()
+        #if DEBUG
+            req.testDevices = [kGADSimulatorID]
+            print("debug!!!")
+        #endif
+        view.addSubview(adBannerView)
+        adBannerView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+        }
         
-        if (self.bannerViewFooter != nil) {
-            self.view.bringSubview(toFront: self.bannerViewFooter!)
-        }
-        super.showInterstitial()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        if self.bannerView != nil {
-            self.bannerView?.removeFromSuperview()
-            self.bannerView = nil
-        }
-        super.viewDidDisappear(animated)
+        adBannerView.load(req)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -276,8 +285,8 @@ class HBGameOverViewController: HBAbstractInterstitialAdViewController {
                 ts.setInitialText("スコア: "
                     + String(score)
                     + "\n守れ！宇宙ねこ: "
-                    + stageNameDict[stage]! + "ステージ\n")
-                ts.add(URL(string: "https://itunes.apple.com/app/id963696838?l=ja"))
+                    + stageNameDict[stage]! + "ステージ\n#宇宙ねこ")
+                ts.add(URL(string: "https://itunes.apple.com/jp/app/id1231851981?mt=8?l=ja"))
                 ts.add(UIImage(named: "icon_180"))
                 self.present(ts, animated: true, completion: nil)
             } else {

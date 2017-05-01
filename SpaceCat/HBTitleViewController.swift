@@ -6,15 +6,15 @@
 //  Copyright (c) 2015年 Kenzo. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Foundation
 import SpriteKit
-import GameKit
+import GoogleMobileAds
+import SnapKit
 
-class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterControllerDelegate, HBTutorialViewControllerDelegate {
+class HBTitleViewController: UIViewController, HBTutorialViewControllerDelegate, GADBannerViewDelegate {
     var catView = UIImageView(image: UIImage(named: "spaceCat.png"))
-
-    var bannerView: GADBannerView?
+    
     var titleView = UIImageView(image: UIImage(named: "titleImage.png"))
     var backgroundView = UIImageView(image: UIImage(named: "background.png"))
     var earthView = UIImageView(image: UIImage(named: "earth.png"))
@@ -24,7 +24,14 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
     let PARTS_MARGIN_Y_IPHONE5ORMORE : CGFloat = 20.0
     let PARTS_MARGIN_Y_IPHONE4ORLESS : CGFloat = 10.0
     
-    let gameCenterPlayer = GKLocalPlayer()
+    lazy var adBannerView: GADBannerView = {
+        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        adBannerView.adUnitID = titleFooterAdID
+        adBannerView.delegate = self
+        adBannerView.rootViewController = self
+        
+        return adBannerView
+    }()
     
     // NSUserDefaults
     let ud = UserDefaults.standard
@@ -93,16 +100,19 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
         tutorialButton.addTarget(self, action: #selector(tutorialButtonTapped(sender: )), for:.touchUpInside)
         self.view.addSubview(tutorialButton)
         
-        // ランキング表示ボタン
-        let scoreButton : UIButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 120, height: 40))
-        scoreButton.setBackgroundImage(UIImage(named: "rankingButton.png"), for: .normal)
-        scoreButton.center = CGPoint(x: self.view.frame.midX, y: tutorialButton.frame.maxY + scoreButton.frame.size.height/2 + partsMarginY)
-        scoreButton.addTarget(self, action: #selector(scoreButtonTapped(sender:)), for: .touchUpInside)
-        self.view.addSubview(scoreButton)
 
         // 広告表示
-        super.showAds(isWithStatusBar: true)
-        self.loginGameCenter()
+        let req = GADRequest()
+        #if DEBUG
+            req.testDevices = [kGADSimulatorID]
+            print("debug!!!")
+        #endif
+        view.addSubview(adBannerView)
+        adBannerView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+        }
+        
+        adBannerView.load(req)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,57 +134,6 @@ class HBTitleViewController: HBAbstractBannerAdViewController, GKGameCenterContr
         vc.delegate = self
         self.present(vc, animated: true, completion: nil)
     }
-    
-    func scoreButtonTapped(sender: AnyObject?) {
-        if self.isLogedIn != true {
-            let alert = Alert()
-            alert.showAlert(viewController: self, title: "きろく",
-                buttonTitle: "OK",
-                message: "ランキングが表示できません。\nネットワークにつながっているか、GameCenterにログインしているか確認してください。", tag: 0)
-            loginGameCenter()
-            return
-        }
-        self.gameCenterPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifier : String!, error : NSError!) -> Void in
-            if error != nil {
-                //println(error.localizedDescription)
-            } else {
-                let gameCenterController:GKGameCenterViewController = GKGameCenterViewController()
-                gameCenterController.gameCenterDelegate = self
-                gameCenterController.viewState = GKGameCenterViewControllerState.leaderboards
-                gameCenterController.leaderboardIdentifier = "spaceCat" //該当するLeaderboardのIDを指定します
-                self.present(gameCenterController, animated: true, completion: nil)
-            }
-        } as? (String?, Error?) -> Void)
-    }
-    
-    func loginGameCenter() {
-        //GameCenterにログインします。
-        self.gameCenterPlayer.authenticateHandler = {(viewController, error) -> Void in
-            if ((viewController) != nil) {
-                print("ログイン確認処理：失敗-ログイン画面を表示")
-                self.present(viewController!, animated: true, completion: nil)
-            }else{
-                print("ログイン確認処理：成功")
-                if (error == nil){
-                    print("ログイン認証：成功")
-                    self.isLogedIn = true
-                    BestScoreManager().syncBestScore()
-                }else{
-                    print("ログイン認証：失敗")
-                }
-            }
-        }
-    }
-    
-    func dismissGameViewControllers() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    //MARK: - Delegate method for GKGameCenterDelegate
-    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController){
-        gameCenterViewController.dismiss(animated: true, completion: nil);
-    }
-    
     
     //MARK: - Delegate method for HBTutorialViewControllerDelegate
     func backButtonTapped() {

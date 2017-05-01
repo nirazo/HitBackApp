@@ -6,8 +6,6 @@
 //  Copyright (c) 2015年 Kenzo. All rights reserved.
 //
 
-#ifndef SpaceCat_SpaceCat_Bridging_Header_h
+#ifdef SpaceCat_SpaceCat_Bridging_Header_h
 #define SpaceCat_SpaceCat_Bridging_Header_h
-#import "GADBannerView.h"
-#import "GADInterstitial.h"
 #endif

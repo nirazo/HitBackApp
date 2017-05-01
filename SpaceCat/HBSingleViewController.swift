@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class HBSingleViewController: HBAbstractBannerAdViewController, SceneEscapeProtocol, HBGameOverViewControllerDelegate {
+class HBSingleViewController: UIViewController, SceneEscapeProtocol, HBGameOverViewControllerDelegate {
     
     var skView : SKView?
     var stage : GAME_STAGE = GAME_STAGE.NORMAL
@@ -55,10 +55,6 @@ class HBSingleViewController: HBAbstractBannerAdViewController, SceneEscapeProto
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // ゲーム画面に広告出すようにしたらコメント外す
-        //super.showAds(isWithStatusBar: true)
-        //var height = self.view.frame.size.height - self.bannerViewFooter!.frame.size.height
-        //self.skView = SKView(frame: CGRectMake(0, 0, self.view.frame.size.width, height))
         self.skView = SKView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         self.view.addSubview(self.skView!)
     }

@@ -23,10 +23,12 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
+  - SnapKit (3.1.2)
 
 DEPENDENCIES:
   - Firebase/AdMob
   - Firebase/Core
+  - SnapKit
 
 SPEC CHECKSUMS:
   Firebase: 8e99eb1ff553ad5bcc6072cc3d925bb89c1244d6
@@ -37,7 +39,8 @@ SPEC CHECKSUMS:
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
 
-PODFILE CHECKSUM: 0913cfb9c07d4318511d2bcc4b652589158137a6
+PODFILE CHECKSUM: 4d7589ed3308bfc8bc5881d3b3d2519e3db20be0
 
 COCOAPODS: 1.1.1

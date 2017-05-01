@@ -5,6 +5,7 @@ use_frameworks!
 target 'SpaceCat' do
   pod 'Firebase/Core'
   pod 'Firebase/AdMob'
+  pod 'SnapKit'
 end
 
 target 'SpaceCatTests' do
