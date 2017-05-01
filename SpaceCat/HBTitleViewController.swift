@@ -8,9 +8,9 @@
 
 import UIKit
 import Foundation
+import SnapKit
 import SpriteKit
 import GoogleMobileAds
-import SnapKit
 
 class HBTitleViewController: UIViewController, HBTutorialViewControllerDelegate, GADBannerViewDelegate {
     var catView = UIImageView(image: UIImage(named: "spaceCat.png"))
@@ -109,7 +109,6 @@ class HBTitleViewController: UIViewController, HBTutorialViewControllerDelegate,
         adBannerView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
         }
-        
         adBannerView.load(req)
     }
     
