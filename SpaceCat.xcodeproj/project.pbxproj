@@ -37,8 +37,6 @@
 		D227FBAD1A988BCB00CBDFE2 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D227FBAC1A988BCB00CBDFE2 /* Alert.swift */; };
 		D230E2DD1AC81A75003A28E6 /* HBStageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230E2DC1AC81A75003A28E6 /* HBStageSelectViewController.swift */; };
 		D230E2DF1AC998E9003A28E6 /* HBStageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D230E2DE1AC998E9003A28E6 /* HBStageCell.swift */; };
-		D2327B551AF86716002D56EC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2327B531AF86716002D56EC /* Fabric.framework */; };
-		D2327B561AF86716002D56EC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2327B541AF86716002D56EC /* Crashlytics.framework */; };
 		D2327B591AFA5B97002D56EC /* HBStageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2327B581AFA5B97002D56EC /* HBStageConstants.swift */; };
 		D2327B621AFA6B87002D56EC /* toStageSelectButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D2327B611AFA6B87002D56EC /* toStageSelectButton.png */; };
 		D24033BA1A9644EE003F0ACB /* HBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24033B91A9644EE003F0ACB /* HBConstants.swift */; };
@@ -234,8 +232,6 @@
 				D29011FE1A77966A00C23E30 /* CoreGraphics.framework in Frameworks */,
 				D29011FC1A77966200C23E30 /* AVFoundation.framework in Frameworks */,
 				D29011FA1A77965A00C23E30 /* AudioToolbox.framework in Frameworks */,
-				D2327B561AF86716002D56EC /* Crashlytics.framework in Frameworks */,
-				D2327B551AF86716002D56EC /* Fabric.framework in Frameworks */,
 				5C521779B14667ADDC7E1AF6 /* Pods_SpaceCat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -824,7 +820,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 2d60535bc8c1859611b7d1bc30a74d0cf51d5c27 f558b3e3da95b4b93482e68505db1c565487f5af45a5e84227e575877eb90960";
+			shellScript = "./Fabric.framework/run da7cfde87b5611a39215449dd198760786d79a23 7dad58fdb060f584f5c9f83500b9a8bc39ed569f61619b1925ddb04e82271e4c";
 		};
 		E6C6DA36DA13789954C1BE53 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -999,7 +995,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E7D7A6D95B4E13CC712339FE /* Pods-SpaceCat.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1028,7 +1024,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9DFAE65A81F1DE63724FFD25 /* Pods-SpaceCat.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

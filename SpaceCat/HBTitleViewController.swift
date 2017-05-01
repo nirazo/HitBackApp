@@ -19,10 +19,8 @@ class HBTitleViewController: UIViewController, HBTutorialViewControllerDelegate,
     var backgroundView = UIImageView(image: UIImage(named: "background.png"))
     var earthView = UIImageView(image: UIImage(named: "earth.png"))
     
-    let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 70.0
-    let TITLE_MARGIN_Y_IPHONE4ORLESS : CGFloat = 35.0
+    let TITLE_MARGIN_Y_IPHONE5ORMORE : CGFloat = 60.0
     let PARTS_MARGIN_Y_IPHONE5ORMORE : CGFloat = 20.0
-    let PARTS_MARGIN_Y_IPHONE4ORLESS : CGFloat = 10.0
     
     lazy var adBannerView: GADBannerView = {
         let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
@@ -49,8 +47,8 @@ class HBTitleViewController: UIViewController, HBTutorialViewControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let titleMarginY : CGFloat = IS_IPHONE_4_OR_LESS ? TITLE_MARGIN_Y_IPHONE4ORLESS : TITLE_MARGIN_Y_IPHONE5ORMORE
-        let partsMarginY : CGFloat = IS_IPHONE_4_OR_LESS ? PARTS_MARGIN_Y_IPHONE4ORLESS : PARTS_MARGIN_Y_IPHONE5ORMORE
+        let titleMarginY : CGFloat = TITLE_MARGIN_Y_IPHONE5ORMORE
+        let partsMarginY : CGFloat = PARTS_MARGIN_Y_IPHONE5ORMORE
         
         // 背景
         self.backgroundView.frame.size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
@@ -70,7 +68,7 @@ class HBTitleViewController: UIViewController, HBTutorialViewControllerDelegate,
         self.view.addSubview(self.titleView)
         
         // ねこ
-        self.catView.frame.size = CGSize(width: 120, height: 102.8)
+        self.catView.frame.size = CGSize(width: 144, height: 123.36)
         self.catView.center = CGPoint(x: self.view.frame.midX , y: self.titleView.frame.maxY + self.catView.frame.size.height/2 + partsMarginY)
         self.view.addSubview(self.catView)
         
@@ -87,14 +85,14 @@ class HBTitleViewController: UIViewController, HBTutorialViewControllerDelegate,
         self.catView.animationDuration = 1.0
         
         // スタートボタン
-        let singleStart : UIButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 120, height: 40))
+        let singleStart : UIButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 144, height: 48))
         singleStart.setBackgroundImage(UIImage(named: "startButton.png"), for: .normal)
         singleStart.center = CGPoint(x: self.view.frame.midX, y: self.catView.frame.maxY + singleStart.frame.size.height/2 + partsMarginY)
         singleStart.addTarget(self, action: #selector(singleStartTapped(sender:)), for: .touchUpInside)
         self.view.addSubview(singleStart)
         
         // チュートリアル表示ボタン
-        let tutorialButton : UIButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 120, height: 40))
+        let tutorialButton : UIButton = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 144, height: 48))
         tutorialButton.setBackgroundImage(UIImage(named: "tutorialButton.png"), for: .normal)
         tutorialButton.center = CGPoint(x: self.view.frame.midX, y: singleStart.frame.maxY + tutorialButton.frame.size.height/2 + partsMarginY)
         tutorialButton.addTarget(self, action: #selector(tutorialButtonTapped(sender: )), for:.touchUpInside)
